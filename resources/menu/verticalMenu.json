@@ -1,0 +1,46 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard",
+      "badge": [
+        "danger",
+        "5"
+      ],
+      "submenu": [
+        {
+          "url": "/",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+      ]
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "name": "Sales Masters",
+      "icon": "menu-icon tf-icons bx bx bx-user",
+      "slug": "masters",
+      "submenu": [
+        {
+          "url": "masters/SupplyMaster",
+          "name": "Profile Master",
+          "slug": "masters-SupplyMaster"
+        },
+        {
+          "url": "masters/ItemMaster",
+          "name": "Item Master",
+          "slug": "masters-ItemMaster"
+        },
+        {
+          "url": "masters/PriceMaster",
+          "name": "Price Master",
+          "slug": "masters-PriceMaster"
+        }
+      ]
+    }
+  ]
+}
