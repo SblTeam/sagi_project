@@ -15445,7 +15445,7 @@ datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.renderer.layout.boots
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
-/*! DataTables 2.0.7
+/*! DataTables 2.0.8
  * © SpryMedia Ltd - datatables.net/license
  */
 
@@ -22954,6 +22954,16 @@ var _selector_row_indexes = function ( settings, opts )
 		order  = opts.order,   // applied, current, index (original - compatibility with 1.9)
 		page   = opts.page;    // all, current
 
+	if ( _fnDataSource( settings ) == 'ssp' ) {
+		// In server-side processing mode, most options are irrelevant since
+		// rows not shown don't exist and the index order is the applied order
+		// Removed is a special case - for consistency just return an empty
+		// array
+		return search === 'removed' ?
+			[] :
+			_range( 0, displayMaster.length );
+	}
+
 	if ( page == 'current' ) {
 		// Current page implies that order=current and filter=applied, since it is
 		// fairly senseless otherwise, regardless of what order and search actually
@@ -23625,7 +23635,7 @@ _api_register( [
 _api_register( _child_obj+'.isShown()', function () {
 	var ctx = this.context;
 
-	if ( ctx.length && this.length ) {
+	if ( ctx.length && this.length && ctx[0].aoData[ this[0] ] ) {
 		// _detailsShown as false or undefined will fall through to return false
 		return ctx[0].aoData[ this[0] ]._detailsShow || false;
 	}
@@ -23648,7 +23658,7 @@ _api_register( _child_obj+'.isShown()', function () {
 // can be an array of these items, comma separated list, or an array of comma
 // separated lists
 
-var __re_column_selector = /^([^:]+):(name|title|visIdx|visible)$/;
+var __re_column_selector = /^([^:]+)?:(name|title|visIdx|visible)$/;
 
 
 // r1 and r2 are redundant - but it means that the parameters match for the
@@ -23720,17 +23730,24 @@ var __column_selector = function ( settings, selector, opts )
 			switch( match[2] ) {
 				case 'visIdx':
 				case 'visible':
-					var idx = parseInt( match[1], 10 );
-					// Visible index given, convert to column index
-					if ( idx < 0 ) {
-						// Counting from the right
-						var visColumns = columns.map( function (col,i) {
-							return col.bVisible ? i : null;
-						} );
-						return [ visColumns[ visColumns.length + idx ] ];
+					if (match[1]) {
+						var idx = parseInt( match[1], 10 );
+						// Visible index given, convert to column index
+						if ( idx < 0 ) {
+							// Counting from the right
+							var visColumns = columns.map( function (col,i) {
+								return col.bVisible ? i : null;
+							} );
+							return [ visColumns[ visColumns.length + idx ] ];
+						}
+						// Counting from the left
+						return [ _fnVisibleToColumnIndex( settings, idx ) ];
 					}
-					// Counting from the left
-					return [ _fnVisibleToColumnIndex( settings, idx ) ];
+					
+					// `:visible` on its own
+					return columns.map( function (col, i) {
+						return col.bVisible ? i : null;
+					} );
 
 				case 'name':
 					// match by name. `names` is column index complete and in order
@@ -25005,7 +25022,7 @@ _api_register( 'i18n()', function ( token, def, plural ) {
  *  @type string
  *  @default Version number
  */
-DataTable.version = "2.0.7";
+DataTable.version = "2.0.8";
 
 /**
  * Private data store, containing all of the settings objects that are

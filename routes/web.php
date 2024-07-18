@@ -10,6 +10,7 @@ use App\Http\Controllers\layouts\Blank;
 use App\Http\Controllers\masters\SupplyMaster;
 use App\Http\Controllers\masters\ItemMaster;
 use App\Http\Controllers\masters\priceMaster;
+use App\Http\Controllers\usersaccesses\userrights;
 use App\Http\Controllers\masters\getitemflag;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
@@ -85,6 +86,13 @@ Route::get('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'edit'])->
 Route::post('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'update'])->name('masters-PriceMaster.update');
 Route::get('/masters/PriceMaster', [PriceMaster::class, 'index'])->name('masters-PriceMaster');
 Route::get('/masters/getitemflag', [getitemflag::class, 'fetchitemDetails'])->name('masters.getitemflag');
+//useraccess
+Route::get('/usersaccesses/userrights', [userrights::class, 'index'])->name('usersaccesses-userrights');
+Route::get('/usersaccesses/userrights/add', [userrights::class, 'add'])->name('usersaccesses-userrights.add');
+Route::post('/usersaccesses/userrights/add', [userrights::class, 'store'])->name('usersaccesses-userrights.store');
+Route::get('/usersaccesses/userrights/edit', [userrights::class, 'edit'])->name('usersaccesses-userrights.edit');
+Route::post('/usersaccesses/userrights/edit', [userrights::class, 'update'])->name('usersaccesses-userrights.update');
+Route::get('/usersaccesses/userrights/active/{id}/{status}', [userrights::class, 'active'])->name('usersaccesses-userrights.active');
 // cards
 Route::get('/cards/basic', [CardBasic::class, 'index'])->name('cards-basic');
 // User Interface
