@@ -22,7 +22,7 @@
     },
     {
       "name": "Sales Masters",
-      "icon": "menu-icon tf-icons bx bx bx-user",
+      "icon": "menu-icon tf-icons bx bx bx-bar-chart-alt-2",
       "slug": "masters",
       "submenu": [
         {
@@ -41,16 +41,16 @@
           "slug": "masters-PriceMaster"
         }
       ]
-    },
+    } ,
     {
       "name": "Users Accesses",
       "icon": "menu-icon tf-icons bx bx bx-user",
-      "slug": "Usersaccesses",
+      "slug": "usersaccesses",
       "submenu": [
         {
-          "url": "Usersaccesses/Userrights",
+          "url": "usersaccesses/userrights",
           "name": "User Rights",
-          "slug": "masters-SupplyMaster"
+          "slug": "usersaccesses-userrights"
         }
       ]
     }

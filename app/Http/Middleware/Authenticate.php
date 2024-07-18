@@ -11,7 +11,8 @@ class Authenticate
     public function handle(Request $request, Closure $next)
     {   
         if(session()->has("db")){
-        Config::set('database.connections.dynamic.database', session()->get("db"));
+            $dynamic_db=session()->get("db");
+        Config::set('database.connections.dynamic.database', $dynamic_db);
         Config::set('database.default', 'dynamic');
         return $next($request);
         }else{
