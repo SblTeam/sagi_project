@@ -41,18 +41,7 @@
           "slug": "masters-PriceMaster"
         }
       ]
-    } ,
-    {
-      "name": "Users Accesses",
-      "icon": "menu-icon tf-icons bx bx bx-user",
-      "slug": "usersaccesses",
-      "submenu": [
-        {
-          "url": "usersaccesses/userrights",
-          "name": "User Rights",
-          "slug": "usersaccesses-userrights"
-        }
-      ]
+
     }
   ]
 }
