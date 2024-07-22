@@ -41,6 +41,20 @@
           "slug": "masters-PriceMaster"
         }
       ]
+
+
+    },
+    {
+      "name": "Sales Transactions",
+      "icon": "menu-icon tf-icons bx bx bx-user",
+      "slug": "transctions",
+      "submenu": [
+        {
+          "url": "transctions/SalesOrder",
+          "name": "Sales Order",
+          "slug": "transctions-SalesOrder"
+        }
+      ]
     }
   ]
 }
