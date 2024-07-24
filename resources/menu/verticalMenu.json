@@ -53,6 +53,11 @@
           "url": "transctions/SalesOrder",
           "name": "Sales Order",
           "slug": "transctions-SalesOrder"
+        },
+        {
+          "url": "transctions/Invoice",
+          "name": "Invoice",
+          "slug": "transctions-Invoice"
         }
       ]
     }

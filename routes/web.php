@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\layouts\WithoutMenu;
@@ -13,7 +12,10 @@ use App\Http\Controllers\masters\priceMaster;
 use App\Http\Controllers\masters\getitemflag;
 use App\Http\Controllers\transactions\getpo;
 use App\Http\Controllers\transactions\getso;
+use App\Http\Controllers\transactions\getsonumber;
+use App\Http\Controllers\transactions\getsodetails;
 use App\Http\Controllers\transactions\SalesOrder;
+use App\Http\Controllers\transactions\Invoice;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\cards\CardBasic;
@@ -111,6 +113,30 @@ Route::post('/transctions/SalesOrder/{code}', [SalesOrder::class, 'update'])->na
 
 
 Route::get('/transctions/SalesOrder/delete/{id}', [SalesOrder::class, 'destroy'])->name('transctions-SalesOrder.destroy');
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/transctions/Invoice', [Invoice::class, 'add'])->name('transctions-Invoice');
+
+Route::get('/transactions/getsonumber', [getsonumber::class, 'fetchsoDetails'])->name('transaction.getsonumber');
+
+Route::get('/transactions/getsodetails', [getsodetails::class, 'fetchsoDetails'])->name('transaction.getsodetails');
+
+
+
+
+
+
+
 // cards
 Route::get('/cards/basic', [CardBasic::class, 'index'])->name('cards-basic');
 // User Interface

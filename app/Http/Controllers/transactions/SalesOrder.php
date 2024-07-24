@@ -23,7 +23,7 @@ class SalesOrder extends Controller
 
     public function add(Request $request)
     {
-        $vendor = 'DST-7463';
+
         $date = date("d.m.Y");
         $yearFull = (int)explode('.', $date)[2];
         $year = (int)substr($yearFull, -2);
