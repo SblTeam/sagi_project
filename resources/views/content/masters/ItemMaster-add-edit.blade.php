@@ -10,6 +10,7 @@
 @section('content')
 
 @php
+
 $cat_array = [];
 foreach ($categoryGroups as $group) {
 $cat_array[] = ['catgroup' => $group->catgroup, 'type' => $group->type];
@@ -38,14 +39,14 @@ $isEdit = isset($ims_itemcodes);
           <div class="row">
             <div class="mb-0 col-md-4">
               <label for="itemcode" class="form-label">Item Code <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" placeholder="Enter itemCode" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onKeyPress="onlyNumbers12(event);" placeholder="Enter itemCode" style="width: 50%" autofocus />
               @error('code')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-5">
-              <label for="description" class="form-label">Description <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="description" id="description" placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
+              <label for="description" class="form-label">Description1 <sup style="color:red;">&#9733;</sup></label>
+              <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);"  placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}"  />
               @error('description')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -67,14 +68,17 @@ $isEdit = isset($ims_itemcodes);
 
               @if($isEdit)
 
-              <label class="form-label" for="category">Category <sup style="color:red;">&#9733;</sup></label>
+              <label class="form-label" for="category">Category<sup style="color:red;">&#9733;</sup></label>
 
               <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
                 <option value="">Select</option>
                 @foreach ($types as $group)
-                <option value="{{ $group->type }}" {{ old('cat', $isEdit ? $ims_itemcodes->cat : '') == $group->type ? 'selected' : '' }}>{{ $group->type }}</option>
+                  <option value="{{ $group->type }}" {{ old('cat') == $group->type ? 'selected' : '' }}>
+                    {{ $group->type }}
+                  </option>
                 @endforeach
               </select>
+              
 
               @else
 
@@ -82,6 +86,11 @@ $isEdit = isset($ims_itemcodes);
 
               <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
                 <option value="">Select</option>
+                    @foreach ($categorytypes as $group)
+                  <option value="{{ $group->type }}" {{ old('cat') == $group->type ? 'selected' : '' }}>
+                    {{ $group->type }}
+                  </option>
+                @endforeach
               </select>
               @endif
 
@@ -179,16 +188,17 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="country">Usage <sup style="color:red;">&#9733;</sup></label>
-              <select id="iusage" name="iusage" class="select2 form-select " style="width: 75%" onchange="checkUsage();">
-                <option value="">Select</option>
-                <option value="General Consumption" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'General Consumption' ? 'selected' : '' }}>General Consumption</option>
-                <option value="Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale' ? 'selected' : '' }}>Sale</option>
-                <option value="Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                <option value="Produced or Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Sale' ? 'Rejected' : '' }}>Produced or Sale</option>
-                <option value="Rejected or Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Rejected or Sale' ? 'Rejected' : '' }}>Rejected or Sale</option>
-                <option value="Produced or Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Rejected' ? 'Rejected' : '' }}>Produced or Rejected</option>
-                <option value="Produced or Sale or Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Sale or Rejected' ? 'Rejected' : '' }}>Produced or Sale or Rejected</option>
-              </select>
+             <select id="iusage" name="iusage" class="select2 form-select" style="width: 75%" onchange="checkUsage();">
+  <option value="">Select</option>
+  <option value="General Consumption" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'General Consumption' ? 'selected' : '' }}>General Consumption</option>
+  <option value="Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale' ? 'selected' : '' }}>Sale</option>
+  <option value="Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+  <option value="Produced or Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Sale' ? 'selected' : '' }}>Produced or Sale</option>
+  <option value="Rejected or Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Rejected or Sale' ? 'selected' : '' }}>Rejected or Sale</option>
+  <option value="Produced or Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Rejected' ? 'selected' : '' }}>Produced or Rejected</option>
+  <option value="Produced or Sale or Rejected" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Produced or Sale or Rejected' ? 'selected' : '' }}>Produced or Sale or Rejected</option>
+</select>
+
               @error('iusage')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -345,7 +355,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               <label class="form-label" for="cum">EAN No<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="ean" id="ean" placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
+              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);"  placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
               @error('ean')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -355,7 +365,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               <label class="form-label" for="cum">HSN/SAC<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="hsn" id="hsn" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
+              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
               @error('hsn')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -377,6 +387,67 @@ $isEdit = isset($ims_itemcodes);
 @endsection
 
 <script>
+
+function onlyNumbers123(e) {
+  
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+
+  if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)|| (code >= 48 && code <= 57)|| (code == 32) ) {
+    return;
+  }
+ e.preventDefault();
+}
+
+function onlyNumbers12(e) {
+  
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+
+  if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)|| (code >= 48 && code <= 57)) {
+    return;
+  }
+ e.preventDefault();
+}
+
+function onlyNumberse(e) {
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+  // Allow digits (0-9) and check input length
+  if (code >= 48 && code <= 57) {
+    // Check if the length of the input exceeds 10 characters
+    if (input.length >= 13) {
+      e.preventDefault(); // Prevent further input
+    }
+    return; // Allow input if within limit
+  }
+
+  // Prevent input for non-digit characters
+  e.preventDefault();
+}
+
+function onlyNumbersh(e) {
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+  // Allow digits (0-9) and check input length
+  if (code >= 48 && code <= 57) {
+    // Check if the length of the input is within 6 to 10 characters
+    if (input.length <= 10) {
+      return; // Allow input if within limit
+    } else {
+      e.preventDefault(); // Prevent further input if outside the limit
+    }
+  } else {
+    // Prevent input for non-digit characters
+    e.preventDefault();
+  }
+}
+
+
   document.getElementById("cat").value = '';
 
   function getcategory() {
@@ -472,4 +543,6 @@ $isEdit = isset($ims_itemcodes);
     }
 
   }
+
+
 </script>

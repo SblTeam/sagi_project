@@ -158,10 +158,11 @@ let kt=0;
 
           let lastDotIndex = oldfile[i].lastIndexOf(".");
           let afterLastDot = oldfile[i].substring(lastDotIndex + 1);
+          console.log("afterLastDot",afterLastDot);
           let imgdata='';
           if(afterLastDot=='pdf'){imgdata='/assets/img/avatars/pdf.png';}
           else if(afterLastDot=='xlsx'){imgdata='/assets/img/avatars/excel.jpg';}
-          else if(afterLastDot=='doc'){imgdata='/assets/img/avatars/doc.png';}
+          else if(afterLastDot=='doc' || afterLastDot=='docx'){imgdata='/assets/img/avatars/doc.png';}
           else{imgdata=oldfile[i];}
 
           accountUserImage.src = imgdata;

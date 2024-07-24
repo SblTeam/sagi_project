@@ -33,7 +33,10 @@
           <td>{{$details->phone}}</td>
           {{-- <td style="text-align:center"><i class="bx bx-file-blank me-1" style="color: #03c3ec"></i> </td> --}}
           <td><span class="badge me-1">@if($details->active_flag==1) <span class="bg-label-primary">Active</span> @else <span style="color: red">Inactive</span> @endif</span></td>
-          <td><i class="bx bx-edit-alt me-1" style="color: #03c3ec" onclick="window.location.href='{{ route('masters-SupplyMaster.edit', $details->id)}}'"></i> <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('masters-SupplyMaster.destroy', $details->id) }}'; }"></i>
+          <td>@if($details->auth_flag2!=1)<i class="bx bx-edit-alt me-1" style="color: #03c3ec" onclick="window.location.href='{{ route('masters-SupplyMaster.edit', $details->id)}}'"></i> <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('masters-SupplyMaster.destroy', $details->id) }}'; }"></i>
+            @else
+            <i class="bx bx-lock-alt me-1" style="color:black "></i>
+             @endif
             @if($details->active_flag==1)<i class="bx bx-user-check me-1" style="color: #03c3ec" onclick="if(confirm('Are you sure you want to Inactivate?')) { window.location.href='{{ route('masters-SupplyMaster.activate',[$details->id,0]) }}'; }"></i> 
             @else<i class="bx bx-user-x me-1" style="color: red" onclick="if(confirm('Are you sure you want to Activate?')) { window.location.href='{{ route('masters-SupplyMaster.activate',[$details->id,1]) }}'; }"></i> 
             @endif</td>

@@ -18,7 +18,7 @@
           <div class="app-brand justify-content-center">
             <a href="{{url('/')}}" class="app-brand-link gap-2">
               <span class="app-brand-logo demo" ><img src="{{asset('assets\img\avatars\sbl.png')}}" alt="main company logo" style="width:60px"></span>
-              <span class="app-brand-text text-body fw-bold" style="font-weight: 850 !important;">SRI BHAGYALAKSHMI ENTERPRICES</span>
+              <span class="app-brand-text text-body fw-bold" style="font-weight: 850 !important;">SRI BHAGYALAKSHMI ENTERPRISES</span>
             </a>
           </div>
           <!-- /Logo -->

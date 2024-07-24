@@ -38,12 +38,16 @@
           <td>{{$details->source}}</td>
           <td>{{$details->sunits}}</td>
           <td>
-            <i class="bx bx-edit-alt me-1" style="color: #03c3ec" onclick="window.location.href='{{ route('masters-ItemMaster.edit', $details->id)}}'"></i>
-            <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('masters-ItemMaster.destroy', $details->id) }}'; }"></i>
+           <i class="bx bx-edit-alt me-1" style="color: #03c3ec" title="Edit"
+   onclick="if(confirm('Are you sure you want to edit the item with code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.edit', $details->id)}}'; }"></i>
+
+       <i class="bx bx-trash me-1" style="color: red" title="Delete"
+   onclick="if(confirm('Are you sure you want to delete the item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.destroy', $details->id) }}'; }"></i>
+
             @if($details->halt_flag == 1)
-            <i class="bx bx-play me-1" style="color: red" onclick="if(confirm('Are you sure,want to Halt this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+            <i class="bx bx-pause me-1" style="color: red" title="Item is active" onclick="if(confirm('Are you sure,want to Halt this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
             @else
-            <i class="bx bx-pause me-1" style="color: red" onclick="if(confirm('Are you sure,want to Resume this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+            <i class="bx bx-play me-1" style="color: red" title="Item is inactive" onclick="if(confirm('Are you sure,want to Resume this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
             @endif
           </td>
         </tr>

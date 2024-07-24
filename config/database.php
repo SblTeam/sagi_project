@@ -48,7 +48,7 @@ return [
             'url' => env('https://103.117.236.162/phpMYADMIN'),
             'host' => env('DB_HOST_SECOND', '103.117.236.162'),
             'port' => env('DB_PORT_SECOND', '3306'),
-            'database' => env('DB_DATABASE_SECOND', 'bhagyalakshmi'),
+            'database' => env('DB_DATABASE_SECOND', 'sblcheck'),
             'username' => env('DB_USERNAME_SECOND', 'forge'),
             'password' => env('DB_PASSWORD_SECOND', 'forge'),
             'unix_socket' => env('DB_SOCKET', ''),
