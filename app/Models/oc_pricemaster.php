@@ -31,4 +31,3 @@ class oc_pricemaster extends Model
     // Optionally, if you want to disable automatic timestamps
     public $timestamps = true; // Set this to false if you want to manage timestamps manually
 }
-

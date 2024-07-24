@@ -28,7 +28,7 @@ class LoginBasic extends Controller
         $databaseName = $tblUser->dbase;
         Config::set('database.connections.dynamic.database', $databaseName);
         Config::set('database.default', 'dynamic');
-        $commonUser = CommonUser::where('username', $username)->first();
+        $commonUser = CommonUser::where('username', $username)->where('active', 1)->first();
         if (!$commonUser) {
             return redirect()->route('auth-login-basic')->with('error', 'Invalid Username from '.$databaseName.'.');
         }

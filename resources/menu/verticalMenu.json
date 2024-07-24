@@ -22,7 +22,7 @@
     },
     {
       "name": "Sales Masters",
-      "icon": "menu-icon tf-icons bx bx bx-user",
+      "icon": "menu-icon tf-icons bx bx bx-bar-chart-alt-2",
       "slug": "masters",
       "submenu": [
         {
@@ -41,8 +41,6 @@
           "slug": "masters-PriceMaster"
         }
       ]
-
-
     },
     {
       "name": "Sales Transactions",

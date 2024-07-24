@@ -155,7 +155,7 @@ class priceMaster extends Controller
                   $validatedData['units'][$index] !== null &&
                   $validatedData['price'][$index] !== null
               ) {
-
+            
                   $nn = new oc_pricemaster();
                   $nn->cat = $category;
                   $nn->desc = $validatedData['description'][$index];
