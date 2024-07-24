@@ -18,7 +18,7 @@
           <div class="app-brand justify-content-center">
             <a href="{{url('/')}}" class="app-brand-link gap-2">
               <span class="app-brand-logo demo" ><img src="{{asset('assets\img\avatars\sbl.png')}}" alt="main company logo" style="width:60px"></span>
-              <span class="app-brand-text text-body fw-bold" style="font-weight: 850 !important;">SRI BHAGYALAKSHMI ENTERPRICES</span>
+              <span class="app-brand-text text-body fw-bold" style="font-weight: 850 !important;">SRI BHAGYALAKSHMI ENTERPRISES</span>
             </a>
           </div>
           <!-- /Logo -->
@@ -50,6 +50,9 @@
             </div>
             <div class="mb-3">
               <button class="btn btn-primary d-grid w-100" type="submit">Change Password</button>
+            </div>
+            <div class="mb-12">
+              <a href="{{url('/auth/login-basic')}}" class="app-brand-link gap-2" style="padding: 0% 0% 2% 40%;"> Go to login</a>
             </div>
           </form>
 
