@@ -22,7 +22,7 @@
     },
     {
       "name": "Sales Masters",
-      "icon": "menu-icon tf-icons bx bx bx-user",
+      "icon": "menu-icon tf-icons bx bx bx-bar-chart-alt-2",
       "slug": "masters",
       "submenu": [
         {
@@ -39,6 +39,23 @@
           "url": "masters/PriceMaster",
           "name": "Price Master",
           "slug": "masters-PriceMaster"
+        }
+      ]
+    },
+    {
+      "name": "Sales Transactions",
+      "icon": "menu-icon tf-icons bx bx bx-user",
+      "slug": "transctions",
+      "submenu": [
+        {
+          "url": "transctions/SalesOrder",
+          "name": "Sales Order",
+          "slug": "transctions-SalesOrder"
+        },
+        {
+          "url": "transctions/Invoice",
+          "name": "Invoice",
+          "slug": "transctions-Invoice"
         }
       ]
     }

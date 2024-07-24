@@ -45,8 +45,12 @@ $isEdit = isset($ims_itemcodes);
               @enderror
             </div>
             <div class="mb-0 col-md-5">
+
               <label for="description" class="form-label">Description1 <sup style="color:red;">&#9733;</sup></label>
               <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);"  placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}"  />
+
+              <label for="description" class="form-label">Description <sup style="color:red;">&#9733;</sup></label>
+              <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);" placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
               @error('description')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -493,7 +497,16 @@ function onlyNumbersh(e) {
   }
 
 
+  function onlyNumbers123(e) {
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
 
+
+  if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)||(code >= 48 && code <= 57)||(code == 32) ) {
+    return;
+  }
+ e.preventDefault();
+}
 
 
 
@@ -544,5 +557,6 @@ function onlyNumbersh(e) {
 
   }
 
-
 </script>
+</script>
+
