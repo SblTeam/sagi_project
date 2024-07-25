@@ -40,12 +40,12 @@
             </div></div>
               <div class="mb-3"><label class="form-label" for="pass">New Password</label>
                 <div class="input-group input-group-merge">
-                <input type="text" id="pass" class="form-control" name="pass" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="pass" />
+                <input type="password" id="pass" class="form-control" name="pass" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="pass" />
               </div></div>
               <div class="mb-3">
                 <label class="form-label" for="cfpass">Confirm Password</label>
                 <div class="input-group input-group-merge">
-                <input type="password" id="cfpass" class="form-control" name="cfpass" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="cfpass" />
+                  <input type="password" id="cfpass" class="form-control" name="cfpass" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="cfpass" />
               </div></div>
             </div>
             <div class="mb-3">
