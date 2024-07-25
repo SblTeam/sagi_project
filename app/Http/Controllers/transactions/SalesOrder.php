@@ -49,8 +49,8 @@ class SalesOrder extends Controller
             $result2 = DB::select($qry2);
             $poincr = $result2[0]->total + 1;
 
-            $vendorids = explode("-", $vendor);
-            $vendorid = $vendorids[1];
+            // $vendorids = explode("-", $vendor);
+            // $vendorid = $vendorids[1];
 
             if ($poincr < 10) {
                 $po = 'SO' . '-' . $fy . '-000' . $poincr;

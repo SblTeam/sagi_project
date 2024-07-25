@@ -48,7 +48,7 @@
                     // Add new row
                     addNewRow(index + 1, transfer, descriptionText, code, rate, unit, price, taxTypeText, taxValue);
                 }
-            });
+            });gettotal();
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', error);
@@ -78,13 +78,13 @@
                 <input type="text" id="code${rowNumber}" name="code[]" class="form-control" value="${code}" readonly/>
             </td>
             <td>
-                <input type="number" id="quantity${rowNumber}" name="quantity[]" class="form-control" value="${rate}" required/>
+                <input type="number" id="quantity${rowNumber}" name="quantity[]" readonly class="form-control" value="${rate}" required/>
             </td>
                    <td>
-                <input type="number" id="enterquantity${rowNumber}" name="enteredquantity[]" class="form-control" value="" required onkeyup = "gettotal();checkdiff();"/>
+                <input type="number" id="enterquantity${rowNumber}" name="enteredquantity[]" class="form-control" value="${rate}" required onkeyup = "gettotal();checkdiff();"/>
             </td>
             <td>
-                <input type="number" id="price${rowNumber}" name="price[]" class="form-control" value="${price}" required/>
+                <input type="number" id="price${rowNumber}" name="price[]" readonly class="form-control" value="${price}" required/>
             </td>
             <td>
                 <select id="taxType${rowNumber}" name="taxType[]" class="form-control" required>
@@ -195,8 +195,8 @@
                                     <th>Category</th>
                                     <th>Description</th>
                                     <th>Code</th>
+                                    <th>PO Quantity</th>
                                     <th>Quantity</th>
-                                    <th>Entered Quantity</th>
                                     <th>Price</th>
                                     <th>Tax Type</th>
                                     <th>Tax</th>
@@ -222,13 +222,13 @@
                                         <input type="text" id="code1" name="code[]" class="form-control" readonly/>
                                     </td>
                                     <td>
-                                        <input type="number" id="quantity1" name="quantity[]" class="form-control" required/>
+                                        <input type="number" id="quantity1" name="quantity[]" readonly class="form-control" required/>
                                     </td>
                                     <td>
                                         <input type="number" id="eneteredquantity1" name="enteredquantity[]" class="form-control" onkeyup = "gettotal();" required/>
                                     </td>
                                     <td>
-                                        <input type="number" id="price1" name="price[]" class="form-control" required/>
+                                        <input type="number" id="price1" name="price[]" readonly class="form-control" required/>
                                     </td>
                                     <td>
                                         <select id="taxType1" name="taxType[]" class="form-control">

@@ -84,7 +84,7 @@ $(document).ready(function() {
           <td>{{ $details->price }}</td>
           <td>
             <i class="bx bx-edit-alt me-1" style="color: #03c3ec" onclick="window.location.href='{{ route('masters-PriceMaster.edit', ['incr' => $details->incr, 'code' => $details->code]) }}'"></i>
-            <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('masters-PriceMaster.destroy', ['incr' => $details->incr, 'code' => $details->code]) }}'; }"></i>
+            <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('masters-PriceMaster.destroy', ['incr' => $details->incr, 'client' => $details->client]) }}'; }"></i>
           </td>
         </tr>
         @endforeach
