@@ -23,14 +23,14 @@ class LoginBasic extends Controller
         $pass = TblUser::where('password', $password)->first();
         if($tblUser && $pass){}
         else if(!$tblUser || !password_verify($password, $tblUser->password)){
-            return redirect()->route('auth-login-basic')->with('error', 'Invalid credentials from usersdb.');
+            return redirect()->route('auth-login-basic')->with('error', 'Invalid credentials.');
         }
         $databaseName = $tblUser->dbase;
         Config::set('database.connections.dynamic.database', $databaseName);
         Config::set('database.default', 'dynamic');
         $commonUser = CommonUser::where('username', $username)->first();
         if (!$commonUser) {
-            return redirect()->route('auth-login-basic')->with('error', 'Invalid Username from '.$databaseName.'.');
+            return redirect()->route('auth-login-basic')->with('error', 'Username not register in '.$databaseName.'.');
         }
         session()->put("db",$databaseName);
         session()->put("valid_user",$username);
