@@ -9,6 +9,11 @@
 @section('content')
 @php
     $isEdit = isset($contactDetail);
+    if($isEdit && $contactDetail->auth_flag2==1){
+      $auth_edit="readOnly";
+    }else{
+      $auth_edit="";
+    }
  @endphp
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Sales Module /</span> Profile Master
@@ -31,14 +36,14 @@
           <div class="row">
             <div class="mb-1 col-md-6">
               <label for="name" class="form-label">Profile Name <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="supplyerName" name="name" value="{{ old('name', $isEdit ? $contactDetail->name : '') }}" placeholder='Enter Name' autofocus />
+              <input class="form-control" type="text" {{$auth_edit}} id="supplyerName" name="name" value="{{ old('name', $isEdit ? $contactDetail->name : '') }}" placeholder='Enter Name' autofocus />
           @error('name')
               <div class="alert alert-danger p-1">{{ $message }}</div>
           @enderror
             </div>
             <div class="mb-1 col-md-6">
               <label for="company" class="form-label">Company Name <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="company" id="companyName" value="{{ old('company', $isEdit ? $contactDetail->company : '') }}" placeholder='Enter CompanyName' />
+              <input class="form-control" type="text" {{$auth_edit}} name="company" id="companyName" value="{{ old('company', $isEdit ? $contactDetail->company : '') }}" placeholder='Enter CompanyName' />
           @error('company')
               <div class="alert alert-danger p-1">{{ $message }}</div>
           @enderror
@@ -46,21 +51,21 @@
             <div class="mb-1 col-md-6">
               <label for="address" class="form-label">Address <sup style="color:red;">&#9733;</sup></label>
               <!-- <input type="text" class="form-control" id="address" name="address" placeholder="Address" /> -->
-            <textarea name="address" id="address" cols="30" rows="2" class="form-control"  placeholder="Address">{{ old('address', $isEdit ? $contactDetail->address : '') }}</textarea>
+            <textarea name="address" id="address" cols="30" {{$auth_edit}} rows="2" class="form-control"  placeholder="Address">{{ old('address', $isEdit ? $contactDetail->address : '') }}</textarea>
           @error('address')
               <div class="alert alert-danger p-1">{{ $message }}</div>
           @enderror
           </div>
             <div class="mb-1 col-md-6">
               <label for="place" class="form-label">Place <sup style="color:red;">&#9733;</sup></label>
-              <input type="text" class="form-control" id="place" name="place" value="{{ old('place', $isEdit ? $contactDetail->place : '') }}" placeholder="Enter Place" />
+              <input type="text" class="form-control" id="place" {{$auth_edit}} name="place" value="{{ old('place', $isEdit ? $contactDetail->place : '') }}" placeholder="Enter Place" />
           @error('place')
               <div class="alert alert-danger p-1">{{ $message }}</div>
           @enderror
         </div>
             <div class="mb-1 col-md-6">
               <label class="form-label" for="pan">Pan <sup style="color:red;">&#9733;</sup></label>
-                <input type="text" id="pan" name="pan" class="form-control" placeholder="Enter PanNumber" value="{{ old('pan', $isEdit ? $contactDetail->pan : '') }}"/>
+                <input type="text" id="pan" name="pan" {{$auth_edit}} class="form-control" placeholder="Enter PanNumber" value="{{ old('pan', $isEdit ? $contactDetail->pan : '') }}"/>
             @error('pan')
                 <div class="alert alert-danger p-1">{{ $message }}</div>
             @enderror
@@ -84,7 +89,13 @@
               <select id="state" class="form-control search_data" name="state">
                 <option value="" {{ old('state', $isEdit ? $contactDetail->state : '') == '' ? 'selected' : '' }}>Select</option>
                 @foreach ($statecodes as $snames)
+                @if($isEdit && $contactDetail->auth_flag2==1)
+                @if($contactDetail->state==$snames)
                 <option value="{{$snames}}" {{ old('state', $isEdit ? $contactDetail->state : '') == $snames ? 'selected' : '' }}>{{$snames}}</option>
+                @endif
+                @else
+                <option value="{{$snames}}" {{ old('state', $isEdit ? $contactDetail->state : '') == $snames ? 'selected' : '' }}>{{$snames}}</option>
+                @endif
                 @endforeach
                </select>
           @error('state')
@@ -93,7 +104,7 @@
             </div>
             <div class="mb-1 col-md-6">
               <label class="form-label" for="gstin">GST <sup style="color:red;">&#9733;</sup></label>
-                <input type="text" id="gst" name="gstin" class="form-control" placeholder="Enter GSTNumber" value="{{ old('gstin', $isEdit ? $contactDetail->gstin : '') }}"/>
+                <input type="text" id="gst" name="gstin" {{$auth_edit}} class="form-control" placeholder="Enter GSTNumber" value="{{ old('gstin', $isEdit ? $contactDetail->gstin : '') }}"/>
            @error('gstin')
                 <div class="alert alert-danger p-1">{{ $message }}</div>
             @enderror

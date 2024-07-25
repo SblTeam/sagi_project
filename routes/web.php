@@ -86,7 +86,7 @@ Route::get('/masters/ItemMaster/delete/{id}', [ItemMaster::class, 'destroy'])->n
 //price master
 Route::get('/masters/PriceMaster/add', [priceMaster::class, 'add'])->name('masters.PriceMaster.add');
 Route::post('/masters/PriceMaster', [PriceMaster::class, 'store'])->name('masters.PriceMaster.store');
-Route::get('/masters/PriceMaster/delete/{incr}/{code}', [PriceMaster::class, 'destroy'])->name('masters-PriceMaster.destroy');
+Route::get('/masters/PriceMaster/delete/{incr}/{client}', [PriceMaster::class, 'destroy'])->name('masters-PriceMaster.destroy');
 Route::get('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'edit'])->name('masters-PriceMaster.edit');
 Route::post('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'update'])->name('masters-PriceMaster.update');
 Route::get('/masters/PriceMaster', [PriceMaster::class, 'index'])->name('masters-PriceMaster');
@@ -132,7 +132,7 @@ Route::get('/usersaccesses/userrights/add', [userrights::class, 'add'])->name('u
 Route::post('/usersaccesses/userrights/add', [userrights::class, 'store'])->name('usersaccesses-userrights.store');
 Route::get('/usersaccesses/userrights/edit', [userrights::class, 'edit'])->name('usersaccesses-userrights.edit');
 Route::post('/usersaccesses/userrights/edit', [userrights::class, 'update'])->name('usersaccesses-userrights.update');
-Route::get('/usersaccesses/userrights/active/{id}/{status}', [userrights::class, 'active'])->name('usersaccesses-userrights.active')
+Route::get('/usersaccesses/userrights/active/{id}/{status}', [userrights::class, 'active'])->name('usersaccesses-userrights.active');
 // cards
 Route::get('/cards/basic', [CardBasic::class, 'index'])->name('cards-basic');
 // User Interface

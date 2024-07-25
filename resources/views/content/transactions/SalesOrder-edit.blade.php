@@ -32,13 +32,13 @@
                 <input type="text" id="code${rowNumber}" name="code[]" class="form-control" value="${details.code}" readonly/>
             </td>
             <td>
-                <input type="number" id="quantity${rowNumber}" name="quantity[]" class="form-control" value="${details.quantity}" required/>
+                <input type="number" id="quantity${rowNumber}" readonly name="quantity[]" class="form-control" value="${details.quantity}" required/>
             </td>
             <td>
                 <input type="number" id="enteredquantity${rowNumber}" name="enteredquantity[]" class="form-control" value="${details.squantity}" required onkeyup="gettotal();checkdiff();"/>
             </td>
             <td>
-                <input type="number" id="price${rowNumber}" name="price[]" class="form-control" value="${details.price}" required/>
+                <input type="number" id="price${rowNumber}" readonly name="price[]" class="form-control" value="${details.price}" required/>
             </td>
             <td>
                 <select id="taxType${rowNumber}" name="taxType[]" class="form-control" required>
@@ -133,8 +133,8 @@
                                     <th>Category</th>
                                     <th>Description</th>
                                     <th>code</th>
+                                    <th>PO Quantity</th>
                                     <th>Quantity</th>
-                                    <th>Entered Quantity</th>
                                     <th>Price</th>
                                     <th>Tax Type</th>
                                     <th>Tax</th>

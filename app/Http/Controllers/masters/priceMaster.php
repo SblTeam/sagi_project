@@ -122,7 +122,7 @@ class priceMaster extends Controller
       ->where('cat', $catp)
       ->get();
 
-    return view('content.masters.priceMaster-add-edit', compact('items', 'oc_pricemaster', 'description', 'codep','activeContacts'));
+    return view('content.masters.priceMaster-add-edit', compact('items', 'oc_pricemaster', 'description', 'codep','activeContacts','incr'));
   }
 
 
@@ -130,8 +130,6 @@ class priceMaster extends Controller
 
   public function store(Request $request)
   {
-
-  $incr = oc_pricemaster::max('incr');
       // Validate incoming request data
       $validatedData = $request->validate([
           'category' => 'required|array',
@@ -141,12 +139,28 @@ class priceMaster extends Controller
           'price' => 'required|array',
           'client' => 'required|array',
           'date' => 'required',
+          'incr' => 'required',
       ]);
 
       try {
           // Start a database transaction
           DB::beginTransaction();
-          $incr = $incr + 1;
+
+          // Initialize the incr value from the post view page
+          $incr = $validatedData['incr'];
+
+          // Prepare data for API request
+          $apiData = [
+              'category' => [],
+              'description' => [],
+              'code' => [],
+              'units' => [],
+              'price' => [],
+              'client' => [],
+              'date' => $validatedData['date'],
+              'incr' => []
+          ];
+
           foreach ($validatedData['category'] as $index => $category) {
               if (
                   $category !== null &&
@@ -155,7 +169,7 @@ class priceMaster extends Controller
                   $validatedData['units'][$index] !== null &&
                   $validatedData['price'][$index] !== null
               ) {
-            
+
                   $nn = new oc_pricemaster();
                   $nn->cat = $category;
                   $nn->desc = $validatedData['description'][$index];
@@ -164,9 +178,19 @@ class priceMaster extends Controller
                   $nn->price = $validatedData['price'][$index];
                   $nn->client = $validatedData['client'][$index];
                   $nn->date = $validatedData['date'];
-                  $nn->incr = $incr;
+                  $nn->incr = $incr; // Set the current incr value
                   $nn->save();
-                  $incr++;
+
+                  // Add data to API request array
+                  $apiData['category'][] = $category;
+                  $apiData['description'][] = $validatedData['description'][$index];
+                  $apiData['code'][] = $validatedData['code'][$index];
+                  $apiData['units'][] = $validatedData['units'][$index];
+                  $apiData['price'][] = $validatedData['price'][$index];
+                  $apiData['client'][] = $validatedData['client'][$index];
+                  $apiData['incr'][] = $incr; // Add the current incr value
+
+                  $incr++; // Increment the incr value
               }
           }
 
@@ -175,15 +199,15 @@ class priceMaster extends Controller
 
           // Send data to secondary server
           $apiUrl = 'https://secondary.sbl1972.in/secondarysales/savepricemasterapi.php';
-          $response = Http::post($apiUrl, $validatedData);
+          $response = Http::post($apiUrl, $apiData);
 
           if ($response->successful()) {
               return redirect()
-              ->route('masters-PriceMaster')
+                  ->route('masters-PriceMaster')
                   ->with('success', 'Item saved successfully and data sent to secondary server!');
           } else {
               return redirect()
-              ->route('masters-PriceMaster')
+                  ->route('masters-PriceMaster')
                   ->with('error', 'Item saved locally, but failed to send data to secondary server.');
           }
       } catch (\Exception $e) {
@@ -191,15 +215,10 @@ class priceMaster extends Controller
           DB::rollBack();
 
           return redirect()
-          ->route('masters-PriceMaster')
+              ->route('masters-PriceMaster')
               ->with('error', 'An error occurred while saving data: ' . $e->getMessage());
       }
   }
-
-
-
-
-
 
   public function update(Request $request, $incr, $code)
   {
@@ -212,6 +231,7 @@ class priceMaster extends Controller
           'price' => 'required|array',
           'client' => 'required|array',
           'date' => 'required',
+          'incr' => 'required',
       ]);
 
       try {
@@ -230,6 +250,7 @@ class priceMaster extends Controller
               $nn->price = $validatedData['price'][$index];
               $nn->client = $validatedData['client'][$index];
               $nn->date = $validatedData['date'];
+              $nn->incr = $validatedData['incr'];
 
               $nn->save();
           }
@@ -246,7 +267,8 @@ class priceMaster extends Controller
               'price' => $validatedData['price'],
               'client' => $validatedData['client'],
               'date' => $validatedData['date'],
-              'incr' => $incr,
+              'incr' => $validatedData['incr'],
+
           ];
 
           // Send data to secondary server
@@ -274,19 +296,19 @@ class priceMaster extends Controller
 
 
 
-  public function destroy($incr,$code)
+  public function destroy($incr,$client)
   {
       try {
 
           DB::beginTransaction();
-          $oc_pricemaster = oc_pricemaster::where('incr', $incr)->where('code', $code)->firstOrFail();
+          $oc_pricemaster = oc_pricemaster::where('incr', $incr)->where('client', $client)->firstOrFail();
           $oc_pricemaster->delete();
 
 
           DB::commit();
 
 
-          $data = ['incr' => $incr,'code' => $code];
+          $data = ['incr' => $incr,'client' => $client];
 
 
           $apiUrl = 'https://secondary.sbl1972.in/secondarysales/deletepricemasterapi.php';
