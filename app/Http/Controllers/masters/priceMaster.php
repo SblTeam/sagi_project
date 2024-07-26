@@ -34,7 +34,7 @@ class priceMaster extends Controller
     $activeContacts = contactdetails::where('active_flag', 1)->pluck('name')->first();
 
     $incr = oc_pricemaster::max('incr');
-
+    $incr =  $incr +1;
 
 
     $codes = oc_salesorder::select('code')
@@ -219,6 +219,12 @@ class priceMaster extends Controller
               ->with('error', 'An error occurred while saving data: ' . $e->getMessage());
       }
   }
+
+
+
+
+
+
 
   public function update(Request $request, $incr, $code)
   {

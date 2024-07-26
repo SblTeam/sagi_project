@@ -18,10 +18,10 @@
     <table class="table w-100" id="datatable_set">
       <thead>
         <tr>
-        <th style="width:19.28%;">So no</th>
-          <th style="width:19.28%;">Category </th>
+        <th style="width:19.28%;text-align:left">Date</th>
+          <th style="width:19.28%;">SO NO.</th>
 
-          <th style="width:14.28%;">Description</th>
+          <th style="width:14.28%;">Distributor</th>
           <th style="width:9.28%;">Quantity</th>
 
           <th style="width:14.28%;">Actions</th>
@@ -30,9 +30,9 @@
       <tbody class="table-border-bottom-0">
         @foreach ($oc_salesorder as $details)
         <tr>
-        <td>{{$details->po}}</td>
-          <td>{{$details->category}}</td>
-          <td>{{$details->description}}</td>
+        <td style="text-align:left">{{$details->date}}</td>
+          <td>{{$details->po}}</td>
+          <td>{{$details->vendor}}</td>
           <td>{{$details->tquantity}}</td>
 
           <td>

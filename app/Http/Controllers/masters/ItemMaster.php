@@ -217,7 +217,7 @@ class ItemMaster extends Controller
     $nn->packetweight = $validatedData['packetweight'];
 
 
-    $nn->sac = $request->input('tax_applicable');
+    $nn->tax_applicable = $request->input('tax_applicable');
     $nn->sac = $request->input('sac');
     $nn->wpac = $request->input('expca');
     $nn->iac = $request->input('iac');
