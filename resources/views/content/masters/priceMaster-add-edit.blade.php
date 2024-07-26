@@ -230,6 +230,7 @@ $cat_array_json = json_encode($cat_array);
 
 <input type="date" id="date" name="date" value="{{ $inputDate }}" class="form-control"   style="width: 200px" onchange="getdescription(this.id);" />
 <input type="hidden" id="incr" name="incr" value="{{ $incr }}" class="form-control"   style="width: 200px" />
+
                     <div class="row mb-4" id="dynamic-rows">
                         <div class="row dynamic-row" id="dynamic-row-1">
                             <div class="mb-1 col-md-3">

@@ -66,12 +66,7 @@ class SalesOrder extends Controller
         return view('content.transactions.SalesOrder1-add', compact('po','data'));
     }
 
-    public function store(Request $request)
-    {
-
-
-
-
+    public function store(Request $request){
       $date = date("d.m.Y");
       $yearFull = (int)explode('.', $date)[2];
       $year = (int)substr($yearFull, -2);
@@ -120,12 +115,8 @@ class SalesOrder extends Controller
                 $nn->date = $request->date;
                 $nn->vendor = $request->distributor;
                 $nn->pono = $request->po;
-
-
                 $nn->tquantity = $request->tquantity;
                 $nn->total = $request->total;
-
-
                 $nn->category = $category;
                 $nn->description = $request->description[$index];
                 $nn->code = $request->code[$index];
@@ -135,12 +126,20 @@ class SalesOrder extends Controller
                 $nn->taxcode = $request->taxType[$index];
                 $nn->taxvalue = $request->tax[$index];
                 $nn->poincr = $poincr;
-
                 $nn->save();
             }
         }
-
-        return redirect()->route('transctions-SalesOrder');
+        
+        // $apiData = [
+        //     'variable_name' => [
+        //         'flag' => 1,
+        //         'po' => 'PO-0724-0007'
+        //     ]
+        // ];
+        //   $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+        //   $response = Http::post($apiUrl, $apiData);
+        //   echo $response;
+       return redirect()->route('transctions-SalesOrder');
 
     }
 
