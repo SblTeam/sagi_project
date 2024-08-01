@@ -4,6 +4,7 @@
 
 @section('page-script')
 @php
+$cat_array=[];
 $isEdit = isset($oc_pricemaster);
 
 foreach ($items as $group) {
@@ -11,8 +12,22 @@ foreach ($items as $group) {
 }
 $cat_array_json = json_encode($cat_array);
 @endphp
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+     
+     let today = new Date();
+     let day = ("0" + today.getDate()).slice(-2);
+     let month = ("0" + (today.getMonth() + 1)).slice(-2);
+     let todayDate = today.getFullYear() + "-" + month + "-" + day;
+
+
+     document.getElementById("date").setAttribute("min", todayDate);
+ });
+</script>
 @if(!$isEdit)
 <script>
+
+
     document.addEventListener('DOMContentLoaded', function() {
         let rowNumber = 1;
 

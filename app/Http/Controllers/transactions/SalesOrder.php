@@ -129,16 +129,15 @@ class SalesOrder extends Controller
                 $nn->save();
             }
         }
-        
-        // $apiData = [
-        //     'variable_name' => [
-        //         'flag' => 1,
-        //         'po' => 'PO-0724-0007'
-        //     ]
-        // ];
-        //   $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
-        //   $response = Http::post($apiUrl, $apiData);
-        //   echo $response;
+        $apiData = [
+            'dataset' => [
+                'flag' => 1,
+                'po' => $request->po
+            ]
+        ];
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
+          $data=$response->json();
        return redirect()->route('transctions-SalesOrder');
 
     }
@@ -193,7 +192,15 @@ class SalesOrder extends Controller
                 $oc_salesorder->save();
             }
         }
-
+        $apiData = [
+            'dataset' => [
+                'flag' => 1,
+                'po' => $request->po
+            ]
+        ];
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
+          $data=$response->json();
         // Redirect back with a success message
         return redirect()
             ->route('transctions-SalesOrder')
@@ -242,8 +249,16 @@ $data = [];
 
     public function destroy($id)
     {
+        $pono = oc_salesorder::where('po', $id)->first()->pono;
         oc_salesorder::where('po', $id)->delete();
-
+        $apiData = [
+            'dataset' => [
+                'flag' => 0,
+                'po' => $pono
+            ]
+        ];
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
         return redirect()
             ->route('transctions-SalesOrder')
             ->with('success', 'Item(s) deleted successfully!');

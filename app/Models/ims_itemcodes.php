@@ -9,6 +9,7 @@ class ims_itemcodes extends Model
 {
   use HasFactory;
   protected $fillable = [
+    'catgroup',
     'code',
     'description',
     'cat',

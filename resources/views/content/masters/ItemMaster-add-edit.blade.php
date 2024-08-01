@@ -39,7 +39,7 @@ $isEdit = isset($ims_itemcodes);
           <div class="row">
             <div class="mb-0 col-md-4">
               <label for="itemcode" class="form-label">Item Code <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onKeyPress="onlyNumbers12(event);" placeholder="Enter itemCode" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onpaste="validatePasteitem(this, event)" onKeyPress="onlyNumbers12(event);" placeholder="Enter itemCode" style="width: 50%" autofocus />
               @error('code')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -47,7 +47,7 @@ $isEdit = isset($ims_itemcodes);
             <div class="mb-0 col-md-5">
 
               <label for="description" class="form-label">Description <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);" placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
+              <input class="form-control" type="text" name="description" id="description" onpaste="validatePaste(this, event)" onKeyPress="onlyNumbers123(event);" placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
               @error('description')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -74,12 +74,12 @@ $isEdit = isset($ims_itemcodes);
               <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
                 <option value="">Select</option>
                 @foreach ($types as $group)
-                  <option value="{{ $group->type }}" {{ old('cat') == $group->type ? 'selected' : '' }}>
+                  <option value="{{ $group->type }}" {{ $ims_itemcodes->cat == $group->type ? 'selected' : '' }}>
                     {{ $group->type }}
                   </option>
                 @endforeach
               </select>
-              
+
 
               @else
 
@@ -88,13 +88,14 @@ $isEdit = isset($ims_itemcodes);
               <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
                 <option value="">Select</option>
                     @foreach ($categorytypes as $group)
+                    @if(old('catgroup') == $group->catgroup)
                   <option value="{{ $group->type }}" {{ old('cat') == $group->type ? 'selected' : '' }}>
                     {{ $group->type }}
                   </option>
+                  @endif
                 @endforeach
               </select>
               @endif
-
               @error('cat')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -356,7 +357,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               <label class="form-label" for="cum">EAN No<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);"  placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
+              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);" onpaste="validatePaste1(this, event)"  placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
               @error('ean')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -366,7 +367,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               <label class="form-label" for="cum">HSN/SAC<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
+              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" onpaste="validatePaste1(this, event)" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
               @error('hsn')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -448,7 +449,42 @@ function onlyNumbersh(e) {
   }
 }
 
+function validatePaste(el, e) {
+  // Regular expression to allow only letters (both cases), digits 1-9, and a single space
+  var regex = /^[a-zA-Z1-9]+( [a-zA-Z1-9]+)?$/;
+  var key = e.clipboardData.getData('text');
 
+  // Test the clipboard data against the regex
+  if (!regex.test(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+function validatePasteitem(el, e) {
+  // Regular expression to allow only letters (both cases) and digits 1-9, with no spaces
+  var regex = /^[a-zA-Z1-9]+$/;
+  var key = e.clipboardData.getData('text');
+
+  // Test the clipboard data against the regex
+  if (!regex.test(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+
+
+
+function validatePaste1(el, e) {
+  var regex = /^[1-9 .'-]+$/gi;
+  var key = e.clipboardData.getData('text')
+  if (!regex.test(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
   document.getElementById("cat").value = '';
 
   function getcategory() {

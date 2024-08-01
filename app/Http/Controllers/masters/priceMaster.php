@@ -61,9 +61,7 @@ class priceMaster extends Controller
         DB::raw("GROUP_CONCAT(CONCAT(code, '@', description, '@', cunits)) as cd")
       )
       ->where('halt_flag', 0)
-      ->where('flag', 1)
-      ->where('iusage', 'LIKE', '%Sale%')
-      ->whereNotIn('code', $check_code_array)
+      ->where('lel2flag', 1)
       ->groupBy('cat')
       ->get();
 
@@ -107,8 +105,7 @@ class priceMaster extends Controller
         DB::raw("GROUP_CONCAT(CONCAT(code, '@', description, '@', cunits)) as cd")
       )
       ->where('halt_flag', 0)
-      ->where('iusage', 'LIKE', '%Sale%')
-      ->whereNotIn('code', $check_code_array)
+      ->where('lel2flag', 1)
       ->groupBy('cat')
       ->get();
 

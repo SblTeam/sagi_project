@@ -30,7 +30,7 @@
       <!-- Account -->
       <hr class="my-0">
       <div class="card-body">
-        <form action="{{ $isEdit ? route('masters-SupplyMaster.update', $contactDetail->id) : route('masters-SupplyMaster') }}" id="formAccountSettings" method="POST" enctype="multipart/form-data" onsubmit="$('#submit').prop('disabled', true);">
+        <form action="{{ $isEdit ? route('masters-SupplyMaster.update', $contactDetail->id) : route('masters-SupplyMaster.store') }}" id="formAccountSettings" method="POST" enctype="multipart/form-data" onsubmit="$('#submit').prop('disabled', true);">
           @csrf
           @method('post')
           <div class="row">

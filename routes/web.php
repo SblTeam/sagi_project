@@ -47,6 +47,7 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\masters\PdfController;
 
 
 // authentication
@@ -58,6 +59,8 @@ Route::get('/auth/logout', [LoginBasic::class, 'logout'])->name('auth-logout');
 Route::middleware(['dynamic.auth'])->group(function () {
 // Main Page Route
 Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+//pdf
+ Route::get('/generatepdf', [PdfController::class, 'generatePdf'])->name('pdf-PdfController');
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
 Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('layouts-without-navbar');
@@ -67,7 +70,7 @@ Route::get('/layouts/blank', [Blank::class, 'index'])->name('layouts-blank');
 // masters
 Route::get('/masters/SupplyMaster', [SupplyMaster::class, 'index'])->name('masters-SupplyMaster');
 Route::get('/masters/SupplyMaster/add', [SupplyMaster::class, 'add'])->name('masters-SupplyMaster.add');
-Route::post('/masters/SupplyMaster', [SupplyMaster::class, 'store'])->name('masters-SupplyMaster');
+Route::post('/masters/SupplyMaster/store', [SupplyMaster::class, 'store'])->name('masters-SupplyMaster.store');
 Route::get('/masters/SupplyMaster/edit/{id}', [SupplyMaster::class, 'edit'])->name('masters-SupplyMaster.edit');
 Route::post('/masters/SupplyMaster/{id}', [SupplyMaster::class, 'update'])->name('masters-SupplyMaster.update');
 Route::get('/masters/SupplyMaster/delete/{id}', [SupplyMaster::class, 'destroy'])->name('masters-SupplyMaster.destroy');

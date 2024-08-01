@@ -45,15 +45,15 @@ class Itemcodes extends Controller
     public function storeflag(Request $request)
     {
         $tableName = $request->input('table_name');
-        $itemid = $request->input('itemid');
+        $itid = $request->input('itemid');
+
         DB::connection('dynamic')
         ->table($tableName)
         ->where('halt_flag', '0')
-        ->where('id', $itemid)
+        ->whereIn('id', $itid)
         ->update(['flag' => '1']);
-        return response()->json(['data' => $itemid], 200);
+        return response()->json(['data' => $itid], 200);
     }
-
     public function numofitems(Request $request)
     {
         $tableName = $request->input('table_name');
@@ -79,9 +79,9 @@ if ($data !== null && count($data) > 0){$count = count($data);}else {$count = 0;
         ->table($tableName)
         ->where('halt_flag', '0')
         ->where('flag', '1')
-        ->where('id', $itemid)
+        ->whereIn('id', $itemid)
         ->update(['lel2flag' => '1']);
-
+        
         DB::connection('dynamic')
         ->table('contactdetails')
         ->where('name', $profile_name)
@@ -90,7 +90,7 @@ if ($data !== null && count($data) > 0){$count = count($data);}else {$count = 0;
         $data=DB::connection('dynamic')
         ->table($tableName)
         ->where('halt_flag', '0')
-        ->where('id', $itemid)
+        ->whereIn('id', $itemid)
         ->where('flag', '1')->where('lel2flag', '1')->get();
         return response()->json(['data' => $data], 200);
     }
