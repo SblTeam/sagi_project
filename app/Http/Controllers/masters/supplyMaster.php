@@ -26,17 +26,22 @@ class SupplyMaster extends Controller
       $request->validate([
         'name' => 'required|regex:/^[A-Za-z0-9][A-Za-z0-9&.\-, ]{0,48}[A-Za-z0-9.]$/',
         'company' => 'required|regex:/^[A-Za-z0-9][A-Za-z0-9&.\-, ]{0,48}[A-Za-z0-9.]$/',
-        'address' => "required|max:255|regex:/^[A-Za-z0-9\s.\-,'&]+$/",
-        'place' => "required|max:100|regex:/^[A-Za-z0-9\s.\-,'&]+$/",
+        'address' => "required|max:255|regex:/^[A-Za-z0-9\s.\-,&]+$/",
+        'place' => "required|max:100|regex:/^[A-Za-z0-9\s.\-,&]+$/",
         'pan' => 'required|regex:/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/',
-        'email' => 'required|email',
+        'email' => 'required|regex:/^[\w\._-]+@[a-zA-Z\d\._-]+\.(?:[a-zA-Z]{2,})$/',
         'phone' => 'required|digits:10',
         'state' => 'required|max:50',
         'gstin' => 'required|size:15|regex:/^[A-Za-z0-9]{15}$/',
         'files_path.*' => 'nullable|file|max:5048',
     ],[
-      'name.regex' =>'Please enter a valid address. Only alphabets (A-Z), numbers (0-9), commas (,), ampersands (&), and hyphens (-) are allowed',
-      'company.regex' =>'Please enter a valid address. Only alphabets (A-Z), numbers (0-9), commas (,), ampersands (&), and hyphens (-) are allowed'
+      'name.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,& ) are allowed',
+      'company.regex' =>'Only alphabets (A-Z), numbers (0-9), )special characters (.-,& ) are allowed',
+      'address.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,\& ) are allowed',
+      'place.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,\& ) are allowed',
+      'email.regex' =>'Please enter a valid email.Only alphabets (A-Z), numbers (0-9), special characters (.-_) are allowed',
+      'pan.regex' =>'Please enter a valid pan number. Ex: ABCDE1234F',
+      'gstin.regex' =>'Only alphabets (A-Z), numbers (0-9) are allowed'
     ]);
     $count = ContactDetails::count();
     if($count>0){return redirect()->route('masters-SupplyMaster')->with('Fail', 'Max profiles access allowed only one.');}
@@ -64,8 +69,8 @@ class SupplyMaster extends Controller
     'email' => $request->email,
     'active' => 1,
     'tbl_name' => "ContactDetails",
-    'localip' => $request->server('SERVER_ADDR'),
-    'publicip' => $request->ip()
+    'localip' => getHostByName(getHostName()),
+    'publicip' => file_get_contents('https://api.ipify.org')
 ]);
    return redirect()->route('masters-SupplyMaster')->with('success', $request->name.' data saved successfully.');
     }
@@ -82,18 +87,23 @@ public function update(Request $request, $id)
     $request->validate([
         'name' => 'required|regex:/^[A-Za-z0-9][A-Za-z0-9&.\-, ]{0,48}[A-Za-z0-9.]$/',
         'company' => 'required|regex:/^[A-Za-z0-9][A-Za-z0-9&.\-, ]{0,48}[A-Za-z0-9.]$/',
-        'address' => "required|max:255|regex:/^[A-Za-z0-9\s.\-,'&]+$/",
-        'place' => "required|max:100|regex:/^[A-Za-z0-9\s.\-,'&]+$/",
+        'address' => "required|max:255|regex:/^[A-Za-z0-9\s.\-,&]+$/",
+        'place' => "required|max:100|regex:/^[A-Za-z0-9\s.\-,&]+$/",
         'pan' => 'required|regex:/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/',
-        'email' => 'required|email',
+        'email' => 'required|regex:/^[\w\._-]+@[a-zA-Z\d\._-]+\.(?:[a-zA-Z]{2,})$/',
         'phone' => 'required|digits:10',
         'state' => 'required|max:255',
         'gstin' => 'required|size:15|regex:/^[A-Za-z0-9]{15}$/',
         'files_path.*' => 'nullable|file|max:5048', // Adjust validation rules as necessary
     ],[
-      'name.regex' =>'Please enter a valid address. Only alphabets (A-Z), numbers (0-9), commas (,), ampersands (&), and hyphens (-) are allowed',
-      'company.regex' =>'Please enter a valid address. Only alphabets (A-Z), numbers (0-9), commas (,), ampersands (&), and hyphens (-) are allowed'
-    ]);
+      'name.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,& ) are allowed',
+      'company.regex' =>'Only alphabets (A-Z), numbers (0-9), )special characters (.-,& ) are allowed',
+      'address.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,\& ) are allowed',
+      'place.regex' =>'Only alphabets (A-Z), numbers (0-9), special characters (.-,\& ) are allowed',
+      'email.regex' =>'Please enter a valid email.Only alphabets (A-Z), numbers (0-9), special characters (.-_) are allowed',
+      'pan.regex' =>'Please enter a valid pan number. Ex: ABCDE1234F',
+      'gstin.regex' =>'Only alphabets (A-Z), numbers (0-9) are allowed'
+      ]);
     $contactDetail = ContactDetails::findOrFail($id);
     $onboard_connections = onboard_connections::where('profile_name', $contactDetail->name)->firstOrFail();
     
@@ -121,8 +131,8 @@ public function update(Request $request, $id)
     'phone' => $request->phone,
     'email' => $request->email,
     'active' => 1,
-    'localip' => $request->server('SERVER_ADDR'),
-    'publicip' => $request->ip()
+    'localip' => getHostByName(getHostName()),
+    'publicip' => file_get_contents('https://api.ipify.org')
 ]);
 return redirect()->route('masters-SupplyMaster')->with('success', $contactDetail->name.' data updated successfully.');
 }

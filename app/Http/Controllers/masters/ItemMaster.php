@@ -207,7 +207,6 @@ class ItemMaster extends Controller
     $nn->cat = $validatedData['cat'];
     $nn->catgroup = $validatedData['catgroup'];
     $nn->type = $validatedData['type'];
-
     $nn->sunits = $validatedData['sunits'];
     $nn->cunits = $validatedData['cunits'];
     $nn->source = $validatedData['source'];
@@ -215,8 +214,6 @@ class ItemMaster extends Controller
     $nn->pieces = $validatedData['pieces'];
     $nn->weight = $validatedData['weight'];
     $nn->packetweight = $validatedData['packetweight'];
-
-
     $nn->tax_applicable = $request->input('tax_applicable');
     $nn->sac = $request->input('sac');
     $nn->wpac = $request->input('expca');
@@ -225,11 +222,9 @@ class ItemMaster extends Controller
     $nn->srac = $request->input('sractd');
     $nn->ean_no = $request->input('ean');
     $nn->hsn = $request->input('hsn');
-
-    // Save the item
+    $nn->client = session()->get('valid_user');
     $nn->save();
 
-    // Return response
     return redirect()
       ->route('masters-ItemMaster')
       ->with('success', 'Item saved successfully!');

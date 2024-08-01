@@ -45,9 +45,9 @@
    onclick="if(confirm('Are you sure you want to delete the item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.destroy', $details->id) }}'; }"></i>
 
             @if($details->halt_flag == 1)
-            <i class="bx bx-pause me-1" style="color: red" title="Item is active" onclick="if(confirm('Are you sure,want to Halt this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+            <i class="bx bx-pause me-1" style="color: red" title="Item is active" onclick="if(confirm('Are you sure you want to Halt this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
             @else
-            <i class="bx bx-play me-1" style="color: red" title="Item is inactive" onclick="if(confirm('Are you sure,want to Resume this Item')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+            <i class="bx bx-play me-1" style="color: red" title="Item is inactive" onclick="if(confirm('Are you sure you want to Resume this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
             @endif
           </td>
         </tr>
