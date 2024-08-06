@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\masters;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ims_itemcodes;
 use App\Models\oc_salesorder;
 use App\Models\oc_loadingslip;
-use App\Models\oc_cobi;
+
 use App\Models\oc_pricemaster;
 use App\Models\contactdetails;
 use Illuminate\Support\Facades\Http;
@@ -37,23 +37,8 @@ class priceMaster extends Controller
     $incr =  $incr +1;
 
 
-    $codes = oc_salesorder::select('code')
-      ->distinct()
-      ->pluck('code')
-      ->toArray();
 
-    $codeds = oc_cobi::select('code')
-      ->where('dflag', 0)
-      ->distinct()
-      ->pluck('code')
-      ->toArray();
-
-    $codeps = oc_loadingslip::select('code')
-      ->distinct()
-      ->pluck('code')
-      ->toArray();
-
-    $check_code_array = array_merge($codes, $codeds, $codeps);
+   
 
     $items = DB::table('ims_itemcodes')
       ->select(
@@ -62,6 +47,7 @@ class priceMaster extends Controller
       )
       ->where('halt_flag', 0)
       ->where('lel2flag', 1)
+
       ->groupBy('cat')
       ->get();
 
@@ -86,11 +72,7 @@ class priceMaster extends Controller
       ->pluck('code')
       ->toArray();
 
-    $codeds = oc_cobi::select('code')
-      ->where('dflag', 0)
-      ->distinct()
-      ->pluck('code')
-      ->toArray();
+   
 
     $codeps = oc_loadingslip::select('code')
       ->distinct()
@@ -105,7 +87,8 @@ class priceMaster extends Controller
         DB::raw("GROUP_CONCAT(CONCAT(code, '@', description, '@', cunits)) as cd")
       )
       ->where('halt_flag', 0)
-      ->where('lel2flag', 1)
+      ->where('iusage', 'LIKE', '%Sale%')
+      ->whereNotIn('code', $check_code_array)
       ->groupBy('cat')
       ->get();
 
