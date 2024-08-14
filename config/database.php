@@ -64,7 +64,7 @@ return [
         ],
     'dynamic' => [
         'driver' => 'mysql',
-        'host' => env('DB_HOST', '127.0.0.1'),
+        'host' => env('DB_HOST', 'localhost'),
         'port' => env('DB_PORT', '3306'),
         'database' => '',
         'username' => env('DB_USERNAME', 'forge'),
@@ -78,7 +78,7 @@ return [
     ],
     'users_db' => [
         'driver' => 'mysql',
-        'host' => env('DB_HOST', '127.0.0.1'),
+        'host' => env('DB_HOST', 'localhost'),
         'port' => env('DB_PORT', '3306'),
         'database' => 'users',
         'username' => env('DB_USERNAME', 'forge'),

@@ -3022,34 +3022,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/popper.js");
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _superPropGet(t, e, r, o) { var p = _get(_getPrototypeOf(1 & o ? t.prototype : t), e, r); return 2 & o ? function (t) { return p.apply(r, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 /*!
   * Bootstrap v5.3.3 (https://getbootstrap.com/)
@@ -3227,7 +3228,7 @@ var isDisabled = function isDisabled(element) {
   }
   return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
 };
-var findShadowRoot = function findShadowRoot(element) {
+var _findShadowRoot = function findShadowRoot(element) {
   if (!document.documentElement.attachShadow) {
     return null;
   }
@@ -3245,7 +3246,7 @@ var findShadowRoot = function findShadowRoot(element) {
   if (!element.parentNode) {
     return null;
   }
-  return findShadowRoot(element.parentNode);
+  return _findShadowRoot(element.parentNode);
 };
 var noop = function noop() {};
 
@@ -3316,16 +3317,16 @@ var executeAfterTransition = function executeAfterTransition(callback, transitio
   var durationPadding = 5;
   var emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
   var called = false;
-  var handler = function handler(_ref) {
+  var _handler = function handler(_ref) {
     var target = _ref.target;
     if (target !== transitionElement) {
       return;
     }
     called = true;
-    transitionElement.removeEventListener(TRANSITION_END, handler);
+    transitionElement.removeEventListener(TRANSITION_END, _handler);
     execute(callback);
   };
-  transitionElement.addEventListener(TRANSITION_END, handler);
+  transitionElement.addEventListener(TRANSITION_END, _handler);
   setTimeout(function () {
     if (!called) {
       triggerTransitionEnd(transitionElement);
@@ -4462,7 +4463,7 @@ var Carousel = /*#__PURE__*/function (_BaseComponent3) {
       if (this._swipeHelper) {
         this._swipeHelper.dispose();
       }
-      _get(_getPrototypeOf(Carousel.prototype), "dispose", this).call(this);
+      _superPropGet(Carousel, "dispose", this, 3)([]);
     }
 
     // Private
@@ -5234,7 +5235,7 @@ var Dropdown = /*#__PURE__*/function (_BaseComponent5) {
       if (this._popper) {
         this._popper.destroy();
       }
-      _get(_getPrototypeOf(Dropdown.prototype), "dispose", this).call(this);
+      _superPropGet(Dropdown, "dispose", this, 3)([]);
     }
   }, {
     key: "update",
@@ -5283,7 +5284,7 @@ var Dropdown = /*#__PURE__*/function (_BaseComponent5) {
   }, {
     key: "_getConfig",
     value: function _getConfig(config) {
-      config = _get(_getPrototypeOf(Dropdown.prototype), "_getConfig", this).call(this, config);
+      config = _superPropGet(Dropdown, "_getConfig", this, 3)([config]);
       if (_typeof(config.reference) === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
         // Popper virtual elements require a getBoundingClientRect method
         throw new TypeError("".concat(NAME$a.toUpperCase(), ": Option \"reference\" provided type \"object\" without a required \"getBoundingClientRect\" method."));
@@ -6036,7 +6037,7 @@ var Modal = /*#__PURE__*/function (_BaseComponent6) {
       EventHandler.off(this._dialog, EVENT_KEY$4);
       this._backdrop.dispose();
       this._focustrap.deactivate();
-      _get(_getPrototypeOf(Modal.prototype), "dispose", this).call(this);
+      _superPropGet(Modal, "dispose", this, 3)([]);
     }
   }, {
     key: "handleUpdate",
@@ -6399,7 +6400,7 @@ var Offcanvas = /*#__PURE__*/function (_BaseComponent7) {
     value: function dispose() {
       this._backdrop.dispose();
       this._focustrap.deactivate();
-      _get(_getPrototypeOf(Offcanvas.prototype), "dispose", this).call(this);
+      _superPropGet(Offcanvas, "dispose", this, 3)([]);
     }
 
     // Private
@@ -6762,7 +6763,7 @@ var TemplateFactory = /*#__PURE__*/function (_Config5) {
   }, {
     key: "_typeCheckConfig",
     value: function _typeCheckConfig(config) {
-      _get(_getPrototypeOf(TemplateFactory.prototype), "_typeCheckConfig", this).call(this, config);
+      _superPropGet(TemplateFactory, "_typeCheckConfig", this, 3)([config]);
       this._checkContent(config.content);
     }
   }, {
@@ -6773,10 +6774,10 @@ var TemplateFactory = /*#__PURE__*/function (_Config5) {
         var _ref20 = _slicedToArray(_ref19, 2);
         var selector = _ref20[0];
         var content = _ref20[1];
-        _get(_getPrototypeOf(TemplateFactory.prototype), "_typeCheckConfig", this).call(this, {
+        _superPropGet(TemplateFactory, "_typeCheckConfig", this, 3)([{
           selector: selector,
           entry: content
-        }, DefaultContentType);
+        }, DefaultContentType]);
       }
     }
   }, {
@@ -6986,7 +6987,7 @@ var Tooltip = /*#__PURE__*/function (_BaseComponent8) {
         this._element.setAttribute('title', this._element.getAttribute('data-bs-original-title'));
       }
       this._disposePopper();
-      _get(_getPrototypeOf(Tooltip.prototype), "dispose", this).call(this);
+      _superPropGet(Tooltip, "dispose", this, 3)([]);
     }
   }, {
     key: "show",
@@ -6999,7 +7000,7 @@ var Tooltip = /*#__PURE__*/function (_BaseComponent8) {
         return;
       }
       var showEvent = EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOW$2));
-      var shadowRoot = findShadowRoot(this._element);
+      var shadowRoot = _findShadowRoot(this._element);
       var isInTheDom = (shadowRoot || this._element.ownerDocument.documentElement).contains(this._element);
       if (showEvent.defaultPrevented || !isInTheDom) {
         return;
@@ -7646,7 +7647,7 @@ var ScrollSpy = /*#__PURE__*/function (_BaseComponent9) {
     key: "dispose",
     value: function dispose() {
       this._observer.disconnect();
-      _get(_getPrototypeOf(ScrollSpy.prototype), "dispose", this).call(this);
+      _superPropGet(ScrollSpy, "dispose", this, 3)([]);
     }
 
     // Private
@@ -8341,7 +8342,7 @@ var Toast = /*#__PURE__*/function (_BaseComponent11) {
       if (this.isShown()) {
         this._element.classList.remove(CLASS_NAME_SHOW);
       }
-      _get(_getPrototypeOf(Toast.prototype), "dispose", this).call(this);
+      _superPropGet(Toast, "dispose", this, 3)([]);
     }
   }, {
     key: "isShown",
@@ -8495,7 +8496,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{--dt-row-selected: 13, 110, 253;--dt-row-selected-text: 255, 255, 255;--dt-row-selected-link: 9, 10, 11;--dt-row-stripe: 0, 0, 0;--dt-row-hover: 0, 0, 0;--dt-column-ordering: 0, 0, 0;--dt-html-background: white}:root.dark{--dt-html-background: rgb(33, 37, 41)}table.dataTable td.dt-control{text-align:center;cursor:pointer}table.dataTable td.dt-control:before{display:inline-block;box-sizing:border-box;content:\"\";border-top:5px solid transparent;border-left:10px solid rgba(0, 0, 0, 0.5);border-bottom:5px solid transparent;border-right:0px solid transparent}table.dataTable tr.dt-hasChild td.dt-control:before{border-top:10px solid rgba(0, 0, 0, 0.5);border-left:5px solid transparent;border-bottom:0px solid transparent;border-right:5px solid transparent}html.dark table.dataTable td.dt-control:before,:root[data-bs-theme=dark] table.dataTable td.dt-control:before{border-left-color:rgba(255, 255, 255, 0.5)}html.dark table.dataTable tr.dt-hasChild td.dt-control:before,:root[data-bs-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before{border-top-color:rgba(255, 255, 255, 0.5);border-left-color:transparent}div.dt-scroll-body thead tr,div.dt-scroll-body tfoot tr{height:0}div.dt-scroll-body thead tr th,div.dt-scroll-body thead tr td,div.dt-scroll-body tfoot tr th,div.dt-scroll-body tfoot tr td{height:0 !important;padding-top:0px !important;padding-bottom:0px !important;border-top-width:0px !important;border-bottom-width:0px !important}div.dt-scroll-body thead tr th div.dt-scroll-sizing,div.dt-scroll-body thead tr td div.dt-scroll-sizing,div.dt-scroll-body tfoot tr th div.dt-scroll-sizing,div.dt-scroll-body tfoot tr td div.dt-scroll-sizing{height:0 !important;overflow:hidden !important}table.dataTable thead>tr>th:active,table.dataTable thead>tr>td:active{outline:none}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before{position:absolute;display:block;bottom:50%;content:\"▲\";content:\"▲\"/\"\"}table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{position:absolute;display:block;top:50%;content:\"▼\";content:\"▼\"/\"\"}table.dataTable thead>tr>th.dt-orderable-asc,table.dataTable thead>tr>th.dt-orderable-desc,table.dataTable thead>tr>th.dt-ordering-asc,table.dataTable thead>tr>th.dt-ordering-desc,table.dataTable thead>tr>td.dt-orderable-asc,table.dataTable thead>tr>td.dt-orderable-desc,table.dataTable thead>tr>td.dt-ordering-asc,table.dataTable thead>tr>td.dt-ordering-desc{position:relative;padding-right:30px}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order{position:absolute;right:12px;top:0;bottom:0;width:12px}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:after,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:before,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{left:0;opacity:.125;line-height:9px;font-size:.8em}table.dataTable thead>tr>th.dt-orderable-asc,table.dataTable thead>tr>th.dt-orderable-desc,table.dataTable thead>tr>td.dt-orderable-asc,table.dataTable thead>tr>td.dt-orderable-desc{cursor:pointer}table.dataTable thead>tr>th.dt-orderable-asc:hover,table.dataTable thead>tr>th.dt-orderable-desc:hover,table.dataTable thead>tr>td.dt-orderable-asc:hover,table.dataTable thead>tr>td.dt-orderable-desc:hover{outline:2px solid rgba(0, 0, 0, 0.05);outline-offset:-2px}table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{opacity:.6}table.dataTable thead>tr>th.sorting_desc_disabled span.dt-column-order:after,table.dataTable thead>tr>th.sorting_asc_disabled span.dt-column-order:before,table.dataTable thead>tr>td.sorting_desc_disabled span.dt-column-order:after,table.dataTable thead>tr>td.sorting_asc_disabled span.dt-column-order:before{display:none}table.dataTable thead>tr>th:active,table.dataTable thead>tr>td:active{outline:none}div.dt-scroll-body>table.dataTable>thead>tr>th,div.dt-scroll-body>table.dataTable>thead>tr>td{overflow:hidden}:root.dark table.dataTable thead>tr>th.dt-orderable-asc:hover,:root.dark table.dataTable thead>tr>th.dt-orderable-desc:hover,:root.dark table.dataTable thead>tr>td.dt-orderable-asc:hover,:root.dark table.dataTable thead>tr>td.dt-orderable-desc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>th.dt-orderable-asc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>th.dt-orderable-desc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>td.dt-orderable-asc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>td.dt-orderable-desc:hover{outline:2px solid rgba(255, 255, 255, 0.05)}div.dt-processing{position:absolute;top:50%;left:50%;width:200px;margin-left:-100px;margin-top:-22px;text-align:center;padding:2px;z-index:10}div.dt-processing>div:last-child{position:relative;width:80px;height:15px;margin:1em auto}div.dt-processing>div:last-child>div{position:absolute;top:0;width:13px;height:13px;border-radius:50%;background:rgb(13, 110, 253);background:rgb(var(--dt-row-selected));-webkit-animation-timing-function:cubic-bezier(0, 1, 1, 0);animation-timing-function:cubic-bezier(0, 1, 1, 0)}div.dt-processing>div:last-child>div:nth-child(1){left:8px;-webkit-animation:datatables-loader-1 .6s infinite;animation:datatables-loader-1 .6s infinite}div.dt-processing>div:last-child>div:nth-child(2){left:8px;-webkit-animation:datatables-loader-2 .6s infinite;animation:datatables-loader-2 .6s infinite}div.dt-processing>div:last-child>div:nth-child(3){left:32px;-webkit-animation:datatables-loader-2 .6s infinite;animation:datatables-loader-2 .6s infinite}div.dt-processing>div:last-child>div:nth-child(4){left:56px;-webkit-animation:datatables-loader-3 .6s infinite;animation:datatables-loader-3 .6s infinite}@-webkit-keyframes datatables-loader-1{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes datatables-loader-1{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes datatables-loader-3{0%{-webkit-transform:scale(1);transform:scale(1)}100%{-webkit-transform:scale(0);transform:scale(0)}}@keyframes datatables-loader-3{0%{-webkit-transform:scale(1);transform:scale(1)}100%{-webkit-transform:scale(0);transform:scale(0)}}@-webkit-keyframes datatables-loader-2{0%{-webkit-transform:translate(0, 0);transform:translate(0, 0)}100%{-webkit-transform:translate(24px, 0);transform:translate(24px, 0)}}@keyframes datatables-loader-2{0%{-webkit-transform:translate(0, 0);transform:translate(0, 0)}100%{-webkit-transform:translate(24px, 0);transform:translate(24px, 0)}}table.dataTable.nowrap th,table.dataTable.nowrap td{white-space:nowrap}table.dataTable th,table.dataTable td{box-sizing:border-box}table.dataTable th.dt-left,table.dataTable td.dt-left{text-align:left}table.dataTable th.dt-center,table.dataTable td.dt-center{text-align:center}table.dataTable th.dt-right,table.dataTable td.dt-right{text-align:right}table.dataTable th.dt-justify,table.dataTable td.dt-justify{text-align:justify}table.dataTable th.dt-nowrap,table.dataTable td.dt-nowrap{white-space:nowrap}table.dataTable th.dt-empty,table.dataTable td.dt-empty{text-align:center;vertical-align:top}table.dataTable th.dt-type-numeric,table.dataTable th.dt-type-date,table.dataTable td.dt-type-numeric,table.dataTable td.dt-type-date{text-align:right}table.dataTable thead th,table.dataTable thead td,table.dataTable tfoot th,table.dataTable tfoot td{text-align:left}table.dataTable thead th.dt-head-left,table.dataTable thead td.dt-head-left,table.dataTable tfoot th.dt-head-left,table.dataTable tfoot td.dt-head-left{text-align:left}table.dataTable thead th.dt-head-center,table.dataTable thead td.dt-head-center,table.dataTable tfoot th.dt-head-center,table.dataTable tfoot td.dt-head-center{text-align:center}table.dataTable thead th.dt-head-right,table.dataTable thead td.dt-head-right,table.dataTable tfoot th.dt-head-right,table.dataTable tfoot td.dt-head-right{text-align:right}table.dataTable thead th.dt-head-justify,table.dataTable thead td.dt-head-justify,table.dataTable tfoot th.dt-head-justify,table.dataTable tfoot td.dt-head-justify{text-align:justify}table.dataTable thead th.dt-head-nowrap,table.dataTable thead td.dt-head-nowrap,table.dataTable tfoot th.dt-head-nowrap,table.dataTable tfoot td.dt-head-nowrap{white-space:nowrap}table.dataTable tbody th.dt-body-left,table.dataTable tbody td.dt-body-left{text-align:left}table.dataTable tbody th.dt-body-center,table.dataTable tbody td.dt-body-center{text-align:center}table.dataTable tbody th.dt-body-right,table.dataTable tbody td.dt-body-right{text-align:right}table.dataTable tbody th.dt-body-justify,table.dataTable tbody td.dt-body-justify{text-align:justify}table.dataTable tbody th.dt-body-nowrap,table.dataTable tbody td.dt-body-nowrap{white-space:nowrap}/*! Bootstrap 5 integration for DataTables\n *\n * ©2020 SpryMedia Ltd, all rights reserved.\n * License: MIT datatables.net/license/mit\n */table.table.dataTable{clear:both;margin-bottom:0;max-width:none;border-spacing:0}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>*{box-shadow:none}table.table.dataTable>:not(caption)>*>*{background-color:var(--bs-table-bg)}table.table.dataTable>tbody>tr{background-color:transparent}table.table.dataTable>tbody>tr.selected>*{box-shadow:inset 0 0 0 9999px rgb(13, 110, 253);box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));color:rgb(255, 255, 255);color:rgb(var(--dt-row-selected-text))}table.table.dataTable>tbody>tr.selected a{color:rgb(9, 10, 11);color:rgb(var(--dt-row-selected-link))}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>*{box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-stripe), 0.05)}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1).selected>*{box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.95);box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.95)}table.table.dataTable.table-hover>tbody>tr:hover>*{box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-hover), 0.075)}table.table.dataTable.table-hover>tbody>tr.selected:hover>*{box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.975);box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.975)}div.dt-container div.dt-length label{font-weight:normal;text-align:left;white-space:nowrap}div.dt-container div.dt-length select{width:auto;display:inline-block;margin-right:.5em}div.dt-container div.dt-search{text-align:right}div.dt-container div.dt-search label{font-weight:normal;white-space:nowrap;text-align:left}div.dt-container div.dt-search input{margin-left:.5em;display:inline-block;width:auto}div.dt-container div.dt-info{padding-top:.85em}div.dt-container div.dt-paging{margin:0}div.dt-container div.dt-paging ul.pagination{margin:2px 0;-ms-flex-wrap:wrap;flex-wrap:wrap}div.dt-container div.dt-row{position:relative}div.dt-scroll-head table.dataTable{margin-bottom:0 !important}div.dt-scroll-body{border-bottom-color:var(--bs-border-color);border-bottom-width:var(--bs-border-width);border-bottom-style:solid}div.dt-scroll-body>table{border-top:none;margin-top:0 !important;margin-bottom:0 !important}div.dt-scroll-body>table>tbody>tr:first-child{border-top-width:0}div.dt-scroll-body>table>thead>tr{border-width:0 !important}div.dt-scroll-body>table>tbody>tr:last-child>*{border-bottom:none}div.dt-scroll-foot>.dt-scroll-footInner{box-sizing:content-box}div.dt-scroll-foot>.dt-scroll-footInner>table{margin-top:0 !important;border-top:none}div.dt-scroll-foot>.dt-scroll-footInner>table>tfoot>tr:first-child{border-top-width:0 !important}@media screen and (max-width: 767px){div.dt-container div.dt-length,div.dt-container div.dt-search,div.dt-container div.dt-info,div.dt-container div.dt-paging{text-align:center}div.dt-container .row{--bs-gutter-y: 0.5rem}div.dt-container div.dt-paging ul.pagination{-ms-flex-pack:center !important;justify-content:center !important}}table.dataTable.table-sm>thead>tr th.dt-orderable-asc,table.dataTable.table-sm>thead>tr th.dt-orderable-desc,table.dataTable.table-sm>thead>tr th.dt-ordering-asc,table.dataTable.table-sm>thead>tr th.dt-ordering-desc,table.dataTable.table-sm>thead>tr td.dt-orderable-asc,table.dataTable.table-sm>thead>tr td.dt-orderable-desc,table.dataTable.table-sm>thead>tr td.dt-ordering-asc,table.dataTable.table-sm>thead>tr td.dt-ordering-desc{padding-right:20px}table.dataTable.table-sm>thead>tr th.dt-orderable-asc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-orderable-desc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-ordering-asc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-ordering-desc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-orderable-asc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-orderable-desc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-ordering-asc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-ordering-desc span.dt-column-order{right:5px}div.dt-scroll-head table.table-bordered{border-bottom-width:0}div.table-responsive>div.dt-container>div.row{margin:0}div.table-responsive>div.dt-container>div.row>div[class^=col-]:first-child{padding-left:0}div.table-responsive>div.dt-container>div.row>div[class^=col-]:last-child{padding-right:0}:root[data-bs-theme=dark]{--dt-row-hover: 255, 255, 255;--dt-row-stripe: 255, 255, 255;--dt-column-ordering: 255, 255, 255}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{--dt-row-selected: 13, 110, 253;--dt-row-selected-text: 255, 255, 255;--dt-row-selected-link: 9, 10, 11;--dt-row-stripe: 0, 0, 0;--dt-row-hover: 0, 0, 0;--dt-column-ordering: 0, 0, 0;--dt-html-background: white}:root.dark{--dt-html-background: rgb(33, 37, 41)}table.dataTable td.dt-control{text-align:center;cursor:pointer}table.dataTable td.dt-control:before{display:inline-block;box-sizing:border-box;content:\"\";border-top:5px solid transparent;border-left:10px solid rgba(0, 0, 0, 0.5);border-bottom:5px solid transparent;border-right:0px solid transparent}table.dataTable tr.dt-hasChild td.dt-control:before{border-top:10px solid rgba(0, 0, 0, 0.5);border-left:5px solid transparent;border-bottom:0px solid transparent;border-right:5px solid transparent}html.dark table.dataTable td.dt-control:before,:root[data-bs-theme=dark] table.dataTable td.dt-control:before,:root[data-theme=dark] table.dataTable td.dt-control:before{border-left-color:rgba(255, 255, 255, 0.5)}html.dark table.dataTable tr.dt-hasChild td.dt-control:before,:root[data-bs-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before,:root[data-theme=dark] table.dataTable tr.dt-hasChild td.dt-control:before{border-top-color:rgba(255, 255, 255, 0.5);border-left-color:transparent}div.dt-scroll{width:100%}div.dt-scroll-body thead tr,div.dt-scroll-body tfoot tr{height:0}div.dt-scroll-body thead tr th,div.dt-scroll-body thead tr td,div.dt-scroll-body tfoot tr th,div.dt-scroll-body tfoot tr td{height:0 !important;padding-top:0px !important;padding-bottom:0px !important;border-top-width:0px !important;border-bottom-width:0px !important}div.dt-scroll-body thead tr th div.dt-scroll-sizing,div.dt-scroll-body thead tr td div.dt-scroll-sizing,div.dt-scroll-body tfoot tr th div.dt-scroll-sizing,div.dt-scroll-body tfoot tr td div.dt-scroll-sizing{height:0 !important;overflow:hidden !important}table.dataTable thead>tr>th:active,table.dataTable thead>tr>td:active{outline:none}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before{position:absolute;display:block;bottom:50%;content:\"▲\";content:\"▲\"/\"\"}table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{position:absolute;display:block;top:50%;content:\"▼\";content:\"▼\"/\"\"}table.dataTable thead>tr>th.dt-orderable-asc,table.dataTable thead>tr>th.dt-orderable-desc,table.dataTable thead>tr>th.dt-ordering-asc,table.dataTable thead>tr>th.dt-ordering-desc,table.dataTable thead>tr>td.dt-orderable-asc,table.dataTable thead>tr>td.dt-orderable-desc,table.dataTable thead>tr>td.dt-ordering-asc,table.dataTable thead>tr>td.dt-ordering-desc{position:relative;padding-right:30px}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order{position:absolute;right:12px;top:0;bottom:0;width:12px}table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:after,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:before,table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:after,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:after,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:before,table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{left:0;opacity:.125;line-height:9px;font-size:.8em}table.dataTable thead>tr>th.dt-orderable-asc,table.dataTable thead>tr>th.dt-orderable-desc,table.dataTable thead>tr>td.dt-orderable-asc,table.dataTable thead>tr>td.dt-orderable-desc{cursor:pointer}table.dataTable thead>tr>th.dt-orderable-asc:hover,table.dataTable thead>tr>th.dt-orderable-desc:hover,table.dataTable thead>tr>td.dt-orderable-asc:hover,table.dataTable thead>tr>td.dt-orderable-desc:hover{outline:2px solid rgba(0, 0, 0, 0.05);outline-offset:-2px}table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before,table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{opacity:.6}table.dataTable thead>tr>th.sorting_desc_disabled span.dt-column-order:after,table.dataTable thead>tr>th.sorting_asc_disabled span.dt-column-order:before,table.dataTable thead>tr>td.sorting_desc_disabled span.dt-column-order:after,table.dataTable thead>tr>td.sorting_asc_disabled span.dt-column-order:before{display:none}table.dataTable thead>tr>th:active,table.dataTable thead>tr>td:active{outline:none}div.dt-scroll-body>table.dataTable>thead>tr>th,div.dt-scroll-body>table.dataTable>thead>tr>td{overflow:hidden}:root.dark table.dataTable thead>tr>th.dt-orderable-asc:hover,:root.dark table.dataTable thead>tr>th.dt-orderable-desc:hover,:root.dark table.dataTable thead>tr>td.dt-orderable-asc:hover,:root.dark table.dataTable thead>tr>td.dt-orderable-desc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>th.dt-orderable-asc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>th.dt-orderable-desc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>td.dt-orderable-asc:hover,:root[data-bs-theme=dark] table.dataTable thead>tr>td.dt-orderable-desc:hover{outline:2px solid rgba(255, 255, 255, 0.05)}div.dt-processing{position:absolute;top:50%;left:50%;width:200px;margin-left:-100px;margin-top:-22px;text-align:center;padding:2px;z-index:10}div.dt-processing>div:last-child{position:relative;width:80px;height:15px;margin:1em auto}div.dt-processing>div:last-child>div{position:absolute;top:0;width:13px;height:13px;border-radius:50%;background:rgb(13, 110, 253);background:rgb(var(--dt-row-selected));-webkit-animation-timing-function:cubic-bezier(0, 1, 1, 0);animation-timing-function:cubic-bezier(0, 1, 1, 0)}div.dt-processing>div:last-child>div:nth-child(1){left:8px;-webkit-animation:datatables-loader-1 .6s infinite;animation:datatables-loader-1 .6s infinite}div.dt-processing>div:last-child>div:nth-child(2){left:8px;-webkit-animation:datatables-loader-2 .6s infinite;animation:datatables-loader-2 .6s infinite}div.dt-processing>div:last-child>div:nth-child(3){left:32px;-webkit-animation:datatables-loader-2 .6s infinite;animation:datatables-loader-2 .6s infinite}div.dt-processing>div:last-child>div:nth-child(4){left:56px;-webkit-animation:datatables-loader-3 .6s infinite;animation:datatables-loader-3 .6s infinite}@-webkit-keyframes datatables-loader-1{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes datatables-loader-1{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes datatables-loader-3{0%{-webkit-transform:scale(1);transform:scale(1)}100%{-webkit-transform:scale(0);transform:scale(0)}}@keyframes datatables-loader-3{0%{-webkit-transform:scale(1);transform:scale(1)}100%{-webkit-transform:scale(0);transform:scale(0)}}@-webkit-keyframes datatables-loader-2{0%{-webkit-transform:translate(0, 0);transform:translate(0, 0)}100%{-webkit-transform:translate(24px, 0);transform:translate(24px, 0)}}@keyframes datatables-loader-2{0%{-webkit-transform:translate(0, 0);transform:translate(0, 0)}100%{-webkit-transform:translate(24px, 0);transform:translate(24px, 0)}}table.dataTable.nowrap th,table.dataTable.nowrap td{white-space:nowrap}table.dataTable th,table.dataTable td{box-sizing:border-box}table.dataTable th.dt-left,table.dataTable td.dt-left{text-align:left}table.dataTable th.dt-center,table.dataTable td.dt-center{text-align:center}table.dataTable th.dt-right,table.dataTable td.dt-right{text-align:right}table.dataTable th.dt-justify,table.dataTable td.dt-justify{text-align:justify}table.dataTable th.dt-nowrap,table.dataTable td.dt-nowrap{white-space:nowrap}table.dataTable th.dt-empty,table.dataTable td.dt-empty{text-align:center;vertical-align:top}table.dataTable th.dt-type-numeric,table.dataTable th.dt-type-date,table.dataTable td.dt-type-numeric,table.dataTable td.dt-type-date{text-align:right}table.dataTable thead th,table.dataTable thead td,table.dataTable tfoot th,table.dataTable tfoot td{text-align:left}table.dataTable thead th.dt-head-left,table.dataTable thead td.dt-head-left,table.dataTable tfoot th.dt-head-left,table.dataTable tfoot td.dt-head-left{text-align:left}table.dataTable thead th.dt-head-center,table.dataTable thead td.dt-head-center,table.dataTable tfoot th.dt-head-center,table.dataTable tfoot td.dt-head-center{text-align:center}table.dataTable thead th.dt-head-right,table.dataTable thead td.dt-head-right,table.dataTable tfoot th.dt-head-right,table.dataTable tfoot td.dt-head-right{text-align:right}table.dataTable thead th.dt-head-justify,table.dataTable thead td.dt-head-justify,table.dataTable tfoot th.dt-head-justify,table.dataTable tfoot td.dt-head-justify{text-align:justify}table.dataTable thead th.dt-head-nowrap,table.dataTable thead td.dt-head-nowrap,table.dataTable tfoot th.dt-head-nowrap,table.dataTable tfoot td.dt-head-nowrap{white-space:nowrap}table.dataTable tbody th.dt-body-left,table.dataTable tbody td.dt-body-left{text-align:left}table.dataTable tbody th.dt-body-center,table.dataTable tbody td.dt-body-center{text-align:center}table.dataTable tbody th.dt-body-right,table.dataTable tbody td.dt-body-right{text-align:right}table.dataTable tbody th.dt-body-justify,table.dataTable tbody td.dt-body-justify{text-align:justify}table.dataTable tbody th.dt-body-nowrap,table.dataTable tbody td.dt-body-nowrap{white-space:nowrap}/*! Bootstrap 5 integration for DataTables\n *\n * ©2020 SpryMedia Ltd, all rights reserved.\n * License: MIT datatables.net/license/mit\n */table.table.dataTable{clear:both;margin-bottom:0;max-width:none;border-spacing:0}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>*{box-shadow:none}table.table.dataTable>:not(caption)>*>*{background-color:var(--bs-table-bg)}table.table.dataTable>tbody>tr{background-color:transparent}table.table.dataTable>tbody>tr.selected>*{box-shadow:inset 0 0 0 9999px rgb(13, 110, 253);box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));color:rgb(255, 255, 255);color:rgb(var(--dt-row-selected-text))}table.table.dataTable>tbody>tr.selected a{color:rgb(9, 10, 11);color:rgb(var(--dt-row-selected-link))}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>*{box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-stripe), 0.05)}table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1).selected>*{box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.95);box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.95)}table.table.dataTable.table-hover>tbody>tr:hover>*{box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-hover), 0.075)}table.table.dataTable.table-hover>tbody>tr.selected:hover>*{box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.975);box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.975)}div.dt-container div.dt-layout-start>*:not(:last-child){margin-right:1em}div.dt-container div.dt-layout-end>*:not(:first-child){margin-left:1em}div.dt-container div.dt-layout-full{width:100%}div.dt-container div.dt-layout-full>*:only-child{margin-left:auto;margin-right:auto}div.dt-container div.dt-layout-table>div{display:block !important}@media screen and (max-width: 767px){div.dt-container div.dt-layout-start>*:not(:last-child){margin-right:0}div.dt-container div.dt-layout-end>*:not(:first-child){margin-left:0}}div.dt-container div.dt-length label{font-weight:normal;text-align:left;white-space:nowrap}div.dt-container div.dt-length select{width:auto;display:inline-block;margin-right:.5em}div.dt-container div.dt-search{text-align:right}div.dt-container div.dt-search label{font-weight:normal;white-space:nowrap;text-align:left}div.dt-container div.dt-search input{margin-left:.5em;display:inline-block;width:auto}div.dt-container div.dt-paging{margin:0}div.dt-container div.dt-paging ul.pagination{margin:2px 0;-ms-flex-wrap:wrap;flex-wrap:wrap}div.dt-container div.dt-row{position:relative}div.dt-scroll-head table.dataTable{margin-bottom:0 !important}div.dt-scroll-body{border-bottom-color:var(--bs-border-color);border-bottom-width:var(--bs-border-width);border-bottom-style:solid}div.dt-scroll-body>table{border-top:none;margin-top:0 !important;margin-bottom:0 !important}div.dt-scroll-body>table>tbody>tr:first-child{border-top-width:0}div.dt-scroll-body>table>thead>tr{border-width:0 !important}div.dt-scroll-body>table>tbody>tr:last-child>*{border-bottom:none}div.dt-scroll-foot>.dt-scroll-footInner{box-sizing:content-box}div.dt-scroll-foot>.dt-scroll-footInner>table{margin-top:0 !important;border-top:none}div.dt-scroll-foot>.dt-scroll-footInner>table>tfoot>tr:first-child{border-top-width:0 !important}@media screen and (max-width: 767px){div.dt-container div.dt-length,div.dt-container div.dt-search,div.dt-container div.dt-info,div.dt-container div.dt-paging{text-align:center}div.dt-container .row{--bs-gutter-y: 0.5rem}div.dt-container div.dt-paging ul.pagination{-ms-flex-pack:center !important;justify-content:center !important}}table.dataTable.table-sm>thead>tr th.dt-orderable-asc,table.dataTable.table-sm>thead>tr th.dt-orderable-desc,table.dataTable.table-sm>thead>tr th.dt-ordering-asc,table.dataTable.table-sm>thead>tr th.dt-ordering-desc,table.dataTable.table-sm>thead>tr td.dt-orderable-asc,table.dataTable.table-sm>thead>tr td.dt-orderable-desc,table.dataTable.table-sm>thead>tr td.dt-ordering-asc,table.dataTable.table-sm>thead>tr td.dt-ordering-desc{padding-right:20px}table.dataTable.table-sm>thead>tr th.dt-orderable-asc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-orderable-desc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-ordering-asc span.dt-column-order,table.dataTable.table-sm>thead>tr th.dt-ordering-desc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-orderable-asc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-orderable-desc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-ordering-asc span.dt-column-order,table.dataTable.table-sm>thead>tr td.dt-ordering-desc span.dt-column-order{right:5px}div.dt-scroll-head table.table-bordered{border-bottom-width:0}div.table-responsive>div.dt-container>div.row{margin:0}div.table-responsive>div.dt-container>div.row>div[class^=col-]:first-child{padding-left:0}div.table-responsive>div.dt-container>div.row>div[class^=col-]:last-child{padding-right:0}:root[data-bs-theme=dark]{--dt-row-hover: 255, 255, 255;--dt-row-stripe: 255, 255, 255;--dt-column-ordering: 255, 255, 255}\n", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -15362,6 +15363,14 @@ $.extend( true, datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.class
 	},
 	processing: {
 		container: "dt-processing card"
+	},
+	layout: {
+		row: 'row mt-2 justify-content-between',
+		cell: 'd-md-flex justify-content-between align-items-center',
+		tableCell: 'col-12',
+		start: 'dt-layout-start col-md-auto me-auto',
+		end: 'dt-layout-end col-md-auto ms-auto',
+		full: 'dt-layout-full col-md'
 	}
 } );
 
@@ -15379,9 +15388,10 @@ datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.renderer.pagingButton
 	}
 
 	var li = $('<li>').addClass(btnClasses.join(' '));
-	var a = $('<a>', {
-		'href': disabled ? null : '#',
-		'class': 'page-link'
+	var a = $('<button>', {
+		'class': 'page-link',
+		role: 'link',
+		type: 'button'
 	})
 		.html(content)
 		.appendTo(li);
@@ -15396,39 +15406,40 @@ datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.renderer.pagingContai
 	return $('<ul/>').addClass('pagination').append(buttonEls);
 };
 
-datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.renderer.layout.bootstrap = function ( settings, container, items ) {
-	var row = $( '<div/>', {
-			"class": items.full ?
-				'row mt-2 justify-content-md-center' :
-				'row mt-2 justify-content-between'
-		} )
-		.appendTo( container );
+// DataTable.ext.renderer.layout.bootstrap = function ( settings, container, items ) {
+// 	var row = $( '<div/>', {
+// 			"class": items.full ?
+// 				'row mt-2 justify-content-md-center' :
+// 				'row mt-2 justify-content-between'
+// 		} )
+// 		.appendTo( container );
 
-	$.each( items, function (key, val) {
-		var klass;
+// 	$.each( items, function (key, val) {
+// 		var klass;
+// 		var cellClass = '';
 
-		// Apply start / end (left / right when ltr) margins
-		if (val.table) {
-			klass = 'col-12';
-		}
-		else if (key === 'start') {
-			klass = 'col-md-auto me-auto';
-		}
-		else if (key === 'end') {
-			klass = 'col-md-auto ms-auto';
-		}
-		else {
-			klass = 'col-md';
-		}
+// 		// Apply start / end (left / right when ltr) margins
+// 		if (val.table) {
+// 			klass = 'col-12';
+// 		}
+// 		else if (key === 'start') {
+// 			klass = '' + cellClass;
+// 		}
+// 		else if (key === 'end') {
+// 			klass = '' + cellClass;
+// 		}
+// 		else {
+// 			klass = ' ' + cellClass;
+// 		}
 
-		$( '<div/>', {
-				id: val.id || null,
-				"class": klass + ' ' + (val.className || '')
-			} )
-			.append( val.contents )
-			.appendTo( row );
-	} );
-};
+// 		$( '<div/>', {
+// 				id: val.id || null,
+// 				"class": klass + ' ' + (val.className || '')
+// 			} )
+// 			.append( val.contents )
+// 			.appendTo( row );
+// 	} );
+// };
 
 
 /* harmony default export */ __webpack_exports__["default"] = (datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -15445,7 +15456,7 @@ datatables_net__WEBPACK_IMPORTED_MODULE_1__["default"].ext.renderer.layout.boots
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
-/*! DataTables 2.0.8
+/*! DataTables 2.1.3
  * © SpryMedia Ltd - datatables.net/license
  */
 
@@ -15498,7 +15509,6 @@ var DataTable = function ( selector, options )
 		
 		var i=0, iLen;
 		var sId = this.getAttribute( 'id' );
-		var bInitHandedOff = false;
 		var defaults = DataTable.defaults;
 		var $this = $(this);
 		
@@ -15648,6 +15658,7 @@ var DataTable = function ( selector, options )
 			"rowId",
 			"caption",
 			"layout",
+			"orderDescReverse",
 			[ "iCookieDuration", "iStateDuration" ], // backwards compat
 			[ "oSearch", "oPreviousSearch" ],
 			[ "aoSearchCols", "aoPreSearchCols" ],
@@ -15694,38 +15705,14 @@ var DataTable = function ( selector, options )
 			oSettings._iDisplayStart = oInit.iDisplayStart;
 		}
 		
-		/* Language definitions */
-		var oLanguage = oSettings.oLanguage;
-		$.extend( true, oLanguage, oInit.oLanguage );
-		
-		if ( oLanguage.sUrl )
+		var defer = oInit.iDeferLoading;
+		if ( defer !== null )
 		{
-			/* Get the language definitions from a file - because this Ajax call makes the language
-			 * get async to the remainder of this function we use bInitHandedOff to indicate that
-			 * _fnInitialise will be fired by the returned Ajax handler, rather than the constructor
-			 */
-			$.ajax( {
-				dataType: 'json',
-				url: oLanguage.sUrl,
-				success: function ( json ) {
-					_fnCamelToHungarian( defaults.oLanguage, json );
-					$.extend( true, oLanguage, json, oSettings.oInit.oLanguage );
+			oSettings.deferLoading = true;
 		
-					_fnCallbackFire( oSettings, null, 'i18n', [oSettings], true);
-					_fnInitialise( oSettings );
-				},
-				error: function () {
-					// Error occurred loading language file
-					_fnLog( oSettings, 0, 'i18n file loading error', 21 );
-		
-					// continue on as best we can
-					_fnInitialise( oSettings );
-				}
-			} );
-			bInitHandedOff = true;
-		}
-		else {
-			_fnCallbackFire( oSettings, null, 'i18n', [oSettings]);
+			var tmp = Array.isArray(defer);
+			oSettings._iRecordsDisplay = tmp ? defer[0] : defer;
+			oSettings._iRecordsTotal = tmp ? defer[1] : defer;
 		}
 		
 		/*
@@ -15792,113 +15779,112 @@ var DataTable = function ( selector, options )
 			} );
 		}
 		
-		var features = oSettings.oFeatures;
-		var loadedInit = function () {
-			/*
-			 * Sorting
-			 * @todo For modularisation (1.11) this needs to do into a sort start up handler
-			 */
-		
-			// If aaSorting is not defined, then we use the first indicator in asSorting
-			// in case that has been altered, so the default sort reflects that option
-			if ( oInit.aaSorting === undefined ) {
-				var sorting = oSettings.aaSorting;
-				for ( i=0, iLen=sorting.length ; i<iLen ; i++ ) {
-					sorting[i][1] = oSettings.aoColumns[ i ].asSorting[0];
-				}
-			}
-		
-			/* Do a first pass on the sorting classes (allows any size changes to be taken into
-			 * account, and also will apply sorting disabled classes if disabled
-			 */
-			_fnSortingClasses( oSettings );
-		
-			_fnCallbackReg( oSettings, 'aoDrawCallback', function () {
-				if ( oSettings.bSorted || _fnDataSource( oSettings ) === 'ssp' || features.bDeferRender ) {
-					_fnSortingClasses( oSettings );
-				}
-			} );
-		
-		
-			/*
-			 * Final init
-			 * Cache the header, body and footer as required, creating them if needed
-			 */
-			var caption = $this.children('caption');
-		
-			if ( oSettings.caption ) {
-				if ( caption.length === 0 ) {
-					caption = $('<caption/>').appendTo( $this );
-				}
-		
-				caption.html( oSettings.caption );
-			}
-		
-			// Store the caption side, so we can remove the element from the document
-			// when creating the element
-			if (caption.length) {
-				caption[0]._captionSide = caption.css('caption-side');
-				oSettings.captionNode = caption[0];
-			}
-		
-			if ( thead.length === 0 ) {
-				thead = $('<thead/>').appendTo($this);
-			}
-			oSettings.nTHead = thead[0];
-			$('tr', thead).addClass(oClasses.thead.row);
-		
-			var tbody = $this.children('tbody');
-			if ( tbody.length === 0 ) {
-				tbody = $('<tbody/>').insertAfter(thead);
-			}
-			oSettings.nTBody = tbody[0];
-		
-			var tfoot = $this.children('tfoot');
-			if ( tfoot.length === 0 ) {
-				// If we are a scrolling table, and no footer has been given, then we need to create
-				// a tfoot element for the caption element to be appended to
-				tfoot = $('<tfoot/>').appendTo($this);
-			}
-			oSettings.nTFoot = tfoot[0];
-			$('tr', tfoot).addClass(oClasses.tfoot.row);
-		
-			// Check if there is data passing into the constructor
-			if ( oInit.aaData ) {
-				for ( i=0 ; i<oInit.aaData.length ; i++ ) {
-					_fnAddData( oSettings, oInit.aaData[ i ] );
-				}
-			}
-			else if ( _fnDataSource( oSettings ) == 'dom' ) {
-				// Grab the data from the page
-				_fnAddTr( oSettings, $(oSettings.nTBody).children('tr') );
-			}
-		
-			/* Copy the data index array */
-			oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
-		
-			/* Initialisation complete - table can be drawn */
-			oSettings.bInitialised = true;
-		
-			/* Check if we need to initialise the table (it might not have been handed off to the
-			 * language processor)
-			 */
-			if ( bInitHandedOff === false ) {
-				_fnInitialise( oSettings );
-			}
-		};
-		
-		/* Must be done after everything which can be overridden by the state saving! */
+		// Must be done after everything which can be overridden by the state saving!
 		_fnCallbackReg( oSettings, 'aoDrawCallback', _fnSaveState );
 		
+		var features = oSettings.oFeatures;
 		if ( oInit.bStateSave )
 		{
 			features.bStateSave = true;
-			_fnLoadState( oSettings, oInit, loadedInit );
-		}
-		else {
-			loadedInit();
 		}
 		
+		// If aaSorting is not defined, then we use the first indicator in asSorting
+		// in case that has been altered, so the default sort reflects that option
+		if ( oInit.aaSorting === undefined ) {
+			var sorting = oSettings.aaSorting;
+			for ( i=0, iLen=sorting.length ; i<iLen ; i++ ) {
+				sorting[i][1] = oSettings.aoColumns[ i ].asSorting[0];
+			}
+		}
+		
+		// Do a first pass on the sorting classes (allows any size changes to be taken into
+		// account, and also will apply sorting disabled classes if disabled
+		_fnSortingClasses( oSettings );
+		
+		_fnCallbackReg( oSettings, 'aoDrawCallback', function () {
+			if ( oSettings.bSorted || _fnDataSource( oSettings ) === 'ssp' || features.bDeferRender ) {
+				_fnSortingClasses( oSettings );
+			}
+		} );
+		
+		
+		/*
+		 * Table HTML init
+		 * Cache the header, body and footer as required, creating them if needed
+		 */
+		var caption = $this.children('caption');
+		
+		if ( oSettings.caption ) {
+			if ( caption.length === 0 ) {
+				caption = $('<caption/>').appendTo( $this );
+			}
+		
+			caption.html( oSettings.caption );
+		}
+		
+		// Store the caption side, so we can remove the element from the document
+		// when creating the element
+		if (caption.length) {
+			caption[0]._captionSide = caption.css('caption-side');
+			oSettings.captionNode = caption[0];
+		}
+		
+		if ( thead.length === 0 ) {
+			thead = $('<thead/>').appendTo($this);
+		}
+		oSettings.nTHead = thead[0];
+		$('tr', thead).addClass(oClasses.thead.row);
+		
+		var tbody = $this.children('tbody');
+		if ( tbody.length === 0 ) {
+			tbody = $('<tbody/>').insertAfter(thead);
+		}
+		oSettings.nTBody = tbody[0];
+		
+		var tfoot = $this.children('tfoot');
+		if ( tfoot.length === 0 ) {
+			// If we are a scrolling table, and no footer has been given, then we need to create
+			// a tfoot element for the caption element to be appended to
+			tfoot = $('<tfoot/>').appendTo($this);
+		}
+		oSettings.nTFoot = tfoot[0];
+		$('tr', tfoot).addClass(oClasses.tfoot.row);
+		
+		// Copy the data index array
+		oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+		
+		// Initialisation complete - table can be drawn
+		oSettings.bInitialised = true;
+		
+		// Language definitions
+		var oLanguage = oSettings.oLanguage;
+		$.extend( true, oLanguage, oInit.oLanguage );
+		
+		if ( oLanguage.sUrl ) {
+			// Get the language definitions from a file
+			$.ajax( {
+				dataType: 'json',
+				url: oLanguage.sUrl,
+				success: function ( json ) {
+					_fnCamelToHungarian( defaults.oLanguage, json );
+					$.extend( true, oLanguage, json, oSettings.oInit.oLanguage );
+		
+					_fnCallbackFire( oSettings, null, 'i18n', [oSettings], true);
+					_fnInitialise( oSettings );
+				},
+				error: function () {
+					// Error occurred loading language file
+					_fnLog( oSettings, 0, 'i18n file loading error', 21 );
+		
+					// Continue on as best we can
+					_fnInitialise( oSettings );
+				}
+			} );
+		}
+		else {
+			_fnCallbackFire( oSettings, null, 'i18n', [oSettings]);
+			_fnInitialise( oSettings );
+		}
 	} );
 	_that = null;
 	return this;
@@ -16415,6 +16401,15 @@ $.extend( DataTable.ext.classes, {
 	info: {
 		container: 'dt-info'
 	},
+	layout: {
+		row: 'dt-layout-row',
+		cell: 'dt-layout-cell',
+		tableRow: 'dt-layout-table',
+		tableCell: '',
+		start: 'dt-layout-start',
+		end: 'dt-layout-end',
+		full: 'dt-layout-full'
+	},
 	length: {
 		container: 'dt-length',
 		select: 'dt-input'
@@ -16538,7 +16533,7 @@ var _numToDecimal = function ( num, decimalPoint ) {
 };
 
 
-var _isNumber = function ( d, decimalPoint, formatted ) {
+var _isNumber = function ( d, decimalPoint, formatted, allowEmpty ) {
 	var type = typeof d;
 	var strType = type === 'string';
 
@@ -16549,7 +16544,7 @@ var _isNumber = function ( d, decimalPoint, formatted ) {
 	// If empty return immediately so there must be a number if it is a
 	// formatted string (this stops the string "k", or "kr", etc being detected
 	// as a formatted number for currency
-	if ( _empty( d ) ) {
+	if ( allowEmpty && _empty( d ) ) {
 		return true;
 	}
 
@@ -16571,8 +16566,8 @@ var _isHtml = function ( d ) {
 };
 
 // Is a string a number surrounded by HTML?
-var _htmlNumeric = function ( d, decimalPoint, formatted ) {
-	if ( _empty( d ) ) {
+var _htmlNumeric = function ( d, decimalPoint, formatted, allowEmpty ) {
+	if ( allowEmpty && _empty( d ) ) {
 		return true;
 	}
 
@@ -16584,7 +16579,7 @@ var _htmlNumeric = function ( d, decimalPoint, formatted ) {
 	var html = _isHtml( d );
 	return ! html ?
 		null :
-		_isNumber( _stripHtml( d ), decimalPoint, formatted ) ?
+		_isNumber( _stripHtml( d ), decimalPoint, formatted, allowEmpty ) ?
 			true :
 			null;
 };
@@ -16680,6 +16675,10 @@ var _removeEmpty = function ( a )
 
 // Replaceable function in api.util
 var _stripHtml = function (input) {
+	if (! input || typeof input !== 'string') {
+		return input;
+	}
+
 	// Irrelevant check to workaround CodeQL's false positive on the regex
 	if (input.length > _max_str_len) {
 		throw new Error('Exceeded max str len');
@@ -17646,6 +17645,21 @@ function _fnGetColumns( oSettings, sParam )
 	return a;
 }
 
+/**
+ * Allow the result from a type detection function to be `true` while
+ * translating that into a string. Old type detection functions will
+ * return the type name if it passes. An obect store would be better,
+ * but not backwards compatible.
+ *
+ * @param {*} typeDetect Object or function for type detection
+ * @param {*} res Result from the type detection function
+ * @returns Type name or false
+ */
+function _typeResult (typeDetect, res) {
+	return res === true
+		? typeDetect.name
+		: res;
+}
 
 /**
  * Calculate the 'type' of a column
@@ -17660,7 +17674,13 @@ function _fnColumnTypes ( settings )
 	var i, ien, j, jen, k, ken;
 	var col, detectedType, cache;
 
-	// For each column, spin over the 
+	// If SSP then we don't have the full data set, so any type detection would be
+	// unreliable and error prone
+	if (_fnDataSource( settings ) === 'ssp') {
+		return;
+	}
+
+	// For each column, spin over the data type detection functions, seeing if one matches
 	for ( i=0, ien=columns.length ; i<ien ; i++ ) {
 		col = columns[i];
 		cache = [];
@@ -17670,8 +17690,27 @@ function _fnColumnTypes ( settings )
 		}
 		else if ( ! col.sType ) {
 			for ( j=0, jen=types.length ; j<jen ; j++ ) {
-				for ( k=0, ken=data.length ; k<ken ; k++ ) {
+				var typeDetect = types[j];
 
+				// There can be either one, or three type detection functions
+				var oneOf = typeDetect.oneOf;
+				var allOf = typeDetect.allOf || typeDetect;
+				var init = typeDetect.init;
+				var one = false;
+
+				detectedType = null;
+
+				// Fast detect based on column assignment
+				if (init) {
+					detectedType = _typeResult(typeDetect, init(settings, col, i));
+
+					if (detectedType) {
+						col.sType = detectedType;
+						break;
+					}
+				}
+
+				for ( k=0, ken=data.length ; k<ken ; k++ ) {
 					if (! data[k]) {
 						continue;
 					}
@@ -17682,14 +17721,20 @@ function _fnColumnTypes ( settings )
 						cache[k] = _fnGetCellData( settings, k, i, 'type' );
 					}
 
-					detectedType = types[j]( cache[k], settings );
+					// Only one data point in the column needs to match this function
+					if (oneOf && ! one) {
+						one = _typeResult(typeDetect, oneOf( cache[k], settings ));
+					}
+
+					// All data points need to match this function
+					detectedType = _typeResult(typeDetect, allOf( cache[k], settings ));
 
 					// If null, then this type can't apply to this column, so
 					// rather than testing all cells, break out. There is an
 					// exception for the last type which is `html`. We need to
 					// scan all rows since it is possible to mix string and HTML
 					// types
-					if ( ! detectedType && j !== types.length-2 ) {
+					if ( ! detectedType && j !== types.length-3 ) {
 						break;
 					}
 
@@ -17703,7 +17748,7 @@ function _fnColumnTypes ( settings )
 
 				// Type is valid for all data points in the column - use this
 				// type
-				if ( detectedType ) {
+				if ( (oneOf && one && detectedType) || (!oneOf && detectedType) ) {
 					col.sType = detectedType;
 					break;
 				}
@@ -17725,7 +17770,7 @@ function _fnColumnTypes ( settings )
 
 		var renderer = _ext.type.render[col.sType];
 
-		// This can only happen once! There is no way to remover
+		// This can only happen once! There is no way to remove
 		// a renderer. After the first time the renderer has
 		// already been set so createTr will run the renderer itself.
 		if (renderer && ! col._render) {
@@ -18769,7 +18814,13 @@ function _fnDraw( oSettings, ajaxComplete )
 	oSettings.bDrawing = true;
 
 	/* Server-side processing draw intercept */
-	if ( !bServerSide )
+	if ( oSettings.deferLoading )
+	{
+		oSettings.deferLoading = false;
+		oSettings.iDraw++;
+		_fnProcessingDisplay( oSettings, false );
+	}
+	else if ( !bServerSide )
 	{
 		oSettings.iDraw++;
 	}
@@ -18870,6 +18921,9 @@ function _fnReDraw( settings, holdPosition, recompute )
 		filter   = features.bFilter;
 
 	if (recompute === undefined || recompute === true) {
+		// Resolve any column types that are unknown due to addition or invalidation
+		_fnColumnTypes( settings );
+
 		if ( sort ) {
 			_fnSort( settings );
 		}
@@ -18925,6 +18979,91 @@ function _emptyRow ( settings ) {
 
 
 /**
+ * Expand the layout items into an object for the rendering function
+ */
+function _layoutItems (row, align, items) {
+	if ( Array.isArray(items)) {
+		for (var i=0 ; i<items.length ; i++) {
+			_layoutItems(row, align, items[i]);
+		}
+
+		return;
+	}
+
+	var rowCell = row[align];
+
+	// If it is an object, then there can be multiple features contained in it
+	if ( $.isPlainObject( items ) ) {
+		// A feature plugin cannot be named "features" due to this check
+		if (items.features) {
+			if (items.rowId) {
+				row.id = items.rowId;
+			}
+			if (items.rowClass) {
+				row.className = items.rowClass;
+			}
+
+			rowCell.id = items.id;
+			rowCell.className = items.className;
+
+			_layoutItems(row, align, items.features);
+		}
+		else {
+			Object.keys(items).map(function (key) {
+				rowCell.contents.push( {
+					feature: key,
+					opts: items[key]
+				});
+			});
+		}
+	}
+	else {
+		rowCell.contents.push(items);
+	}
+}
+
+/**
+ * Find, or create a layout row
+ */
+function _layoutGetRow(rows, rowNum, align) {
+	var row;
+
+	// Find existing rows
+	for (var i=0; i<rows.length; i++) {
+		row = rows[i];
+
+		if (row.rowNum === rowNum) {
+			// full is on its own, but start and end share a row
+			if (
+				(align === 'full' && row.full) ||
+				((align === 'start' || align === 'end') && (row.start || row.end))
+			) {
+				if (! row[align]) {
+					row[align] = {
+						contents: []
+					};
+				}
+
+				return row;
+			}
+		}
+	}
+
+	// If we get this far, then there was no match, create a new row
+	row = {
+		rowNum: rowNum	
+	};
+
+	row[align] = {
+		contents: []
+	};
+
+	rows.push(row);
+
+	return row;
+}
+
+/**
  * Convert a `layout` object given by a user to the object structure needed
  * for the renderer. This is done twice, once for above and once for below
  * the table. Ordering must also be considered.
@@ -18934,104 +19073,60 @@ function _emptyRow ( settings ) {
  * @param {string} side `top` or `bottom`
  * @returns Converted array structure - one item for each row.
  */
-function _layoutArray ( settings, layout, side )
-{
-	var groups = {};
-
-	// Combine into like groups (e.g. `top`, `top2`, etc)
-	$.each( layout, function ( pos, val ) {
-		if (val === null) {
+function _layoutArray ( settings, layout, side ) {
+	var rows = [];
+	
+	// Split out into an array
+	$.each( layout, function ( pos, items ) {
+		if (items === null) {
 			return;
 		}
 
-		var splitPos = pos.replace(/([A-Z])/g, ' $1').split(' ');
+		var parts = pos.match(/^([a-z]+)([0-9]*)([A-Za-z]*)$/);
+		var rowNum = parts[2]
+			? parts[2] * 1
+			: 0;
+		var align = parts[3]
+			? parts[3].toLowerCase()
+			: 'full';
 
-		if ( ! groups[ splitPos[0] ] ) {
-			groups[ splitPos[0] ] = {};
+		// Filter out the side we aren't interested in
+		if (parts[1] !== side) {
+			return;
 		}
 
-		var align = splitPos.length === 1 ?
-			'full' :
-			splitPos[1].toLowerCase();
-		var group = groups[ splitPos[0] ];
-		var groupRun = function (contents, innerVal) {
-			// If it is an object, then there can be multiple features contained in it
-			if ( $.isPlainObject( innerVal ) ) {
-				Object.keys(innerVal).map(function (key) {
-					contents.push( {
-						feature: key,
-						opts: innerVal[key]
-					});
-				});
-			}
-			else {
-				contents.push(innerVal);
-			}
-		}
+		// Get or create the row we should attach to
+		var row = _layoutGetRow(rows, rowNum, align);
 
-		// Transform to an object with a contents property
-		if (! group[align] || ! group[align].contents) {
-			group[align] = { contents: [] };
-		}
-
-		// Allow for an array or just a single object
-		if ( Array.isArray(val)) {
-			for (var i=0 ; i<val.length ; i++) {
-				groupRun(group[align].contents, val[i]);
-			}
-		}
-		else {
-			groupRun(group[ align ].contents, val);
-		}
-
-		// And make contents an array
-		if ( ! Array.isArray( group[ align ].contents ) ) {
-			group[ align ].contents = [ group[ align ].contents ];
-		}
-	} );
-
-	var filtered = Object.keys(groups)
-		.map( function ( pos ) {
-			// Filter to only the side we need
-			if ( pos.indexOf(side) !== 0 ) {
-				return null;
-			}
-
-			return {
-				name: pos,
-				val: groups[pos]
-			};
-		} )
-		.filter( function (item) {
-			return item !== null;
-		});
+		_layoutItems(row, align, items);
+	});
 
 	// Order by item identifier
-	filtered.sort( function ( a, b ) {
-		var order1 = a.name.replace(/[^0-9]/g, '') * 1;
-		var order2 = b.name.replace(/[^0-9]/g, '') * 1;
+	rows.sort( function ( a, b ) {
+		var order1 = a.rowNum;
+		var order2 = b.rowNum;
+
+		// If both in the same row, then the row with `full` comes first
+		if (order1 === order2) {
+			var ret = a.full && ! b.full ? -1 : 1;
+
+			return side === 'bottom'
+				? ret * -1
+				: ret;
+		}
 
 		return order2 - order1;
 	} );
-	
+
+	// Invert for below the table
 	if ( side === 'bottom' ) {
-		filtered.reverse();
+		rows.reverse();
 	}
 
-	// Split into rows
-	var rows = [];
-	for ( var i=0, ien=filtered.length ; i<ien ; i++ ) {
-		if (  filtered[i].val.full ) {
-			rows.push( { full: filtered[i].val.full } );
-			_layoutResolve( settings, rows[ rows.length - 1 ] );
+	for (var row = 0; row<rows.length; row++) {
+		delete rows[row].rowNum;
 
-			delete filtered[i].val.full;
-		}
-
-		if ( Object.keys(filtered[i].val).length ) {
-			rows.push( filtered[i].val );
-			_layoutResolve( settings, rows[ rows.length - 1 ] );
-		}
+		_layoutResolve(settings, rows[row]);
 	}
 
 	return rows;
@@ -19055,6 +19150,10 @@ function _layoutResolve( settings, row ) {
 	};
 
 	var resolve = function ( item ) {
+		if (! row[ item ]) {
+			return;
+		}
+
 		var line = row[ item ].contents;
 
 		for ( var i=0, ien=line.length ; i<ien ; i++ ) {
@@ -19082,9 +19181,9 @@ function _layoutResolve( settings, row ) {
 		}
 	};
 
-	$.each( row, function ( key ) {
-		resolve( key );
-	} );
+	resolve('start');
+	resolve('end');
+	resolve('full');
 }
 
 
@@ -19417,6 +19516,17 @@ function _fnBuildAjax( oSettings, data, fn )
 			_fnLog( oSettings, 0, error );
 		}
 
+		// Microsoft often wrap JSON as a string in another JSON object
+		// Let's handle that automatically
+		if (json.d && typeof json.d === 'string') {
+			try {
+				json = JSON.parse(json.d);
+			}
+			catch (e) {
+				// noop
+			}
+		}
+
 		oSettings.json = json;
 
 		_fnCallbackFire( oSettings, null, 'xhr', [oSettings, json, oSettings.jqXHR], true );
@@ -19493,11 +19603,11 @@ function _fnBuildAjax( oSettings, data, fn )
 	else {
 		// Object to extend the base settings
 		oSettings.jqXHR = $.ajax( baseAjax );
+	}
 
-		// Restore for next time around
-		if ( ajaxData ) {
-			ajax.data = ajaxData;
-		}
+	// Restore for next time around
+	if ( ajaxData ) {
+		ajax.data = ajaxData;
 	}
 }
 
@@ -19721,10 +19831,6 @@ function _fnAjaxDataSrcParam (settings, param, json) {
 function _fnFilterComplete ( settings, input )
 {
 	var columnsSearch = settings.aoPreSearchCols;
-
-	// Resolve any column types that are unknown due to addition or invalidation
-	// @todo As per sort - can this be moved into an event handler?
-	_fnColumnTypes( settings );
 
 	// In server-side processing all filtering is done by the server, so no point hanging around here
 	if ( _fnDataSource( settings ) != 'ssp' )
@@ -20030,66 +20136,90 @@ function _fnFilterData ( settings )
  */
 function _fnInitialise ( settings )
 {
-	var i, iAjaxStart=settings.iInitDisplayStart;
+	var i;
+	var init = settings.oInit;
+	var deferLoading = settings.deferLoading;
+	var dataSrc = _fnDataSource( settings );
 
-	/* Ensure that the table data is fully initialised */
+	// Ensure that the table data is fully initialised
 	if ( ! settings.bInitialised ) {
 		setTimeout( function(){ _fnInitialise( settings ); }, 200 );
 		return;
 	}
 
-	/* Build and draw the header / footer for the table */
+	// Build the header / footer for the table
 	_fnBuildHead( settings, 'header' );
 	_fnBuildHead( settings, 'footer' );
-	_fnDrawHead( settings, settings.aoHeader );
-	_fnDrawHead( settings, settings.aoFooter );
 
-	// Enable features
-	_fnAddOptionsHtml( settings );
-	_fnSortInit( settings );
+	// Load the table's state (if needed) and then render around it and draw
+	_fnLoadState( settings, init, function () {
+		// Then draw the header / footer
+		_fnDrawHead( settings, settings.aoHeader );
+		_fnDrawHead( settings, settings.aoFooter );
 
-	_colGroup( settings );
+		// Cache the paging start point, as the first redraw will reset it
+		var iAjaxStart = settings.iInitDisplayStart
 
-	/* Okay to show that something is going on now */
-	_fnProcessingDisplay( settings, true );
+		// Local data load
+		// Check if there is data passing into the constructor
+		if ( init.aaData ) {
+			for ( i=0 ; i<init.aaData.length ; i++ ) {
+				_fnAddData( settings, init.aaData[ i ] );
+			}
+		}
+		else if ( deferLoading || dataSrc == 'dom' ) {
+			// Grab the data from the page
+			_fnAddTr( settings, $(settings.nTBody).children('tr') );
+		}
 
-	_fnCallbackFire( settings, null, 'preInit', [settings], true );
+		// Filter not yet applied - copy the display master
+		settings.aiDisplay = settings.aiDisplayMaster.slice();
 
-	// If there is default sorting required - let's do it. The sort function
-	// will do the drawing for us. Otherwise we draw the table regardless of the
-	// Ajax source - this allows the table to look initialised for Ajax sourcing
-	// data (show 'loading' message possibly)
-	_fnReDraw( settings );
+		// Enable features
+		_fnAddOptionsHtml( settings );
+		_fnSortInit( settings );
 
-	var dataSrc = _fnDataSource( settings );
+		_colGroup( settings );
 
-	// Server-side processing init complete is done by _fnAjaxUpdateDraw
-	if ( dataSrc != 'ssp' ) {
-		// if there is an ajax source load the data
-		if ( dataSrc == 'ajax' ) {
-			_fnBuildAjax( settings, {}, function(json) {
-				var aData = _fnAjaxDataSrc( settings, json );
+		/* Okay to show that something is going on now */
+		_fnProcessingDisplay( settings, true );
 
-				// Got the data - add it to the table
-				for ( i=0 ; i<aData.length ; i++ ) {
-					_fnAddData( settings, aData[i] );
-				}
+		_fnCallbackFire( settings, null, 'preInit', [settings], true );
 
-				// Reset the init display for cookie saving. We've already done
-				// a filter, and therefore cleared it before. So we need to make
-				// it appear 'fresh'
-				settings.iInitDisplayStart = iAjaxStart;
+		// If there is default sorting required - let's do it. The sort function
+		// will do the drawing for us. Otherwise we draw the table regardless of the
+		// Ajax source - this allows the table to look initialised for Ajax sourcing
+		// data (show 'loading' message possibly)
+		_fnReDraw( settings );
 
-				_fnReDraw( settings );
-				_fnProcessingDisplay( settings, false );
+		// Server-side processing init complete is done by _fnAjaxUpdateDraw
+		if ( dataSrc != 'ssp' || deferLoading ) {
+			// if there is an ajax source load the data
+			if ( dataSrc == 'ajax' ) {
+				_fnBuildAjax( settings, {}, function(json) {
+					var aData = _fnAjaxDataSrc( settings, json );
+
+					// Got the data - add it to the table
+					for ( i=0 ; i<aData.length ; i++ ) {
+						_fnAddData( settings, aData[i] );
+					}
+
+					// Reset the init display for cookie saving. We've already done
+					// a filter, and therefore cleared it before. So we need to make
+					// it appear 'fresh'
+					settings.iInitDisplayStart = iAjaxStart;
+
+					_fnReDraw( settings );
+					_fnProcessingDisplay( settings, false );
+					_fnInitComplete( settings );
+				}, settings );
+			}
+			else {
 				_fnInitComplete( settings );
-			}, settings );
+				_fnProcessingDisplay( settings, false );
+			}
 		}
-		else {
-			_fnInitComplete( settings );
-			_fnProcessingDisplay( settings, false );
-		}
-	}
+	} );
 }
 
 
@@ -20244,7 +20374,36 @@ function _processingHtml ( settings )
  */
 function _fnProcessingDisplay ( settings, show )
 {
+	// Ignore cases when we are still redrawing
+	if (settings.bDrawing && show === false) {
+		return;
+	}
+
 	_fnCallbackFire( settings, null, 'processing', [settings, show] );
+}
+
+/**
+ * Show the processing element if an action takes longer than a given time
+ *
+ * @param {*} settings DataTables settings object
+ * @param {*} enable Do (true) or not (false) async processing (local feature enablement)
+ * @param {*} run Function to run
+ */
+function _fnProcessingRun( settings, enable, run ) {
+	if (! enable) {
+		// Immediate execution, synchronous
+		run();
+	}
+	else {
+		_fnProcessingDisplay(settings, true);
+		
+		// Allow the processing display to show if needed
+		setTimeout(function () {
+			run();
+
+			_fnProcessingDisplay(settings, false);
+		}, 0);
+	}
 }
 /**
  * Add any control elements for the table - specifically scrolling
@@ -20576,8 +20735,17 @@ function _fnCalculateColumnWidths ( settings )
 		tableWidthAttr = table.getAttribute('width'), // from DOM element
 		tableContainer = table.parentNode,
 		i, column, columnIdx;
-
+		
 	var styleWidth = table.style.width;
+
+	// If there is no width applied as a CSS style or as an attribute, we assume that
+	// the width is intended to be 100%, which is usually is in CSS, but it is very
+	// difficult to correctly parse the rules to get the final result.
+	if ( ! styleWidth && ! tableWidthAttr) {
+		table.style.width = '100%';
+		styleWidth = '100%';
+	}
+
 	if ( styleWidth && styleWidth.indexOf('%') !== -1 ) {
 		tableWidthAttr = styleWidth;
 	}
@@ -20891,22 +21059,16 @@ function _fnSortAttachListener(settings, node, selector, column, callback) {
 			}
 
 			if (run) {
-				_fnProcessingDisplay( settings, true );
-
-				// Allow the processing display to show
-				setTimeout( function () {
+				_fnProcessingRun(settings, true, function () {
 					_fnSort( settings );
 					_fnSortDisplay( settings, settings.aiDisplay );
-
-					// Sort processing done - redraw has its own processing display
-					_fnProcessingDisplay( settings, false );
 
 					_fnReDraw( settings, false, false );
 
 					if (callback) {
 						callback();
 					}
-				}, 0);
+				});
 			}
 		}
 	} );
@@ -21065,11 +21227,6 @@ function _fnSort ( oSettings, col, dir )
 		displayMaster = oSettings.aiDisplayMaster,
 		aSort;
 
-	// Resolve any column types that are unknown due to addition or invalidation
-	// @todo Can this be moved into a 'data-ready' handler which is called when
-	//   data is going to be used in the table?
-	_fnColumnTypes( oSettings );
-
 	// Allow a specific column to be sorted, which will _not_ alter the display
 	// master
 	if (col !== undefined) {
@@ -21106,7 +21263,7 @@ function _fnSort ( oSettings, col, dir )
 
 		// If the first sort is desc, then reverse the array to preserve original
 		// order, just in reverse
-		if (aSort.length && aSort[0].dir === 'desc') {
+		if (aSort.length && aSort[0].dir === 'desc' && oSettings.orderDescReverse) {
 			aiOrig.reverse();
 		}
 
@@ -21176,6 +21333,7 @@ function _fnSort ( oSettings, col, dir )
 	if (col === undefined) {
 		// Tell the draw function that we have sorted the data
 		oSettings.bSorted = true;
+		oSettings.sortDetails = aSort;
 
 		_fnCallbackFire( oSettings, null, 'order', [oSettings, aSort] );
 	}
@@ -21477,8 +21635,7 @@ function _fnImplementState ( settings, s, callback) {
 		}
 	}
 
-	// Restore key features - todo - for 1.11 this needs to be done by
-	// subscribed events
+	// Restore key features
 	if ( s.start !== undefined ) {
 		if(api === null) {
 			settings._iDisplayStart    = s.start;
@@ -24597,22 +24754,59 @@ _api_register( 'state.save()', function () {
 } );
 
 /**
- * Set the jQuery or window object to be used by DataTables
- *
- * @param {*} module Library / container object
- * @param {string} [type] Library or container type `lib`, `win` or `datetime`.
- *   If not provided, automatic detection is attempted.
+ * Set the libraries that DataTables uses, or the global objects.
+ * Note that the arguments can be either way around (legacy support)
+ * and the second is optional. See docs.
  */
-DataTable.use = function (module, type) {
-	if (type === 'lib' || module.fn) {
+DataTable.use = function (arg1, arg2) {
+	// Reverse arguments for legacy support
+	var module = typeof arg1 === 'string'
+		? arg2
+		: arg1;
+	var type = typeof arg2 === 'string'
+		? arg2
+		: arg1;
+
+	// Getter
+	if (module === undefined && typeof type === 'string') {
+		switch (type) {
+			case 'lib':
+			case 'jq':
+				return $;
+
+			case 'win':
+				return window;
+
+			case 'datetime':
+				return DataTable.DateTime;
+
+			case 'luxon':
+				return __luxon;
+
+			case 'moment':
+				return __moment;
+
+			default:
+				return null;
+		}
+	}
+
+	// Setter
+	if (type === 'lib' || type === 'jq' || (module && module.fn && module.fn.jquery)) {
 		$ = module;
 	}
-	else if (type == 'win' || module.document) {
+	else if (type == 'win' || (module && module.document)) {
 		window = module;
 		document = module.document;
 	}
-	else if (type === 'datetime' || module.type === 'DateTime') {
+	else if (type === 'datetime' || (module && module.type === 'DateTime')) {
 		DataTable.DateTime = module;
+	}
+	else if (type === 'luxon' || (module && module.FixedOffsetZone)) {
+		__luxon = module;
+	}
+	else if (type === 'moment' || (module && module.isMoment)) {
+		__moment = module;
 	}
 }
 
@@ -25022,7 +25216,7 @@ _api_register( 'i18n()', function ( token, def, plural ) {
  *  @type string
  *  @default Version number
  */
-DataTable.version = "2.0.8";
+DataTable.version = "2.1.3";
 
 /**
  * Private data store, containing all of the settings objects that are
@@ -25867,7 +26061,8 @@ DataTable.defaults = {
 				first: 'First',
 				last: 'Last',
 				next: 'Next',
-				previous: 'Previous'
+				previous: 'Previous',
+				number: ''
 			}
 		},
 
@@ -26047,6 +26242,10 @@ DataTable.defaults = {
 	},
 
 
+	/** The initial data order is reversed when `desc` ordering */
+	orderDescReverse: true,
+
+
 	/**
 	 * This parameter allows you to have define the global filtering state at
 	 * initialisation time. As an object the `search` parameter must be
@@ -26095,7 +26294,7 @@ DataTable.defaults = {
 	 * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers
 	 * * `first_last_numbers` - 'First' and 'Last' buttons, plus page numbers
 	 */
-	"sPaginationType": "full_numbers",
+	"sPaginationType": "",
 
 
 	/**
@@ -26165,7 +26364,13 @@ DataTable.defaults = {
 	/**
 	 * Caption value
 	 */
-	"caption": null
+	"caption": null,
+
+
+	/**
+	 * For server-side processing - use the data from the DOM for the first draw
+	 */
+	iDeferLoading: null
 };
 
 _fnHungarianMap( DataTable.defaults );
@@ -27108,7 +27313,10 @@ DataTable.models.oSettings = {
 
 	captionNode: null,
 
-	colgroup: null
+	colgroup: null,
+
+	/** Delay loading of data */
+	deferLoading: null
 };
 
 /**
@@ -27132,7 +27340,7 @@ $.extend( extPagination, {
 	},
 
 	full: function () {
-		return [  'first', 'previous', 'next', 'last' ];
+		return [ 'first', 'previous', 'next', 'last' ];
 	},
 
 	numbers: function () {
@@ -27146,11 +27354,11 @@ $.extend( extPagination, {
 	full_numbers: function () {
 		return [ 'first', 'previous', 'numbers', 'next', 'last' ];
 	},
-	
+
 	first_last: function () {
 		return ['first', 'last'];
 	},
-	
+
 	first_last_numbers: function () {
 		return ['first', 'numbers', 'last'];
 	},
@@ -27232,38 +27440,56 @@ var _filterString = function (stripHtml, normalize) {
  * to make working with DataTables a little bit easier.
  */
 
-function __mldFnName(name) {
-	return name.replace(/[\W]/g, '_')
-}
-
-// Common logic for moment, luxon or a date action
-function __mld( dt, momentFn, luxonFn, dateFn, arg1 ) {
-	if (window.moment) {
-		return dt[momentFn]( arg1 );
+/**
+ * Common logic for moment, luxon or a date action.
+ *
+ * Happens after __mldObj, so don't need to call `resolveWindowsLibs` again
+ */
+function __mld( dtLib, momentFn, luxonFn, dateFn, arg1 ) {
+	if (__moment) {
+		return dtLib[momentFn]( arg1 );
 	}
-	else if (window.luxon) {
-		return dt[luxonFn]( arg1 );
+	else if (__luxon) {
+		return dtLib[luxonFn]( arg1 );
 	}
 	
-	return dateFn ? dt[dateFn]( arg1 ) : dt;
+	return dateFn ? dtLib[dateFn]( arg1 ) : dtLib;
 }
 
 
 var __mlWarning = false;
+var __luxon; // Can be assigned in DateTeble.use()
+var __moment; // Can be assigned in DateTeble.use()
+
+/**
+ * 
+ */
+function resolveWindowLibs() {
+	if (window.luxon && ! __luxon) {
+		__luxon = window.luxon;
+	}
+	
+	if (window.moment && ! __moment) {
+		__moment = window.moment;
+	}
+}
+
 function __mldObj (d, format, locale) {
 	var dt;
 
-	if (window.moment) {
-		dt = window.moment.utc( d, format, locale, true );
+	resolveWindowLibs();
+
+	if (__moment) {
+		dt = __moment.utc( d, format, locale, true );
 
 		if (! dt.isValid()) {
 			return null;
 		}
 	}
-	else if (window.luxon) {
+	else if (__luxon) {
 		dt = format && typeof d === 'string'
-			? window.luxon.DateTime.fromFormat( d, format )
-			: window.luxon.DateTime.fromISO( d );
+			? __luxon.DateTime.fromFormat( d, format )
+			: __luxon.DateTime.fromISO( d );
 
 		if (! dt.isValid) {
 			return null;
@@ -27308,7 +27534,7 @@ function __mlHelper (localeString) {
 			from = null;
 		}
 
-		var typeName = 'datetime' + (to ? '-' + __mldFnName(to) : '');
+		var typeName = 'datetime' + (to ? '-' + to : '');
 
 		// Add type detection and sorting specific to this date format - we need to be able to identify
 		// date type columns as such, rather than as numbers in extensions. Hence the need for this.
@@ -27411,7 +27637,7 @@ if (window.Intl !== undefined) {
 
 // Formatted date time detection - use by declaring the formats you are going to use
 DataTable.datetime = function ( format, locale ) {
-	var typeName = 'datetime-detect-' + __mldFnName(format);
+	var typeName = 'datetime-' + format;
 
 	if (! locale) {
 		locale = 'en';
@@ -27566,27 +27792,20 @@ DataTable.type = function (name, prop, val) {
 	var setProp = function(prop, propVal) {
 		_extTypes[prop][name] = propVal;
 	};
-	var setDetect = function (fn) {
-		// Wrap to allow the function to return `true` rather than
-		// specifying the type name.
-		var cb = function (d, s) {
-			var ret = fn(d, s);
+	var setDetect = function (detect) {
+		// `detect` can be a function or an object - we set a name
+		// property for either - that is used for the detection
+		Object.defineProperty(detect, "name", {value: name});
 
-			return ret === true
-				? name
-				: ret;
-		};
-		Object.defineProperty(cb, "name", {value: name});
-
-		var idx = _extTypes.detect.findIndex(function (fn) {
-			return fn.name === name;
+		var idx = _extTypes.detect.findIndex(function (item) {
+			return item.name === name;
 		});
 
 		if (idx === -1) {
-			_extTypes.detect.unshift(cb);
+			_extTypes.detect.unshift(detect);
 		}
 		else {
-			_extTypes.detect.splice(idx, 1, cb);
+			_extTypes.detect.splice(idx, 1, detect);
 		}
 	};
 	var setOrder = function (obj) {
@@ -27646,6 +27865,19 @@ DataTable.types = function () {
 	});
 };
 
+var __diacriticSort = function (a, b) {
+	a = a.toString().toLowerCase();
+	b = b.toString().toLowerCase();
+
+	// Checked for `navigator.languages` support in `oneOf` so this code can't execute in old
+	// Safari and thus can disable this check
+	// eslint-disable-next-line compat/compat
+	return a.localeCompare(b, navigator.languages[0] || navigator.language, {
+		numeric: true,
+		ignorePunctuation: true,
+	});
+}
+
 //
 // Built in data types
 //
@@ -27670,11 +27902,38 @@ DataTable.type('string', {
 	search: _filterString(false, true)
 });
 
+DataTable.type('string-utf8', {
+	detect: {
+		allOf: function ( d ) {
+			return true;
+		},
+		oneOf: function ( d ) {
+			// At least one data point must contain a non-ASCII character
+			// This line will also check if navigator.languages is supported or not. If not (Safari 10.0-)
+			// this data type won't be supported.
+			// eslint-disable-next-line compat/compat
+			return ! _empty( d ) && navigator.languages && typeof d === 'string' && d.match(/[^\x00-\x7F]/);
+		}
+	},
+	order: {
+		asc: __diacriticSort,
+		desc: function (a, b) {
+			return __diacriticSort(a, b) * -1;
+		}
+	},
+	search: _filterString(false, true)
+});
+
 
 DataTable.type('html', {
-	detect: function ( d ) {
-		return _empty( d ) || (typeof d === 'string' && d.indexOf('<') !== -1) ?
-			'html' : null;
+	detect: {
+		allOf: function ( d ) {
+			return _empty( d ) || (typeof d === 'string' && d.indexOf('<') !== -1);
+		},
+		oneOf: function ( d ) {
+			// At least one data point must contain a `<`
+			return ! _empty( d ) && typeof d === 'string' && d.indexOf('<') !== -1;
+		}
 	},
 	order: {
 		pre: function ( a ) {
@@ -27691,16 +27950,21 @@ DataTable.type('html', {
 
 DataTable.type('date', {
 	className: 'dt-type-date',
-	detect: function ( d )
-	{
-		// V8 tries _very_ hard to make a string passed into `Date.parse()`
-		// valid, so we need to use a regex to restrict date formats. Use a
-		// plug-in for anything other than ISO8601 style strings
-		if ( d && !(d instanceof Date) && ! _re_date.test(d) ) {
-			return null;
+	detect: {
+		allOf: function ( d ) {
+			// V8 tries _very_ hard to make a string passed into `Date.parse()`
+			// valid, so we need to use a regex to restrict date formats. Use a
+			// plug-in for anything other than ISO8601 style strings
+			if ( d && !(d instanceof Date) && ! _re_date.test(d) ) {
+				return null;
+			}
+			var parsed = Date.parse(d);
+			return (parsed !== null && !isNaN(parsed)) || _empty(d);
+		},
+		oneOf: function ( d ) {
+			// At least one entry must be a date or a string with a date
+			return (d instanceof Date) || (typeof d === 'string' && _re_date.test(d));
 		}
-		var parsed = Date.parse(d);
-		return (parsed !== null && !isNaN(parsed)) || _empty(d) ? 'date' : null;
 	},
 	order: {
 		pre: function ( d ) {
@@ -27713,10 +27977,16 @@ DataTable.type('date', {
 
 DataTable.type('html-num-fmt', {
 	className: 'dt-type-numeric',
-	detect: function ( d, settings )
-	{
-		var decimal = settings.oLanguage.sDecimal;
-		return _htmlNumeric( d, decimal, true ) ? 'html-num-fmt' : null;
+	detect: {
+		allOf: function ( d, settings ) {
+			var decimal = settings.oLanguage.sDecimal;
+			return _htmlNumeric( d, decimal, true, false );
+		},
+		oneOf: function (d, settings) {
+			// At least one data point must contain a numeric value
+			var decimal = settings.oLanguage.sDecimal;
+			return _htmlNumeric( d, decimal, true, false );
+		}
 	},
 	order: {
 		pre: function ( d, s ) {
@@ -27730,10 +28000,16 @@ DataTable.type('html-num-fmt', {
 
 DataTable.type('html-num', {
 	className: 'dt-type-numeric',
-	detect: function ( d, settings )
-	{
-		var decimal = settings.oLanguage.sDecimal;
-		return _htmlNumeric( d, decimal ) ? 'html-num' : null;
+	detect: {
+		allOf: function ( d, settings ) {
+			var decimal = settings.oLanguage.sDecimal;
+			return _htmlNumeric( d, decimal, false, true );
+		},
+		oneOf: function (d, settings) {
+			// At least one data point must contain a numeric value
+			var decimal = settings.oLanguage.sDecimal;
+			return _htmlNumeric( d, decimal, false, false );
+		}
 	},
 	order: {
 		pre: function ( d, s ) {
@@ -27747,10 +28023,16 @@ DataTable.type('html-num', {
 
 DataTable.type('num-fmt', {
 	className: 'dt-type-numeric',
-	detect: function ( d, settings )
-	{
-		var decimal = settings.oLanguage.sDecimal;
-		return _isNumber( d, decimal, true ) ? 'num-fmt' : null;
+	detect: {
+		allOf: function ( d, settings ) {
+			var decimal = settings.oLanguage.sDecimal;
+			return _isNumber( d, decimal, true, true );
+		},
+		oneOf: function (d, settings) {
+			// At least one data point must contain a numeric value
+			var decimal = settings.oLanguage.sDecimal;
+			return _isNumber( d, decimal, true, false );
+		}
 	},
 	order: {
 		pre: function ( d, s ) {
@@ -27763,10 +28045,16 @@ DataTable.type('num-fmt', {
 
 DataTable.type('num', {
 	className: 'dt-type-numeric',
-	detect: function ( d, settings )
-	{
-		var decimal = settings.oLanguage.sDecimal;
-		return _isNumber( d, decimal ) ? 'num' : null;
+	detect: {
+		allOf: function ( d, settings ) {
+			var decimal = settings.oLanguage.sDecimal;
+			return _isNumber( d, decimal, false, true );
+		},
+		oneOf: function (d, settings) {
+			// At least one data point must contain a numeric value
+			var decimal = settings.oLanguage.sDecimal;
+			return _isNumber( d, decimal, false, false );
+		}
 	},
 	order: {
 		pre: function (d, s) {
@@ -27850,11 +28138,12 @@ $.extend( true, DataTable.ext.renderer, {
 			// `DT` namespace will allow the event to be removed automatically
 			// on destroy, while the `dt` namespaced event is the one we are
 			// listening for
-			$(settings.nTable).on( 'order.dt.DT', function ( e, ctx, sorting ) {
+			$(settings.nTable).on( 'order.dt.DT column-visibility.dt.DT', function ( e, ctx ) {
 				if ( settings !== ctx ) { // need to check this this is the host
 					return;               // table, not a nested one
 				}
 
+				var i;
 				var orderClasses = classes.order;
 				var columns = ctx.api.columns( cell );
 				var col = settings.aoColumns[columns.flatten()[0]];
@@ -27862,9 +28151,8 @@ $.extend( true, DataTable.ext.renderer, {
 				var ariaType = '';
 				var indexes = columns.indexes();
 				var sortDirs = columns.orderable(true).flatten();
-				var orderedColumns = ',' + sorting.map( function (val) {
-					return val.col;
-				} ).join(',') + ',';
+				var sorting = ctx.sortDetails;
+				var orderedColumns = _pluck(sorting, 'col');
 
 				cell
 					.removeClass(
@@ -27874,10 +28162,18 @@ $.extend( true, DataTable.ext.renderer, {
 					.toggleClass( orderClasses.none, ! orderable )
 					.toggleClass( orderClasses.canAsc, orderable && sortDirs.includes('asc') )
 					.toggleClass( orderClasses.canDesc, orderable && sortDirs.includes('desc') );
-				
-				var sortIdx = orderedColumns.indexOf( ',' + indexes.toArray().join(',') + ',' );
 
-				if ( sortIdx !== -1 ) {
+				// Determine if all of the columns that this cell covers are included in the
+				// current ordering
+				var isOrdering = true;
+				
+				for (i=0; i<indexes.length; i++) {
+					if (! orderedColumns.includes(indexes[i])) {
+						isOrdering = false;
+					}
+				}
+
+				if ( isOrdering ) {
 					// Get the ordering direction for the columns under this cell
 					// Note that it is possible for a cell to be asc and desc sorting
 					// (column spanning cells)
@@ -27889,8 +28185,19 @@ $.extend( true, DataTable.ext.renderer, {
 					);
 				}
 
-				// The ARIA spec says that only one column should be marked with aria-sort
-				if ( sortIdx === 0 ) {
+				// Find the first visible column that has ordering applied to it - it get's
+				// the aria information, as the ARIA spec says that only one column should
+				// be marked with aria-sort
+				var firstVis = -1; // column index
+
+				for (i=0; i<orderedColumns.length; i++) {
+					if (settings.aoColumns[orderedColumns[i]].bVisible) {
+						firstVis = orderedColumns[i];
+						break;
+					}
+				}
+
+				if (indexes[0] == firstVis) {
 					var firstSort = sorting[0];
 					var sortOrder = col.asSorting;
 
@@ -27908,6 +28215,7 @@ $.extend( true, DataTable.ext.renderer, {
 					: col.ariaTitle
 				);
 
+				// Make the headers tab-able for keyboard navigation
 				if (orderable) {
 					cell.find('.dt-column-title').attr('role', 'button');
 					cell.attr('tabindex', 0)
@@ -27918,23 +28226,40 @@ $.extend( true, DataTable.ext.renderer, {
 
 	layout: {
 		_: function ( settings, container, items ) {
+			var classes = settings.oClasses.layout;
 			var row = $('<div/>')
-				.addClass('dt-layout-row')
+				.attr('id', items.id || null)
+				.addClass(items.className || classes.row)
 				.appendTo( container );
 
 			$.each( items, function (key, val) {
-				var klass = ! val.table ?
-					'dt-'+key+' ' :
-					'';
+				if (key === 'id' || key === 'className') {
+					return;
+				}
+
+				var klass = '';
 
 				if (val.table) {
-					row.addClass('dt-layout-table');
+					row.addClass(classes.tableRow);
+					klass += classes.tableCell + ' ';
+				}
+
+				if (key === 'start') {
+					klass += classes.start;
+				}
+				else if (key === 'end') {
+					klass += classes.end;
+				}
+				else {
+					klass += classes.full;
 				}
 
 				$('<div/>')
 					.attr({
 						id: val.id || null,
-						"class": 'dt-layout-cell '+klass+(val.className || '')
+						"class": val.className
+							? val.className
+							: classes.cell + ' ' + klass
 					})
 					.append( val.contents )
 					.appendTo( row );
@@ -27957,6 +28282,25 @@ DataTable.feature.register = function ( name, cb, legacy ) {
 		});
 	}
 };
+
+function _divProp(el, prop, val) {
+	if (val) {
+		el[prop] = val;
+	}
+}
+
+DataTable.feature.register( 'div', function ( settings, opts ) {
+	var n = $('<div>')[0];
+
+	if (opts) {
+		_divProp(n, 'className', opts.className);
+		_divProp(n, 'id', opts.id);
+		_divProp(n, 'innerHTML', opts.html);
+		_divProp(n, 'textContent', opts.text);
+	}
+
+	return n;
+} );
 
 DataTable.feature.register( 'info', function ( settings, opts ) {
 	// For compatibility with the legacy `info` top level option
@@ -28057,6 +28401,7 @@ DataTable.feature.register( 'search', function ( settings, opts ) {
 
 	opts = $.extend({
 		placeholder: language.sSearchPlaceholder,
+		processing: false,
 		text: language.sSearch
 	}, opts);
 
@@ -28100,13 +28445,15 @@ DataTable.feature.register( 'search', function ( settings, opts ) {
 
 		/* Now do the filter */
 		if ( val != previousSearch.search ) {
-			previousSearch.search = val;
-
-			_fnFilterComplete( settings, previousSearch );
-
-			// Need to redraw, without resorting
-			settings._iDisplayStart = 0;
-			_fnDraw( settings );
+			_fnProcessingRun(settings, opts.processing, function () {
+				previousSearch.search = val;
+		
+				_fnFilterComplete( settings, previousSearch );
+		
+				// Need to redraw, without resorting
+				settings._iDisplayStart = 0;
+				_fnDraw( settings );
+			});
 		}
 	};
 
@@ -28164,17 +28511,17 @@ DataTable.feature.register( 'paging', function ( settings, opts ) {
 	opts = $.extend({
 		buttons: DataTable.ext.pager.numbers_length,
 		type: settings.sPaginationType,
-		boundaryNumbers: true
+		boundaryNumbers: true,
+		firstLast: true,
+		previousNext: true,
+		numbers: true
 	}, opts);
 
-	// To be removed in 2.1
-	if (opts.numbers) {
-		opts.buttons = opts.numbers;
-	}
-
-	var host = $('<div/>').addClass( settings.oClasses.paging.container + ' paging_' + opts.type );
+	var host = $('<div/>')
+		.addClass(settings.oClasses.paging.container + (opts.type ? ' paging_' + opts.type : ''))
+		.append('<nav>');
 	var draw = function () {
-		_pagingDraw(settings, host, opts);
+		_pagingDraw(settings, host.children(), opts);
 	};
 
 	settings.aoDrawCallback.push(draw);
@@ -28185,13 +28532,39 @@ DataTable.feature.register( 'paging', function ( settings, opts ) {
 	return host;
 }, 'p' );
 
+/**
+ * Dynamically create the button type array based on the configuration options.
+ * This will only happen if the paging type is not defined.
+ */
+function _pagingDynamic(opts) {
+	var out = [];
+
+	if (opts.numbers) {
+		out.push('numbers');
+	}
+
+	if (opts.previousNext) {
+		out.unshift('previous');
+		out.push('next');
+	}
+
+	if (opts.firstLast) {
+		out.unshift('first');
+		out.push('last');
+	}
+
+	return out;
+}
+
 function _pagingDraw(settings, host, opts) {
 	if (! settings._bInitComplete) {
 		return;
 	}
 
 	var
-		plugin = DataTable.ext.pager[ opts.type ],
+		plugin = opts.type
+			? DataTable.ext.pager[ opts.type ]
+			: _pagingDynamic,
 		aria = settings.oLanguage.oAria.paginate || {},
 		start      = settings._iDisplayStart,
 		len        = settings._iDisplayLength,
@@ -28199,7 +28572,7 @@ function _pagingDraw(settings, host, opts) {
 		all        = len === -1,
 		page = all ? 0 : Math.ceil( start / len ),
 		pages = all ? 1 : Math.ceil( visRecords / len ),
-		buttons = plugin()
+		buttons = plugin(opts)
 			.map(function (val) {
 				return val === 'numbers'
 					? _pagingNumbers(page, pages, opts.buttons, opts.boundaryNumbers)
@@ -28221,14 +28594,24 @@ function _pagingDraw(settings, host, opts) {
 			btnInfo.disabled
 		);
 
+		var ariaLabel = typeof button === 'string'
+			? aria[ button ]
+			: aria.number
+				? aria.number + (button+1)
+				: null;
+
 		// Common attributes
 		$(btn.clicker).attr({
 			'aria-controls': settings.sTableId,
 			'aria-disabled': btnInfo.disabled ? 'true' : null,
 			'aria-current': btnInfo.active ? 'page' : null,
-			'aria-label': aria[ button ],
+			'aria-label': ariaLabel,
 			'data-dt-idx': button,
-			'tabIndex': btnInfo.disabled ? -1 : settings.iTabIndex,
+			'tabIndex': btnInfo.disabled
+				? -1
+				: settings.iTabIndex
+					? settings.iTabIndex
+					: null, // `0` doesn't need a tabIndex since it is the default
 		});
 
 		if (typeof button !== 'number') {
@@ -28262,10 +28645,10 @@ function _pagingDraw(settings, host, opts) {
 	// height of the buttons and the container.
 	if (
 		buttonEls.length && // any buttons
-		opts.numbers > 1 && // prevent infinite
+		opts.buttons > 1 && // prevent infinite
 		$(host).height() >= ($(buttonEls[0]).outerHeight() * 2) - 10
 	) {
-		_pagingDraw(settings, host, $.extend({}, opts, { numbers: opts.numbers - 2 }));
+		_pagingDraw(settings, host, $.extend({}, opts, { buttons: opts.buttons - 2 }));
 	}
 }
 
@@ -28467,10 +28850,11 @@ DataTable.feature.register( 'pageLength', function ( settings, opts ) {
 	}
 
 	// Wrapper element - use a span as a holder for where the select will go
+	var tmpId = 'tmp-' + (+new Date())
 	var div = $('<div/>')
 		.addClass( classes.container )
 		.append(
-			str.replace( '_MENU_', '<span></span>' )
+			str.replace( '_MENU_', '<span id="'+tmpId+'"></span>' )
 		);
 
 	// Save text node content for macro updating
@@ -28513,7 +28897,7 @@ DataTable.feature.register( 'pageLength', function ( settings, opts ) {
 	__lengthCounter++;
 
 	// Swap in the select list
-	div.find('span').replaceWith(select);
+	div.find('#' + tmpId).replaceWith(select);
 
 	// Can't use `select` variable as user might provide their own and the
 	// reference is broken by the use of outerHTML

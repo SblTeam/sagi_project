@@ -81,7 +81,7 @@ if ($data !== null && count($data) > 0){$count = count($data);}else {$count = 0;
         ->where('flag', '1')
         ->whereIn('id', $itemid)
         ->update(['lel2flag' => '1']);
-        
+       //venkey folders
         DB::connection('dynamic')
         ->table('contactdetails')
         ->where('name', $profile_name)

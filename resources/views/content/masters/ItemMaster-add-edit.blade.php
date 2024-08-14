@@ -20,6 +20,7 @@ $cat_array_json = json_encode($cat_array);
 
 $isEdit = isset($ims_itemcodes);
 
+
 @endphp
 <h4 class="py-3 mb-4">
   <span class="text-muted fw-light">Sales Masters/</span> Item Master
@@ -39,7 +40,7 @@ $isEdit = isset($ims_itemcodes);
           <div class="row">
             <div class="mb-0 col-md-4">
               <label for="itemcode" class="form-label">Item Code <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onpaste="validatePasteitem(this, event)" onKeyPress="onlyNumbers12(event);" placeholder="Enter itemCode" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onKeyPress="onlyNumbers12(event);" onpaste="validatePasteitem(this, event);" ondrop="validateDropitem(this, event);"  placeholder="Enter itemCode" style="width: 50%" autofocus />
               @error('code')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -47,7 +48,7 @@ $isEdit = isset($ims_itemcodes);
             <div class="mb-0 col-md-5">
 
               <label for="description" class="form-label">Description <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="description" id="description" onpaste="validatePaste(this, event)" onKeyPress="onlyNumbers123(event);" placeholder="Enter Description" style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
+              <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);"onpaste="validatePaste(this, event)" ondrop="validateDrop(this, event);" placeholder="Enter Description"  style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
               @error('description')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -96,6 +97,7 @@ $isEdit = isset($ims_itemcodes);
                 @endforeach
               </select>
               @endif
+
               @error('cat')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -120,21 +122,21 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="type">No.Of Pieces<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="piece1" name="pieces" value="{{ old('pieces', $isEdit ? $ims_itemcodes->pieces : '') }}" placeholder="Enter NO.OF Pieces" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="piece1" name="pieces" value="{{ old('pieces', $isEdit ? $ims_itemcodes->pieces : '') }}" placeholder="Enter NO.OF Pieces"  onKeyPress="onlyNumbersepices(event);" onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" style="width: 50%" autofocus />
               @error('type')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="type">Bag Weight<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="weight1" name="weight" value="{{ old('weight', $isEdit ? $ims_itemcodes->weight : '') }}" placeholder="Enter Bag Weight" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="weight1" name="weight" value="{{ old('weight', $isEdit ? $ims_itemcodes->weight : '') }}"onKeyPress="onlyNumbersepices(event);"  onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" placeholder="Enter Bag Weight" style="width: 50%" autofocus />
               @error('weight')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="type">Packet Weight<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="packetweight" name="packetweight" value="{{ old('packetweight', $isEdit ? $ims_itemcodes->weight : '') }}" placeholder="Enter Packet Weight" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="packetweight" name="packetweight" value="{{ old('packetweight', $isEdit ? $ims_itemcodes->weight : '') }}" onKeyPress="onlyNumbersepices(event);" onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" placeholder="Enter Packet Weight" style="width: 50%" autofocus />
               @error('packetweight')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -169,7 +171,7 @@ $isEdit = isset($ims_itemcodes);
               <select id="saunits" name="saunits" class="select2 form-select" style="width: 75%">
                 <option value="">Select</option>
                 @foreach ($sunits1 as $group)
-                <option value="{{ $group->sunits }}" {{ old('saunits', $isEdit ? $ims_itemcodes->sunits : '') == $group->sunits ? 'selected' : '' }}>{{ $group->sunits }}</option>
+                <option value="{{ $group->sunits }}" {{ old('saunits', $isEdit ? $ims_itemcodes->sales_units : '') == $group->sunits ? 'selected' : '' }}>{{ $group->sunits }}</option>
                 @endforeach
               </select>
               @error('saunits')
@@ -357,7 +359,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               <label class="form-label" for="cum">EAN No<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);" onpaste="validatePaste1(this, event)"  placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
+              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);" onpaste="validatePaste111(this, event);" ondrop="validatedrop111(this, event);" placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
               @error('ean')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -367,11 +369,14 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               <label class="form-label" for="cum">HSN/SAC<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" onpaste="validatePaste1(this, event)" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
+              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" onpaste="validatePaste111(this, event);" ondrop="validateDrop111(this, event);" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
               @error('hsn')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
+
+
+
 
 
 
@@ -391,7 +396,7 @@ $isEdit = isset($ims_itemcodes);
 <script>
 
 function onlyNumbers123(e) {
-  
+
   var code = e.charCode || e.keyCode;
   var input = e.target.value;
 
@@ -403,7 +408,7 @@ function onlyNumbers123(e) {
 }
 
 function onlyNumbers12(e) {
-  
+
   var code = e.charCode || e.keyCode;
   var input = e.target.value;
 
@@ -431,8 +436,146 @@ function onlyNumberse(e) {
   e.preventDefault();
 }
 
-function onlyNumbersh(e) {
+
+
+
+
+
+
+
+
+
+
+function onlyNumbersepices(e) {
   var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+  // Allow digits (0-9) and check input length
+  if (code >= 48 && code <= 57) {
+    // Check if the length of the input exceeds 10 characters
+
+    return; // Allow input if within limit
+  }
+
+  // Prevent input for non-digit characters
+  e.preventDefault();
+}
+
+
+
+
+function validateTextInputpices(text) {
+  // Regular expression to allow only letters (both cases) and digits 1-9, with no spaces
+  var regex = /^[1-9]+$/;
+  return regex.test(text);
+}
+
+function validatePasteitempices(el, e) {
+  var key = e.clipboardData.getData('text');
+
+  // Test the clipboard data against the regex
+  if (!validateTextInputpices(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+function validatePastepices(el, e) {
+  var key = e.clipboardData.getData('text');
+
+  // Test the clipboard data against the regex
+  if (!validateTextInputpices(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+function validateDroppices(el, e) {
+  var key = e.dataTransfer.getData('text');
+
+  // Test the dropped data against the regex
+  if (!validateTextInputpices(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function onlyNumbersh(e) {  var code = e.charCode || e.keyCode;
   var input = e.target.value;
 
   // Allow digits (0-9) and check input length
@@ -449,42 +592,7 @@ function onlyNumbersh(e) {
   }
 }
 
-function validatePaste(el, e) {
-  // Regular expression to allow only letters (both cases), digits 1-9, and a single space
-  var regex = /^[a-zA-Z1-9]+( [a-zA-Z1-9]+)?$/;
-  var key = e.clipboardData.getData('text');
 
-  // Test the clipboard data against the regex
-  if (!regex.test(key)) {
-    e.preventDefault();
-    return false;
-  }
-}
-
-function validatePasteitem(el, e) {
-  // Regular expression to allow only letters (both cases) and digits 1-9, with no spaces
-  var regex = /^[a-zA-Z1-9]+$/;
-  var key = e.clipboardData.getData('text');
-
-  // Test the clipboard data against the regex
-  if (!regex.test(key)) {
-    e.preventDefault();
-    return false;
-  }
-}
-
-
-
-
-
-function validatePaste1(el, e) {
-  var regex = /^[1-9 .'-]+$/gi;
-  var key = e.clipboardData.getData('text')
-  if (!regex.test(key)) {
-    e.preventDefault();
-    return false;
-  }
-}
   document.getElementById("cat").value = '';
 
   function getcategory() {
@@ -528,6 +636,96 @@ function validatePaste1(el, e) {
       }
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+function validatePaste(el, e) {
+  var key = e.clipboardData.getData('text');
+
+  // Test the clipboard data against the regex
+  if (!validateTextInput(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+function validateDrop(el, e) {
+  var key = e.dataTransfer.getData('text');
+
+  // Test the dropped data against the regex
+  if (!validateTextInput(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+
+
+function validateTextInput(text) {
+  // Regular expression to allow only letters (both cases) and digits 1-9, with no spaces
+  var regex = /^[a-zA-Z1-9]+$/;
+  return regex.test(text);
+}
+
+function validatePasteitem(el, e) {
+  var key = e.clipboardData.getData('text');
+
+  // Test the clipboard data against the regex
+  if (!validateTextInput(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+function validateDropitem(el, e) {
+  var key = e.dataTransfer.getData('text');
+
+  // Test the dropped data against the regex
+  if (!validateTextInput(key)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+
+function validateTextInput111(text) {
+  var regex = /^[1-9 .'-]+$/;
+  return regex.test(text);
+}
+
+function validatePaste111(el, e) {
+  var text = e.clipboardData.getData('text');
+  if (!validateTextInput111(text)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+function validateDrop111(el, e) {
+  var text = e.clipboardData.getData('text');
+  if (!validateTextInput111(text)) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+
+
+
+
+
+
+
 
 
   function onlyNumbers123(e) {
