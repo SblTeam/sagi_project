@@ -9,9 +9,7 @@ use App\Imports\ImportUser;
 use App\Models\ims_itemcodes;
 use App\Models\ims_itemtypes;
 use App\Models\ims_itemunits;
-use App\Models\contactdetails;
 use App\Models\ims_taxcodes;
-use Illuminate\Validation\Rule;
 use App\Models\ac_coa;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -83,41 +81,12 @@ class ItemMaster extends Controller
 
   public function saveimport(Request $request)
   {
-      // Validate the file input
-      $request->validate([
-          'file' => 'required|file|mimes:xlsx,xls,csv|max:2048',
-      ]);
-
-      $import = new ImportUser();
-
-      try {
-          // Import the file
-          Excel::import($import, $request->file('file')->store('files'));
-
-          // Check if there are any errors collected during import
-          $errors = $import->getErrors();
-
-          if (count($errors) > 0) {
-              // Redirect with errors if present
-              return redirect()
-                  ->route('masters.ItemMaster.import')
-                  ->with('error', 'Some rows have errors. Please review the import file and try again.')
-                  ->with('import_errors', $errors);
-          }
-
-          // Success message if no errors
-          return redirect()
-              ->route('masters-ItemMaster')
-              ->with('success', 'Items saved successfully!');
-      } catch (\Exception $e) {
-          // Redirect with error if an exception occurs
-          return redirect()
-              ->route('masters.ItemMaster.import')
-              ->with('error', 'Error processing the import file: ' . $e->getMessage());
-      }
+    Excel::import(
+      new ImportUser,
+      $request->file('file')->store('files')
+    );
+    return redirect()->back();
   }
-
-
   public function import()
   {
     return view('content.masters.ItemMaster-import');
@@ -201,7 +170,6 @@ class ItemMaster extends Controller
 
       $ims_itemcode->save();
 
-
       return redirect()
         ->route('masters-ItemMaster')
         ->with('success', 'Item saved successfully!');
@@ -211,7 +179,6 @@ class ItemMaster extends Controller
 
   public function store(Request $request)
   {
-    $activeContacts = contactdetails::where('active_flag', 1)->pluck('name')->first();
     // Define validation rules
     $validatedData = $request->validate([
       'code' => 'required|string|max:255|unique:ims_itemcodes|regex:/^[a-zA-Z0-9]+$/',
@@ -221,14 +188,12 @@ class ItemMaster extends Controller
       'type' => 'required|string|max:255',
 
       'sunits' => 'required|string|max:255',
-      'saunits' => 'required|string|max:255',
       'cunits' => 'required|string|max:255',
       'source' => 'required|string|max:255',
       'iusage' => 'required|string|max:255',
       'pieces' => 'required|string|max:255',
       'weight' => 'required|string|max:255',
       'packetweight' => 'required|string|max:255',
-   
 
 
     ]);
@@ -242,7 +207,6 @@ class ItemMaster extends Controller
     $nn->cat = $validatedData['cat'];
     $nn->catgroup = $validatedData['catgroup'];
     $nn->type = $validatedData['type'];
-
     $nn->sunits = $validatedData['sunits'];
     $nn->cunits = $validatedData['cunits'];
     $nn->source = $validatedData['source'];
@@ -250,8 +214,6 @@ class ItemMaster extends Controller
     $nn->pieces = $validatedData['pieces'];
     $nn->weight = $validatedData['weight'];
     $nn->packetweight = $validatedData['packetweight'];
-
-
     $nn->tax_applicable = $request->input('tax_applicable');
     $nn->sac = $request->input('sac');
     $nn->wpac = $request->input('expca');
@@ -260,10 +222,7 @@ class ItemMaster extends Controller
     $nn->srac = $request->input('sractd');
     $nn->ean_no = $request->input('ean');
     $nn->hsn = $request->input('hsn');
-    $nn->sales_units = $request->input('saunits');
-    $nn->client = $activeContacts;
-    $nn->updated_by = session()->get("valid_user");
-
+    $nn->client = session()->get('valid_user');
     $nn->save();
 
     return redirect()
@@ -273,17 +232,9 @@ class ItemMaster extends Controller
 
   public function update(Request $request, $id)
   {
-    $ims_itemcodes = ims_itemcodes::findOrFail($id);
-    $activeContacts = contactdetails::where('active_flag', 1)->pluck('name')->first();
     // Define validation rules
     $validatedData = $request->validate([
-      'code' => [
-        'required',
-        'string',
-        'max:255',
-        'regex:/^[a-zA-Z0-9]+$/',
-        Rule::unique('ims_itemcodes')->ignore($ims_itemcodes->id)
-    ],
+      'code' => 'required|string|max:255|regex:/^[a-zA-Z0-9]+$/',
       'description' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s]+$/',
       'cat' => 'required|string|max:255',
       'catgroup' => 'required|string|max:255',
@@ -293,12 +244,12 @@ class ItemMaster extends Controller
       'cunits' => 'required|string|max:255',
       'source' => 'required|string|max:255',
       'iusage' => 'required|string|max:255',
- 
+
 
     ]);
 
     // Find the existing item
-
+    $ims_itemcodes = ims_itemcodes::findOrFail($id);
 
     // Update the item's properties
     $ims_itemcodes->code = $validatedData['code'];
@@ -321,9 +272,6 @@ class ItemMaster extends Controller
     $ims_itemcodes->srac = $request->input('sractd', $ims_itemcodes->srac);
     $ims_itemcodes->ean_no = $request->input('ean', $ims_itemcodes->ean_no);
     $ims_itemcodes->hsn = $request->input('hsn', $ims_itemcodes->hsn);
-    $ims_itemcodes->client =  $activeContacts;
-
-    $ims_itemcodes->updated_by = session()->get("valid_user");
 
     // Save the updated item
     $ims_itemcodes->save();
