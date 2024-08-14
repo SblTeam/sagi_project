@@ -21,8 +21,52 @@ class SalesOrder extends Controller
       return view('content.transactions.SalesOrder', compact('oc_salesorder'));
   }
 
-  public function add(Request $request)
-  {
+    public function add(Request $request)
+    {
+
+        $date = date("d.m.Y");
+        $yearFull = (int)explode('.', $date)[2];
+        $year = (int)substr($yearFull, -2);
+        $month = (int)explode('.', $date)[1];
+
+        if ($month < 4) {
+            $prevYear = $year - 1;
+            $fyid = " and ((m >= '4' and y = '$prevYear') or (m <= '3' and y='$year')) ";
+            $fy = $prevYear . $year;
+        } else {
+            $nextYear = $year + 1;
+            $fyid = " and ((m >= '4' and y = '$year') or (m <= '3' and y = '$nextYear')) ";
+            $fy = $year . $nextYear;
+        }
+
+        $table = "oc_salesorders";
+
+        // Ensure query string is constructed properly before passing to DB::select
+
+
+
+            $qry2 = "SELECT count(DISTINCT po) as total FROM $table";
+            $result2 = DB::select($qry2);
+            $poincr = $result2[0]->total + 1;
+
+            // $vendorids = explode("-", $vendor);
+            // $vendorid = $vendorids[1];
+
+            if ($poincr < 10) {
+                $po = 'SO' . '-' . $fy . '-000' . $poincr;
+            } elseif ($poincr < 100) {
+                $po = 'SO' .'-' . $fy . '-00' . $poincr;
+            } else {
+                $po = 'SO' .'-' . $fy . '-0' . $poincr;
+            }
+
+        $response = Http::get('https://secondary.sbl1972.in/secondarysales/apidistnameid.php');
+        $data = $response->json();
+
+        return view('content.transactions.SalesOrder1-add', compact('po','data'));
+    }
+
+    public function store(Request $request){
       $date = date("d.m.Y");
       $yearFull = (int)explode('.', $date)[2];
       $year = (int)substr($yearFull, -2);
@@ -40,256 +84,128 @@ class SalesOrder extends Controller
 
       $table = "oc_salesorders";
 
-      // Ensure query string is constructed properly before passing to DB::select
-      $qry2 = "SELECT count(DISTINCT po) as total FROM $table";
+ $qry2 = "SELECT count(DISTINCT po) as total FROM $table";
       $result2 = DB::select($qry2);
       $poincr = $result2[0]->total + 1;
 
-      if ($poincr < 10) {
-          $po = 'SO' . '-' . $fy . '-000' . $poincr;
-      } elseif ($poincr < 100) {
-          $po = 'SO' .'-' . $fy . '-00' . $poincr;
-      } else {
-          $po = 'SO' .'-' . $fy . '-0' . $poincr;
-      }
+        $validatedData = $request->validate([
+            'so' => 'required',
+             'id' => 'required',
+            'date' => 'required',
+            'distributor' => 'required',
+            'po' => 'required',
+            'category' => 'required|array',
+            'description' => 'required|array',
+            'code' => 'required|array',
+            'quantity' => 'required|array',
+            'enteredquantity' => 'array',
+            'price' => 'required|array',
+            'taxType' => 'required|array',
+            'tax' => 'required|array',
+            'tquantity' => 'required',
+            'total' => 'required',
+        ]);
 
-      // Initialize cURL session
-      $ch = curl_init();
+        // Iterate through the rows and insert into the database
+        foreach ($request->category as $index => $category) {
+            if (isset($request->check[$index])) {
+                $nn = new oc_salesorder();
+                $nn->po = $request->so;
+                $nn->vendorid = $request->id;
+                $nn->date = $request->date;
+                $nn->vendor = $request->distributor;
+                $nn->pono = $request->po;
+                $nn->tquantity = $request->tquantity;
+                $nn->total = $request->total;
+                $nn->category = $category;
+                $nn->description = $request->description[$index];
+                $nn->code = $request->code[$index];
+                $nn->quantity = $request->quantity[$index];
+                $nn->squantity = $request->enteredquantity[$index];
+                $nn->sprice = $request->price[$index];
+                $nn->taxcode = $request->taxType[$index];
+                $nn->taxvalue = $request->tax[$index];
+                $nn->poincr = $poincr;
+                $nn->save();
+            }
+        }
+        $apiData = [
+            'dataset' => [
+                'flag' => 1,
+                'po' => $request->po
+            ]
+        ];
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
+          $data=$response->json();
+       return redirect()->route('transctions-SalesOrder');
 
-      // Set the URL
-      curl_setopt($ch, CURLOPT_URL, 'https://secondary.sbl1972.in/secondarysales/apidistnameid.php');
+    }
 
-      // Set option to return the response as a string
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      // Optionally, disable SSL verification (not recommended for production)
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    public function update(Request $request, $code)
+    {
+        // Fetch the existing sales orders
+        $oc_salesorders = oc_salesorder::where('po', $code)->get();
 
-      // Execute the cURL request
-      $response = curl_exec($ch);
-
-      // Check for cURL errors
-      if (curl_errno($ch)) {
-          $error_msg = curl_error($ch);
-          curl_close($ch);
-          // Handle the error (e.g., log it, return a specific response)
-          return response()->json(['error' => 'cURL error: ' . $error_msg], 500);
-      }
-
-      // Close cURL session
-      curl_close($ch);
-
-      // Decode JSON response
-      $data = json_decode($response, true);
-
-      // Return view with variables
-      return view('content.transactions.SalesOrder1-add', compact('po', 'data'));
-  }
-
-  public function store(Request $request)
-  {
-      $date = date("d.m.Y");
-      $yearFull = (int)explode('.', $date)[2];
-      $year = (int)substr($yearFull, -2);
-      $month = (int)explode('.', $date)[1];
-
-      if ($month < 4) {
-          $prevYear = $year - 1;
-          $fyid = " and ((m >= '4' and y = '$prevYear') or (m <= '3' and y='$year')) ";
-          $fy = $prevYear . $year;
-      } else {
-          $nextYear = $year + 1;
-          $fyid = " and ((m >= '4' and y = '$year') or (m <= '3' and y = '$nextYear')) ";
-          $fy = $year . $nextYear;
-      }
-
-      $table = "oc_salesorders";
-
-      $qry2 = "SELECT count(DISTINCT po) as total FROM $table";
-      $result2 = DB::select($qry2);
-      $poincr = $result2[0]->total + 1;
-
-      $validatedData = $request->validate([
+        // Validate the incoming request data
+        $validatedData = $request->validate([
           'so' => 'required',
-          'id' => 'required',
-          'date' => 'required',
-          'distributor' => 'required',
-          'po' => 'required',
-          'category' => 'required|array',
-          'description' => 'required|array',
-          'code' => 'required|array',
-          'quantity' => 'required|array',
-          'enteredquantity' => 'array',
-          'price' => 'required|array',
-          'taxType' => 'required|array',
-          'tax' => 'required|array',
-          'tquantity' => 'required',
-          'total' => 'required',
-      ]);
+            'id' => 'required',
+            'date' => 'required',
+            'distributor' => 'required',
+            'po' => 'required',
+            'category' => 'required|array',
+            'description' => 'required|array',
+            'code' => 'required|array',
+            'quantity' => 'required|array',
+            'enteredquantity' => 'array',
+            'price' => 'required|array',
+            'taxType' => 'required|array',
+            'tax' => 'required|array',
+            'tquantity' => 'required',
+            'total' => 'required',
+        ]);
 
-      // Iterate through the rows and insert into the database
-      foreach ($request->category as $index => $category) {
-          if (isset($request->check[$index])) {
-              $nn = new oc_salesorder();
-              $nn->po = $request->so;
-              $nn->vendorid = $request->id;
-              $nn->date = $request->date;
-              $nn->vendor = $request->distributor;
-              $nn->pono = $request->po;
-              $nn->tquantity = $request->tquantity;
-              $nn->total = $request->total;
-              $nn->category = $category;
-              $nn->description = $request->description[$index];
-              $nn->code = $request->code[$index];
-              $nn->quantity = $request->quantity[$index];
-              $nn->squantity = $request->enteredquantity[$index];
-              $nn->sprice = $request->price[$index];
-              $nn->taxcode = $request->taxType[$index];
-              $nn->taxvalue = $request->tax[$index];
-              $nn->poincr = $poincr;
-              $nn->save();
-          }
-      }
+        // Delete existing sales orders
+        oc_salesorder::where('po', $code)->delete();
 
-      // Prepare data for the API request
-      $apiData = [
-          'dataset' => [
-              'flag' => 1,
-              'po' => $request->po
-          ]
-      ];
-
-      // Initialize cURL session
-      $ch = curl_init();
-
-      // Set cURL options
-      curl_setopt($ch, CURLOPT_URL, 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php');
-      curl_setopt($ch, CURLOPT_POST, true);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($apiData)); // Encode data as query string
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-      // Optionally, disable SSL verification (not recommended for production)
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-      // Execute cURL request
-      $response = curl_exec($ch);
-
-      // Check for cURL errors
-      if (curl_errno($ch)) {
-          $error_msg = curl_error($ch);
-          curl_close($ch);
-          // Handle the error (e.g., log it, return a specific response)
-          return response()->json(['error' => 'cURL error: ' . $error_msg], 500);
-      }
-
-      // Close cURL session
-      curl_close($ch);
-
-      // Decode JSON response
-      $data = json_decode($response, true);
-
-      // Redirect to the route
-      return redirect()->route('transctions-SalesOrder');
-  }
-
-
-  public function update(Request $request, $code)
-  {
-      // Fetch the existing sales orders
-      $oc_salesorders = oc_salesorder::where('po', $code)->get();
-
-      // Validate the incoming request data
-      $validatedData = $request->validate([
-          'so' => 'required',
-          'id' => 'required',
-          'date' => 'required',
-          'distributor' => 'required',
-          'po' => 'required',
-          'category' => 'required|array',
-          'description' => 'required|array',
-          'code' => 'required|array',
-          'quantity' => 'required|array',
-          'enteredquantity' => 'array',
-          'price' => 'required|array',
-          'taxType' => 'required|array',
-          'tax' => 'required|array',
-          'tquantity' => 'required',
-          'total' => 'required',
-      ]);
-
-      // Delete existing sales orders
-      oc_salesorder::where('po', $code)->delete();
-
-      // Iterate through the rows and insert the updated data into the database
-      foreach ($request->category as $index => $category) {
-          if (isset($request->check[$index])) {
-              $oc_salesorder = new oc_salesorder();
-              $oc_salesorder->po = $request->so;
-              $oc_salesorder->vendorid = $request->id;
-              $oc_salesorder->date = $request->date;
-              $oc_salesorder->vendor = $request->distributor;
-              $oc_salesorder->pono = $request->po;
-              $oc_salesorder->tquantity = $request->tquantity;
-              $oc_salesorder->total = $request->total;
-              $oc_salesorder->category = $category;
-              $oc_salesorder->description = $request->description[$index];
-              $oc_salesorder->code = $request->code[$index];
-              $oc_salesorder->quantity = $request->quantity[$index];
-              $oc_salesorder->squantity = $request->enteredquantity[$index] ?? null;
-              $oc_salesorder->sprice = $request->price[$index];
-              $oc_salesorder->taxcode = $request->taxType[$index];
-              $oc_salesorder->taxvalue = $request->tax[$index];
-              $oc_salesorder->save();
-          }
-      }
-
-      // Prepare data for the API request
-      $apiData = [
-          'dataset' => [
-              'flag' => 1,
-              'po' => $request->po
-          ]
-      ];
-
-      // Initialize cURL session
-      $ch = curl_init();
-
-      // Set cURL options
-      curl_setopt($ch, CURLOPT_URL, 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php');
-      curl_setopt($ch, CURLOPT_POST, true);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($apiData)); // Encode data as query string
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-      // Optionally, disable SSL verification (not recommended for production)
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-      // Execute cURL request
-      $response = curl_exec($ch);
-
-      // Check for cURL errors
-      if (curl_errno($ch)) {
-          $error_msg = curl_error($ch);
-          curl_close($ch);
-          // Handle the error (e.g., log it, return a specific response)
-          return redirect()
-              ->route('transctions-SalesOrder')
-              ->with('error', 'cURL error: ' . $error_msg);
-      }
-
-      // Close cURL session
-      curl_close($ch);
-
-      // Decode JSON response
-      $data = json_decode($response, true);
-
-      // Redirect back with a success message
-      return redirect()
-          ->route('transctions-SalesOrder')
-          ->with('success', 'Sales order updated successfully!');
-  }
+        // Iterate through the rows and insert the updated data into the database
+        foreach ($request->category as $index => $category) {
+            if (isset($request->check[$index])) {
+                $oc_salesorder = new oc_salesorder();
+                $oc_salesorder->po = $request->so;
+                $oc_salesorder->vendorid = $request->id;
+                $oc_salesorder->date = $request->date;
+                $oc_salesorder->vendor = $request->distributor;
+                $oc_salesorder->pono = $request->po;
+                $oc_salesorder->tquantity = $request->tquantity;
+                $oc_salesorder->total = $request->total;
+                $oc_salesorder->category = $category;
+                $oc_salesorder->description = $request->description[$index];
+                $oc_salesorder->code = $request->code[$index];
+                $oc_salesorder->quantity = $request->quantity[$index];
+                $oc_salesorder->squantity = $request->enteredquantity[$index] ?? null;
+                $oc_salesorder->sprice = $request->price[$index];
+                $oc_salesorder->taxcode = $request->taxType[$index];
+                $oc_salesorder->taxvalue = $request->tax[$index];
+                $oc_salesorder->save();
+            }
+        }
+        $apiData = [
+            'dataset' => [
+                'flag' => 1,
+                'po' => $request->po
+            ]
+        ];
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
+          $data=$response->json();
+        // Redirect back with a success message
+        return redirect()
+            ->route('transctions-SalesOrder')
+            ->with('success', 'Sales order updated successfully!');
+    }
 
 
 
@@ -333,66 +249,21 @@ $data = [];
 
     public function destroy($id)
     {
-        // Fetch the 'pono' for the given 'po'
-        $salesOrder = oc_salesorder::where('po', $id)->first();
-        
-        if (!$salesOrder) {
-            return redirect()
-                ->route('transctions-SalesOrder')
-                ->with('error', 'Sales order not found!');
-        }
-        
-        $pono = $salesOrder->pono;
-        
-        // Delete the sales order record
+        $pono = oc_salesorder::where('po', $id)->first()->pono;
         oc_salesorder::where('po', $id)->delete();
-        
-        // Prepare data for the API request
         $apiData = [
             'dataset' => [
                 'flag' => 0,
                 'po' => $pono
             ]
         ];
-
-        // Initialize cURL session
-        $ch = curl_init();
-
-        // Set cURL options
-        curl_setopt($ch, CURLOPT_URL, 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($apiData)); // Encode data as query string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // Optionally, disable SSL verification (not recommended for production)
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        // Execute cURL request
-        $response = curl_exec($ch);
-
-        // Check for cURL errors
-        if (curl_errno($ch)) {
-            $error_msg = curl_error($ch);
-            curl_close($ch);
-            // Handle the error (e.g., log it, return a specific response)
-            return redirect()
-                ->route('transctions-SalesOrder')
-                ->with('error', 'cURL error: ' . $error_msg);
-        }
-
-        // Close cURL session
-        curl_close($ch);
-
-        // Optionally, decode JSON response if needed
-        $data = json_decode($response, true);
-
-        // Redirect back with a success message
+          $apiUrl = 'https://secondary.sbl1972.in/secondarysales/poflagupdate.php';
+          $response = Http::post($apiUrl, $apiData);
         return redirect()
             ->route('transctions-SalesOrder')
             ->with('success', 'Item(s) deleted successfully!');
     }
-}
 
 
-  
+
+  }
