@@ -36,9 +36,13 @@
           <td>{{$details->tquantity}}</td>
 
           <td>
+          @if($details->cobi_flag == 1)
+           <i class="bx bx-lock-alt me-1" style="color: #03c3ec" title="Locked"></i>
+   @endif
+   @if($details->cobi_flag == 0)    
     <i class="bx bx-edit-alt me-1" style="color: #03c3ec" onclick="window.location.href='{{ route('transctions-SalesOrder.edit', ['id' => $details->po]) }}'"></i>
     <i class="bx bx-trash me-1" style="color: red" onclick="if(confirm('Are you sure you want to delete?')) { window.location.href='{{ route('transctions-SalesOrder.destroy', ['id' => $details->po]) }}'; }"></i>
-
+@endif
 </td>
 
 

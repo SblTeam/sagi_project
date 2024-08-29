@@ -10,6 +10,7 @@ $isEdit = isset($oc_pricemaster);
 foreach ($items as $group) {
     $cat_array[] = ['cat' => $group->cat, 'cd' => $group->cd];
 }
+
 $cat_array_json = json_encode($cat_array);
 @endphp
 <script>
@@ -44,14 +45,15 @@ $cat_array_json = json_encode($cat_array);
 
             // If all fields are filled, add a new row
             if (isFilled) {
+                console.log(rowNumber);
                 rowNumber++;
                 const newRow = document.createElement('div');
                 newRow.classList.add('row', 'dynamic-row');
                 newRow.id = `dynamic-row-${rowNumber}`;
                 newRow.innerHTML = `
                 <div class="mb-1 col-md-3">
-                    <label for="category${rowNumber}" class="form-label">Category</label>
-                    <select id="category${rowNumber}" name="category[]" class="form-control" onchange="getdescription(this.id);">
+                   
+                    <select id="category@${rowNumber}" name="category[]" class="form-control" onchange="getdescription(this.id); ">
                         <option value="">-select-</option>
                         @foreach ($items as $group)
                             <option value="{{ $group->cat }}" {{ old('cat', $isEdit ? $oc_pricemaster->cat : '') == $group->cat ? 'selected' : '' }}>{{ $group->cat }}</option>
@@ -59,27 +61,30 @@ $cat_array_json = json_encode($cat_array);
                     </select>
                 </div>
                 <div class="mb-1 col-md-3">
-                    <label for="description${rowNumber}" class="form-label">Description</label>
-                    <select id="description${rowNumber}" name="description[]" class="form-control" onchange="getcode(this.id);">
-                        <option value=""></option>
+               
+                    <select id="description@${rowNumber}" name="description[]" class="form-control" onchange="getcode(this.id);getunits(this.id);">
+                        <option value="">-select-</option>
                     </select>
                 </div>
                 <div class="mb-1 col-md-2">
-                    <label for="code${rowNumber}" class="form-label">Code</label>
-                    <select id="code${rowNumber}" name="code[]" class="form-control" onchange="getdesc(this.id);">
-                        <option value=""></option>
+             
+                    <select id="code@${rowNumber}" name="code[]" class="form-control" onchange="getdesc(this.id);getunits(this.id);">
+                        <option value="">-select-</option>
                     </select>
                 </div>
                 <div class="mb-1 col-md-2">
-                    <label for="units${rowNumber}" class="form-label">Units</label>
+      
                     <input type="text" id="units${rowNumber}" name="units[]" class="form-control" value="" readonly/>
                 </div>
                 <div class="mb-1 col-md-2">
-                    <label for="price${rowNumber}" class="form-label">Price / Unit</label>
-                    <input type="text" id="price${rowNumber}" name="price[]" class="form-control price-input" placeholder="Enter Price" onKeyPress="onlyNumbers2(event);"/>
+            
+                    <input type="text" id="price${rowNumber}" name="price[]" class="form-control price-input" placeholder="Enter Price" oninput="validateInput(event);"ondrop="handlePasteOrDrop(event);" onpaste="handlePasteOrDrop(event);"/>
                 </div>
                 <div class="mb-1 col-md-2">
                     <input type="hidden" id="client${rowNumber}" name="client[]" class="form-control" value="{{$activeContacts}}"/>
+                </div>
+                   <div class="mb-1 col-md-2">
+                    <input type="hidden" id="empname${rowNumber}" name="empname[]" class="form-control" value="{{$empname}}"/>
                 </div>
                 `;
                 document.getElementById('dynamic-rows').appendChild(newRow);
@@ -93,32 +98,37 @@ $cat_array_json = json_encode($cat_array);
         document.getElementById('price1').addEventListener('input', addNewRow);
     });
 
-    function onlyNumbers2(e) {
-        var code = e.charCode || e.keyCode;
-        var input = e.target.value;
+    function validateInput(event) {
+    let input = event.target.value;
 
-        // Allow numbers (0-9)
-        if (code >= 48 && code <= 57) {
-            return;
-        }
+    // Remove any characters that are not digits or a decimal point
+    input = input.replace(/[^0-9.]/g, '');
 
-        // Allow one decimal point
-        if (code === 46 && !input.includes('.')) {
-            return;
-        }
-
-        // Prevent any other input
-        e.preventDefault();
+    // Ensure only one decimal point is present
+    const decimalIndex = input.indexOf('.');
+    if (decimalIndex !== -1) {
+        // Keep digits before and after the decimal point but limit to 2 digits after the decimal point
+        input = input.slice(0, decimalIndex + 1) + input.slice(decimalIndex + 1).replace(/[^0-9]/g, '').slice(0, 2);
+    } else {
+        // If no decimal point, remove any non-digit characters
+        input = input.replace(/[^0-9]/g, '');
     }
 
+    event.target.value = input;
+}
+
+
+
     function getdescription(a) {
-        let id = a.substring(8, 9);
+   var id = a.split('@')[1];
+
+
 
         var cat_arry = <?php echo empty($cat_array_json) ? '[]' : $cat_array_json; ?>;
 
-        var catgroupElement = document.getElementById("category" + id);
-        var descriptionDropdown = document.getElementById("description" + id);
-        var codeDropdown = document.getElementById("code" + id);
+        var catgroupElement = document.getElementById("category@" + id);
+        var descriptionDropdown = document.getElementById("description@" + id);
+        var codeDropdown = document.getElementById("code@" + id);
         var unitsDropdown = document.getElementById("units" + id);
 
         if (!catgroupElement || !descriptionDropdown || !codeDropdown || !unitsDropdown) {
@@ -142,7 +152,7 @@ $cat_array_json = json_encode($cat_array);
         var defaultOption = new Option("-select-", "");
         descriptionDropdown.options.add(defaultOption.cloneNode(true));
         codeDropdown.options.add(defaultOption.cloneNode(true));
-
+        unitsDropdown.value = '';
         for (var i = 0; i < l; i++) {
             if (cat_arry[i].cat === catgroup11) {
                 var type = cat_arry[i].cd;
@@ -158,7 +168,7 @@ $cat_array_json = json_encode($cat_array);
                     if (!descriptionsSet.has(type2)) {
                         descriptionsSet.add(type2);
                         var descriptionOption = new Option(type2, type2);
-                        descriptionOption.title = type;
+                       
                         descriptionDropdown.options.add(descriptionOption);
                     }
 
@@ -166,24 +176,26 @@ $cat_array_json = json_encode($cat_array);
                     if (!codesSet.has(type3)) {
                         codesSet.add(type3);
                         var codeOption = new Option(type3, type3);
-                        codeOption.title = type;
+                   
                         codeDropdown.options.add(codeOption);
                     }
 
-                    // Set the units value (assuming it's the same for all entries)
-                    if (!unitsDropdown.value) { // Set only if not already set
-                        unitsDropdown.value = type4;
-                    }
+       
+                    // if (!unitsDropdown.value) {
+                    //     unitsDropdown.value = type4;
+                    // }
+
+                   
                 }
             }
         }
     }
 
     function getcode(a) {
-        var id = a.substring(11, 12);
+        var id = a.split('@')['1'];
 
-        var codeSelect = document.getElementById('code'+id);
-        var descriptionSelect = document.getElementById('description'+id);
+        var codeSelect = document.getElementById('code@'+id);
+        var descriptionSelect = document.getElementById('description@'+id);
 
         var selectedIndex = descriptionSelect.selectedIndex;
         codeSelect.selectedIndex = selectedIndex;
@@ -192,11 +204,11 @@ $cat_array_json = json_encode($cat_array);
 
         for(i = 1; i <= index; i++) {
             if (i != Number(id)) {
-                if (document.getElementById('description' + id).value == document.getElementById('description' + i).value) {
+                if (document.getElementById('description@' + id).value == document.getElementById('description@' + i).value) {
                     alert("Same Code should not be selected");
 
-                    document.getElementById('description' + id).options[0].selected = "selected";
-                    document.getElementById('code' + id).options[0].selected = "selected";
+                    document.getElementById('description@' + id).options[0].selected = "selected";
+                    document.getElementById('code@' + id).options[0].selected = "selected";
                     document.getElementById('units' + id).value = '';
                 }
             }
@@ -204,14 +216,44 @@ $cat_array_json = json_encode($cat_array);
     }
 
     function getdesc(a) {
-        var id = a.substring(4, 5);
 
-        var codeSelect = document.getElementById('code'+id);
-        var descriptionSelect = document.getElementById('description'+id);
 
-        var selectedIndex = codeSelect.selectedIndex;
-        descriptionSelect.selectedIndex = selectedIndex;
-    }
+var id = a.split('@')[1];
+
+var codeSelect = document.getElementById('code@'+id);
+  var descriptionSelect = document.getElementById('description@'+id);
+
+  var selectedIndex = codeSelect.selectedIndex;
+
+  descriptionSelect.selectedIndex = selectedIndex;
+
+  var index = document.getElementsByName("code[]").length;
+
+  for(i= 1 ;i<=index;i++)
+{
+
+  if(i!=Number(id))
+  {
+    if(document.getElementById('code@' + id).value==document.getElementById('code@' + i).value)
+
+   {
+     alert("Same Code should not be selected");
+
+
+
+	   document.getElementById('description@' + id).options[0].selected="selected";
+
+	   document.getElementById('code@' + id).options[0].selected="selected";
+     document.getElementById('units' + id).value = '';
+
+
+   }
+
+
+ }
+
+}
+}
 </script>
 @endif
 @endsection
@@ -223,6 +265,7 @@ foreach ($items as $group) {
     $cat_array[] = ['cat' => $group->cat, 'cd' => $group->cd];
 }
 $cat_array_json = json_encode($cat_array);
+
 @endphp
 <h4 class="py-3 mb-4">
     <span class="text-muted fw-light">Sales Module /</span> Price Master
@@ -234,7 +277,7 @@ $cat_array_json = json_encode($cat_array);
             <h5 class="card-header p-3"><strong style="font-size:25px">Price Master</strong></h5>
             <hr class="my-0">
             <div class="card-body">
-                <form action="{{ $isEdit ? route('masters-PriceMaster.update', ['incr' => $oc_pricemaster->incr, 'code' => $oc_pricemaster->code]) : route('masters.PriceMaster.store') }}" id="formAccountSettings" method="POST" enctype="multipart/form-data">
+                <form action="{{ $isEdit ? route('masters-PriceMaster.update', ['incr' => $oc_pricemaster->incr, 'code' => $oc_pricemaster->code]) : route('masters.PriceMaster.store') }}" onsubmit = "return checkpricemaster(this);" id="formAccountSettings" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <label for="date" class="form-label">Date</label>
@@ -250,7 +293,9 @@ $cat_array_json = json_encode($cat_array);
                         <div class="row dynamic-row" id="dynamic-row-1">
                             <div class="mb-1 col-md-3">
                                 <label for="category1" class="form-label">Category</label>
-                                <select id="category1" name="category[]" class="form-control" onchange="getdescription(this.id);">
+                                <select id="category@1" name="category[]" class="form-control" onchange="getdescription(this.id);"   @if ($isEdit)
+        style="pointer-events: none; -webkit-appearance: none;"
+    @endif>
                                     <option value="">-select-</option>
                                     @foreach ($items as $group)
                                         <option value="{{ $group->cat }}" {{ old('cat', $isEdit ? $oc_pricemaster->cat : '') == $group->cat ? 'selected' : '' }}>{{ $group->cat }}</option>
@@ -262,8 +307,8 @@ $cat_array_json = json_encode($cat_array);
                             </div>
                             <div class="mb-1 col-md-3">
                                 @if($isEdit)
-                                    <label for="description1" class="form-label">Description</label>
-                                    <select id="description1" name="description[]" class="form-control" onchange="getcode(this.id);">
+                                    <label for="description" class="form-label">Description</label>
+                                    <select id="description@1" name="description[]" class="form-control" onchange="getcode(this.id);" style="pointer-events: none;-webkit-appearance: none;" >
                                         <option value="">-select-</option>
                                         @foreach ($description as $group)
                                             <option value="{{ $group->description }}" {{ old('description1', $isEdit ? $oc_pricemaster->desc : '') == $group->description ? 'selected' : '' }}>{{ $group->description }}</option>
@@ -271,7 +316,7 @@ $cat_array_json = json_encode($cat_array);
                                     </select>
                                 @else
                                     <label for="description1" class="form-label">Description</label>
-                                    <select id="description1" name="description[]" class="form-control" onchange="getcode(this.id);">
+                                    <select id="description@1" name="description[]" class="form-control" onchange="getunits(this.id);getcode(this.id);">
                                         <option value="">-select-</option>
                                     </select>
                                 @endif
@@ -279,7 +324,7 @@ $cat_array_json = json_encode($cat_array);
                             <div class="mb-1 col-md-2">
                                 @if($isEdit)
                                     <label for="code1" class="form-label">Code</label>
-                                    <select id="code1" name="code[]" class="form-control" onchange="getdesc(this.id);">
+                                    <select id="code@1" name="code[]" class="form-control" onchange="getdesc(this.id);getunits(this.id);" style="pointer-events: none;-webkit-appearance: none;">
                                         <option value="">-select-</option>
                                         @foreach ($codep as $group)
                                             <option value="{{ $group->code }}" {{ old('code1', $isEdit ? $oc_pricemaster->code : '') == $group->code ? 'selected' : '' }}>{{ $group->code }}</option>
@@ -287,7 +332,7 @@ $cat_array_json = json_encode($cat_array);
                                     </select>
                                 @else
                                     <label for="code1" class="form-label">Code</label>
-                                    <select id="code1" name="code[]" class="form-control" onchange="getdesc(this.id);">
+                                    <select id="code@1" name="code[]" class="form-control" onchange="getdesc(this.id);">
                                         <option value="">-select-</option>
                                     </select>
                                 @endif
@@ -298,10 +343,13 @@ $cat_array_json = json_encode($cat_array);
                             </div>
                             <div class="mb-1 col-md-2">
                                 <label for="price1" class="form-label">Price / Unit</label>
-                                <input type="text" id="price1" name="price[]" class="form-control price-input" placeholder="Enter Price" value="{{ old('price', $isEdit ? $oc_pricemaster->price : '') }}" onKeyPress="onlyNumbers2(event);" />
+                                <input type="text" id="price1" name="price[]" class="form-control price-input" placeholder="Enter Price" value="{{ old('price', $isEdit ? $oc_pricemaster->price : '') }}" oninput="validateInput(event);"ondrop="handlePasteOrDrop(event);" onpaste="handlePasteOrDrop(event);" />
                             </div>
                             <div class="mb-1 col-md-2">
                                 <input type="hidden" id="client" name="client[]" class="form-control" value="{{$activeContacts}}" />
+                            </div>
+                            <div class="mb-1 col-md-2">
+                                <input type="hidden" id="empname" name="empname[]" class="form-control" value="{{$empname}}" />
                             </div>
                         </div>
                     </div>
@@ -318,15 +366,16 @@ $cat_array_json = json_encode($cat_array);
 
 
 <script>
-    document.getElementById("cat").value = '';
+
     function getdescription(a) {
-    let id = a.substring(8, 9);
+        alert(a);
+let id = a.split('@')[1];
 
     var cat_arry = <?php echo empty($cat_array_json) ? '[]' : $cat_array_json; ?>;
 
-    var catgroupElement = document.getElementById("category" + id);
-    var descriptionDropdown = document.getElementById("description" + id);
-    var codeDropdown = document.getElementById("code" + id);
+    var catgroupElement = document.getElementById("category@" + id);
+    var descriptionDropdown = document.getElementById("description@" + id);
+    var codeDropdown = document.getElementById("code@" + id);
     var unitsDropdown = document.getElementById("units" + id);
 
     if (!catgroupElement || !descriptionDropdown || !codeDropdown || !unitsDropdown) {
@@ -350,6 +399,7 @@ $cat_array_json = json_encode($cat_array);
     var defaultOption = new Option("-select-", "");
     descriptionDropdown.options.add(defaultOption.cloneNode(true));
     codeDropdown.options.add(defaultOption.cloneNode(true));
+    unitsDropdown.value = '';
 
     for (var i = 0; i < l; i++) {
         if (cat_arry[i].cat === catgroup11) {
@@ -366,7 +416,7 @@ $cat_array_json = json_encode($cat_array);
                 if (!descriptionsSet.has(type2)) {
                     descriptionsSet.add(type2);
                     var descriptionOption = new Option(type2, type2);
-                    descriptionOption.title = type;
+                 
                     descriptionDropdown.options.add(descriptionOption);
                 }
 
@@ -374,94 +424,202 @@ $cat_array_json = json_encode($cat_array);
                 if (!codesSet.has(type3)) {
                     codesSet.add(type3);
                     var codeOption = new Option(type3, type3);
-                    codeOption.title = type;
+                
                     codeDropdown.options.add(codeOption);
                 }
 
                 // Set the units value (assuming it's the same for all entries)
-                if (!unitsDropdown.value) { // Set only if not already set
-                    unitsDropdown.value = type4;
-                }
+                // if (!unitsDropdown.value) { // Set only if not already set
+                //     unitsDropdown.value = type4;
+                // }
             }
         }
     }
 }
 
-function getcode(a) {
+
+function getunits(a)
+{
+    
+
+    let id = a.split('@')[1];
+    if(document.getElementById("description@" + id).value == '')
+{
+    document.getElementById("units" + id).value = '';
+}
+
+    var cat_arry = <?php echo empty($cat_array_json) ? '[]' : $cat_array_json; ?>;
+
+    var catgroupElement = document.getElementById("category@" + id);
+    var descriptionDropdown = document.getElementById("description@" + id);
+
+    var unitsDropdown = document.getElementById("units" + id);
+
+ 
+
+    var catgroup11 = catgroupElement.value;
 
 
-  var id = a.substring(11, 12);
 
-  var codeSelect = document.getElementById('code'+id);
-    var descriptionSelect = document.getElementById('description'+id);
+    var l = cat_arry.length;
 
-    var selectedIndex = descriptionSelect.selectedIndex;
 
-    codeSelect.selectedIndex = selectedIndex;
 
-var index = document.getElementsByName("description[]").length;
+    for (var i = 0; i < l; i++) {
+        if (cat_arry[i].cat === catgroup11) {
+            var type = cat_arry[i].cd;
+            var type1 = type.split(",");
 
-    for(i= 1 ;i<=index;i++)
+            for (var j = 0; j < type1.length; j++) {
+                var typeParts = type1[j].split('@');
+                var type2 = typeParts[1].trim(); // Description
+                var type3 = typeParts[0].trim(); // Code
+                var type4 = typeParts[2].trim(); // Units
+
+           
+          
+if(descriptionDropdown.value == type2)
 {
 
-  if(i!=Number(id))
-  {
-    if(document.getElementById('description' + id).value==document.getElementById('description' + i).value)
-
-   {
-     alert("Same Code should not be selected");
-
-
-
-	   document.getElementById('description' + id).options[0].selected="selected";
-
-	   document.getElementById('code' + id).options[0].selected="selected";
-     document.getElementById('units' + id).value = '';
-
-
-   }
-
-
- }
+    if (!unitsDropdown.value) { // Set only if not already set
+                    unitsDropdown.value = type4;
+                }
+}
+         
+            }
+        }
+    }
 
 }
 
 
-}
-
-function getdesc(a) {
 
 
-var id = a.substring(4, 5);
-
-var codeSelect = document.getElementById('code'+id);
-  var descriptionSelect = document.getElementById('description'+id);
-
-  var selectedIndex = codeSelect.selectedIndex;
-
-  descriptionSelect.selectedIndex = selectedIndex;
 
 
-}
 
-
-function onlyNumbers2(e) {
-  var code = e.charCode || e.keyCode;
-  var input = e.target.value;
-
-  // Allow numbers (0-9)
-  if (code >= 48 && code <= 57) {
-    return;
-  }
-
-  // Allow one decimal point
-  if (code === 46 && !input.includes('.')) {
-    return;
-  }
-
-  // Prevent any other input
+function handlePasteOrDrop(e) {
   e.preventDefault();
+  var paste = e.clipboardData || window.clipboardData;
+  var text = paste.getData('text');
+  
+  // Ensure the pasted text is numeric and contains only one decimal point
+  if (/^\d*\.?\d*$/.test(text)) {
+    // Get the current value in the input
+    var currentValue = e.target.value;
+    
+    // Concatenate the current value with the pasted text
+    var newValue = currentValue + text;
+
+    // Validate that the result still only contains at most one decimal point
+    if (/^\d*\.?\d*$/.test(newValue)) {
+      e.target.value = newValue;
+    }
+  }
 }
+
+function checkpricemaster(){
+ 
+
+    var index = $('[name="category[]"]').length; 
+  for(var k = 1;k<=index;k++) 
+  { 
+    
+if(k==1)
+	{
+	
+	var category= document.getElementById("category@"+k).value;
+	var description= document.getElementById("description@"+k).value;
+	var code= document.getElementById("code@"+k).value;
+	var price= document.getElementById("price"+k).value;
+	if(category=="" )
+	{
+        alert("please select category");
+        return false;
+	
+	
+	}
+    if(description=="" )
+	{
+        alert("please select description");
+        return false;
+	}
+    if(code=="" )
+	{
+        alert("please select code");
+        return false;
+	}
+    if(price=="" )
+	{
+        alert("please enter price");
+        return false;
+	}
+}
+if(k>1)
+{
+    var category= document.getElementById("category@"+k).value;
+	var description= document.getElementById("description@"+k).value;
+	var code= document.getElementById("code@"+k).value;
+	var price= document.getElementById("price"+k).value;
+    if(category!="" ) 
+    {
+        if(description=="" )
+	{
+        alert("please select description");
+        return false;
+	}
+    if(code=="" )
+	{
+        alert("please select code");
+        return false;
+	}
+    if(price=="" )
+	{
+        alert("please enter price");
+        return false;
+	}
+    }  
+    if(description!="" ) 
+    {
+        if(category=="" )
+	{
+        alert("please select description");
+        return false;
+	}
+    if(code=="" )
+	{
+        alert("please select code");
+        return false;
+	}
+    if(price=="" )
+	{
+        alert("please enter price");
+        return false;
+	}
+    }  
+    if(price!="" ) 
+    {
+        if(category=="" )
+	{
+        alert("please select category");
+        return false;
+	}
+    if(description=="" )
+	{
+        alert("please select description");
+        return false;
+	}
+    if(code=="" )
+	{
+        alert("please select code");
+        return false;
+	}
+    }
+}
+	
+	}
+
+  }
 
 
 

@@ -32,22 +32,27 @@
                 // Split the item string by '@'
                 var values = item.split('@'); // Changed item[0] to item
 
+                
+
                 if (values.length >= 8) { // Ensure there are enough values
-                    var transfer = values[0];
+                    var category = values[0];
                     var code = values[1];
-                    var descriptionText = values[2];
+                    var description = values[2];
                     var quantity = values[3];
-                    var unit = values[4];
-                    var price = values[5];
-                    var taxTypeText = values[6];
-                    var taxValue = values[7];
+                    var price = values[4];
+                    var taxable = values[5];
+                    var basic = values[6];
+                    var tax = values[7];
+                    var tax_value = values[8];
+                    var tax_amount = values[9];
+                    var Total = values[10];
 
                     // Add new row
-                    addNewRow(index + 1, transfer, descriptionText, code, quantity, unit, price, taxTypeText, taxValue);
+                    addNewRow(index + 1, category, description, code, quantity, price, taxable, basic, tax, tax_value, tax_amount, Total);
                 } else {
                     console.error('Invalid data format:', values);
                 }
-            });
+            });gettotal();
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', error);
@@ -55,39 +60,52 @@
     });
   }
 
-  function addNewRow(rowNumber, transfer, descriptionText, code, quantity, unit, price, taxTypeText, taxValue) {
+  function addNewRow(rowNumber,category, description, code, quantity, price, taxable, basic, tax, tax_value, tax_amount, Total) {
     let newRow = document.createElement('tr');
     newRow.classList.add('dynamic-row', 'mb-1');
     newRow.id = `dynamic-row-${rowNumber}`;
     newRow.innerHTML = `
 
         <td>
-            <select id="category${rowNumber}" name="category[]" class="form-control" required>
-                <option value="${transfer}">${transfer}</option>
+            <select id="category${rowNumber}" name="category[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                <option value="${category}">${category}</option>
             </select>
         </td>
         <td>
-            <select id="description${rowNumber}" name="description[]" class="form-control" required>
-                <option value="${descriptionText}">${descriptionText}</option>
+            <select id="description${rowNumber}" name="description[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                <option value="${description}">${description}</option>
             </select>
         </td>
         <td>
-            <input type="text" id="code${rowNumber}" name="code[]" class="form-control" value="${code}" readonly/>
+            <input type="text" id="code${rowNumber}" name="code[]" style="border: none;width: 100px;" value="${code}" readonly/>
         </td>
         <td>
-            <input type="number" id="quantity${rowNumber}" name="quantity[]" class="form-control" value="${quantity}" required/>
+            <input type="number" id="quantity${rowNumber}" name="quantity[]"  style="border: none;width: 70px" value="${quantity}" required readonly/>
         </td>
 
         <td>
-            <input type="number" id="price${rowNumber}" name="price[]" class="form-control" value="${price}" required/>
+            <input type="number" id="price${rowNumber}" name="price[]"  style="border: none;width: 70px;" value="${price}" required
+            readonly/>
         </td>
+             <td>
+                <input type="number" id="taxable${rowNumber}" name="taxable[]" style="border: none; width: 70px;" readonly  value="${taxable}" required/>
+            </td>
+               <td>
+                <input type="number" id="basic${rowNumber}" name="basic[]" readonly  value="${basic}" style="border: none;  width: 100px;" required/>
+            </td>
         <td>
-            <select id="taxType${rowNumber}" name="taxType[]" class="form-control" required>
-                <option value="${taxTypeText}">${taxTypeText}</option>
+            <select id="tax${rowNumber}" name="tax[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                <option value="${tax}">${tax}</option>
             </select>
         </td>
         <td>
-            <input type="number" id="tax${rowNumber}" name="tax[]" class="form-control" value="${taxValue}" readonly/>
+            <input type="number" id="tax_value${rowNumber}" name="tax_value[]" style="border: none;width: 50px;"   value="${tax_value}" readonly/>
+        </td>
+         <td>
+            <input type="number" id="taxamount${rowNumber}" name="taxamount[]" style="border: none;width: 70px;"  value="${tax_amount}" readonly/>
+        </td>
+         <td>
+            <input type="number" id="Total${rowNumber}" name="Total[]"  style="border: none;width: 100px;" value="${Total}" readonly/>
         </td>
     `;
 
@@ -111,7 +129,7 @@
             <h5 class="card-header text-center"><strong style="font-size:25px">Invoice</strong></h5>
             <hr class="my-0">
             <div class="card-body">
-                <form action="{{ route('transctions-SalesOrder-store') }}" id="formSalesOrder" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('transctions-invoice-store') }}" id="formSalesOrder" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-2">
@@ -131,6 +149,9 @@
                                 @endforeach
                             </select>
                         </div>
+                        @error('id')
+                        <div class="alert alert-danger p-1">{{ $message }}</div>
+                    @enderror
                         <div class="col-md-2">
                             <label for="dist" class="form-label"><strong>Distributor*</strong></label>
                         </div>
@@ -142,6 +163,9 @@
                                 @endforeach
                             </select>
                         </div>
+                        @error('dist')
+                        <div class="alert alert-danger p-1">{{ $message }}</div>
+                    @enderror
                     </div>
 
                     <div class="row mb-3">
@@ -157,10 +181,10 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label for="po_no" class="form-label"><strong>Invoice</strong></label>
+                            <label for="invoice" class="form-label"><strong>Invoice</strong></label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" id="po_no" name="po_no" class="form-control" value="{{ $inv }}" readonly/>
+                            <input type="text" id="invoice" name="invoice" class="form-control" value="{{ $inv }}" readonly/>
                         </div>
                         <div class="col-md-2">
                             <label for="book_invoice" class="form-label"><strong>Book Invoice</strong></label>
@@ -179,100 +203,101 @@
                                     <th>Code</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
+                                    <th>Taxable Price</th>
+                                    <th>Basic Total</th>
                                     <th>Tax</th>
                                     <th>Tax value</th>
+                                    <th>Tax amount</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody id="dynamic-rows">
                                 <tr class="dynamic-row mb-1" id="dynamic-row-1">
                                     <td>
-                                        <select id="category1" name="category[]" class="form-control" required>
-                                            <option value="">-Select-</option>
+                                        <select id="category1" name="category[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                                       
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="description1" name="description[]" class="form-control" required>
-                                            <option value="">-Select-</option>
+                                        <select id="description1" name="description[]" style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                                     
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="code1" name="code[]" class="form-control" readonly/>
+                                        <input type="text" id="code1" name="code[]" style="border: none;"  readonly/>
                                     </td>
                                     <td>
-                                        <input type="number" id="quantity1" name="quantity[]" class="form-control" required/>
+                                        <input type="number" id="quantity1" name="quantity[]" style="border: none;"   readonly/>
                                     </td>
                                     <td>
-                                        <input type="number" id="price1" name="price[]" class="form-control" required/>
+                                        <input type="number" id="price1" name="price[]"  style="border: none;" readonly/>
                                     </td>
                                     <td>
-                                        <select id="taxType1" name="taxType[]" class="form-control">
-                                            <option value="">-Select-</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="tax1" name="tax[]" class="form-control" readonly/>
-                                    </td>
+                                       <input type="number" id="taxable1" name="taxable[]" style="border: none;"   readonly/>
+                                     </td>
+                                     <td>
+                                      <input type="number" id="basic1" name="basic[]" style="border: none;"  readonly/>
+                                     </td>
+                                     <td>
+                                      <select id="tax1" name="tax[]" style="border: none;pointer-events: none;-webkit-appearance: none;" required>
+                                         <option value="">-select-</option>
+                                      </select>
+                                      </td>
+                                      <td>
+            <input type="number" id="tax_value1" name="tax_value[]" style="border: none;" value="${tax_value}" readonly/>
+        </td>
+         <td>
+            <input type="number" id="taxamount1" name="taxamount[]"  style="border: none;" value="${tax_amount}" readonly/>
+        </td>
+         <td>
+            <input type="number" id="Total1" name="Total[]" style="border: none;" value="${Total}" readonly/>
+        </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-3 offset-md-1">
-                            <label class="form-label"><strong>Total Quantity (In Tonnage)</strong></label>
+<table>
+    <center>
+                    <tr class="row mb-4">
+                        <td class="col-md-3 offset-md-1">
+                            <label class="form-label"><strong>Total Quantity</strong></label>
                             <input type="text" name="tquantity" id="tquantity" class="form-control" readonly value="0"/>
-                        </div>
-                        <div class="col-md-3">
+                        </td>
+
+               
+
+                        <td class="col-md-3">
+                            <label class="form-label"><strong>GSTIN</strong></label>
+                            <input type="text" name="gstin" id="gstin" class="form-control" readonly value="{{$gstin}}"/>
+                        </td>
+
+                     
+
+    <!-- TCS Tax Radio Buttons -->
+
+
+    <td class="col-md-3">
                             <label class="form-label"><strong>Grand Total</strong></label>
                             <input type="text" name="total" id="total" class="form-control" readonly value="0"/>
-                        </div>
-                    </div>
+                        </td>
 
-                    <div class="row mb-4">
-                        <div class="col-md-3">
-                            <label class="form-label"><strong>GSTIN</strong></label>
-                            <input type="text" name="gstin" id="gstin" class="form-control" readonly value="0"/>
-                        </div>
-
-                        <div class="row mb-4">
-                        <div class="col-md-3">
-                            <label class="form-label"><strong>Basic Total</strong></label>
-                            <input type="text" name="gstin" id="gstin" class="form-control" readonly value="0"/>
-                        </div>
-
-                        <div class="row mb-4">
-    <!-- TCS Tax Radio Buttons -->
-    <div class="col-md-9">
-        <div class="form-group">
-        <label class="form-label"><strong>TCS Rate (%)</strong></label>
-            <strong>N/A</strong>
-            <input type="radio" name="tcs_tax" id="tcs_tax" onclick="apply_tcs_tax(this.id)" value="0" checked>
-            @foreach($result_data as $key => $tcs)
-                <strong>{{ $tcs['tax'] }}</strong>
-                <input type="radio" name="tcs_tax" id="tcs_tax{{ $key }}" value="{{ $tcs['tax'] }}">
-            @endforeach
-        </div>
-    </div>
-
-    <div class="col-md-3">
-                            <label class="form-label"><strong>Grand Total</strong></label>
-                            <input type="text" name="gstin" id="gstin" class="form-control" readonly value="0"/>
-                        </div>
-
-
+                        </tr>
+                        <tr class="row mb-4">
+                        <td class="col-md-12">
+                            <label class="form-label"><strong>Narration</strong></label>
+                            <textarea name="narration" id="narration" class="form-control" rows="3"></textarea>
+                        </td>
+                    </tr>
+                        <center>
+</table>
 </div>
 
 
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <label class="form-label"><strong>Narration</strong></label>
-                            <textarea name="narration" id="narration" class="form-control" rows="3"></textarea>
-                        </div>
-                    </div>
+              
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-success">Save</button>
-                        <button type="reset" class="btn btn-danger" onclick="window.location.href=''">Cancel</button>
+                        <button type="reset" class="btn btn-danger" onclick="window.location.href='{{ route('transctions-Invoice')}}'">Cancel</button
                     </div>
                 </form>
             </div>
@@ -336,6 +361,43 @@ function getso() {
     }
   });
 }
+function apply_tcs_tax(a){
+
+var a1 = parseFloat(a/100);
+
+  if(document.getElementById("btotal").value > 0)
+{
+  var x = parseFloat(document.getElementById("btotal").value);
+  var tcsamount = parseFloat(a1 * x);
+  var grandt = parseFloat(x+parseFloat(a1 * x));
+
+  document.getElementById("tcsamount").value = tcsamount;
+
+}
+}
+function gettotal() 
+{
+
+    var sum = 0 ;
+    var sum1 = 0;
+
+
+var index = $('[name="category[]"]').length;
+
+for (var i = 1; i <= index; i++) {
+    var enteredQuantity = parseFloat(document.getElementById("quantity" + i).value);
+var price = parseFloat(document.getElementById("price" + i).value);
+var Total = parseFloat(document.getElementById("Total" + i).value);
+sum = parseFloat(sum + enteredQuantity);
+sum1 = parseFloat(sum1 + Total);
+}
+
+
+document.getElementById("tquantity").value = sum.toFixed(2);
+document.getElementById("total").value = sum1.toFixed(2);
+
+}
+
 
 
 

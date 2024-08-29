@@ -38,16 +38,23 @@
           <td>{{$details->source}}</td>
           <td>{{$details->sunits}}</td>
           <td>
+       
            <i class="bx bx-edit-alt me-1" style="color: #03c3ec" title="Edit"
+  
    onclick="if(confirm('Are you sure you want to edit the item with code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.edit', $details->id)}}'; }"></i>
 
+   @if($details->lel2flag == 0)
        <i class="bx bx-trash me-1" style="color: red" title="Delete"
    onclick="if(confirm('Are you sure you want to delete the item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.destroy', $details->id) }}'; }"></i>
+   @endif
 
-            @if($details->halt_flag == 1)
-            <i class="bx bx-pause me-1" style="color: red" title="Item is active" onclick="if(confirm('Are you sure you want to Halt this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+   @if($details->lel2flag == 1)
+           <i class="bx bx-lock-alt me-1" style="color: #03c3ec" title="Locked"></i>
+   @endif
+            @if($details->halt_flag == 0)
+            <i class="bx bx-pause me-1" style="color: red" title="Item is active" onclick="if(confirm('Are you sure you want to Halt this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->code) }}'; }"></i>
             @else
-            <i class="bx bx-play me-1" style="color: red" title="Item is inactive" onclick="if(confirm('Are you sure you want to Resume this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->id) }}'; }"></i>
+            <i class="bx bx-play me-1" style="color: red" title="Item is inactive" onclick="if(confirm('Are you sure you want to Resume this item of code ({{$details->code}}) and description ({{$details->description}})?')) { window.location.href='{{ route('masters-ItemMaster.activeinactive', $details->code) }}'; }"></i>
             @endif
           </td>
         </tr>

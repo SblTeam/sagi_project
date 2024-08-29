@@ -16,8 +16,10 @@ class getsonumber extends Controller
       $id = $request->input('id');
 
       $distinctPos = oc_salesorder::where('vendorid', $id)
-                           ->distinct()
-                           ->pluck('po');
+      ->where('cobi_flag', 0)
+      ->distinct()
+      ->pluck('po');
+
 
     $distinctPosArray = $distinctPos->toArray();
 

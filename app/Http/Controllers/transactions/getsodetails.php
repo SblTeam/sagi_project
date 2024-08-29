@@ -19,12 +19,13 @@ class getsodetails extends Controller
 
 $results = oc_salesorder::where('po', $so)
     ->distinct()
-    ->select('category', 'code', 'description', 'squantity', 'unit', 'rateperunit', 'taxcode', 'taxvalue', 'sprice')
+    ->select('category', 'code', 'description', 'squantity', 'sprice', 'taxableprice', 'basic','taxcode', 'taxvalue', 'totalwithtax','taxamount')
+    ->where ('cobi_flag' , 0)
     ->get();
     $details = [];
 
     foreach ($results as $row) {
-        $details[] = $row->category . "@" . $row->code . "@" . $row->description . "@" . $row->squantity . "@" . $row->unit . "@" . $row->sprice . "@" . $row->taxcode . "@" . $row->taxvalue;
+        $details[] = $row->category . "@" . $row->code . "@" . $row->description . "@" . $row->squantity . "@" . $row->sprice . "@" . $row->taxableprice . "@" . $row->basic . "@" . $row->taxcode . "@" . $row->taxvalue. "@" . $row->taxamount. "@" . $row->totalwithtax;
     }
 
 return json_encode($details);

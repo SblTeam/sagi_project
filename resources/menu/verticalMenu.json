@@ -51,6 +51,23 @@
           "url": "transctions/SalesOrder",
           "name": "Sales Order",
           "slug": "transctions-SalesOrder"
+        },
+        {
+          "url": "transctions/Invoice",
+          "name": "Invoice",
+          "slug": "transctions-Invoice"
+        }
+      ]
+    },
+    {
+      "name": "Sales Processing",
+      "icon": "menu-icon tf-icons bx bx bx-receipt",
+      "slug": "processing",
+      "submenu": [
+        {
+          "url": "processing/receipt",
+          "name": "Sales Receipt",
+          "slug": "processing-receipt"
         }
       ]
     }

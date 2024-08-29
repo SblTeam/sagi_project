@@ -7,6 +7,8 @@ use App\Http\Controllers\layouts\Fluid;
 use App\Http\Controllers\layouts\Container;
 use App\Http\Controllers\layouts\Blank;
 use App\Http\Controllers\masters\SupplyMaster;
+use App\Http\Controllers\processing\Receipt;
+use App\Http\Controllers\processing\PdfControllerm;
 use App\Http\Controllers\masters\ItemMaster;
 use App\Http\Controllers\masters\priceMaster;
 use App\Http\Controllers\usersaccesses\userrights;
@@ -67,7 +69,7 @@ Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('la
 Route::get('/layouts/fluid', [Fluid::class, 'index'])->name('layouts-fluid');
 Route::get('/layouts/container', [Container::class, 'index'])->name('layouts-container');
 Route::get('/layouts/blank', [Blank::class, 'index'])->name('layouts-blank');
-// masters
+//profile masters
 Route::get('/masters/SupplyMaster', [SupplyMaster::class, 'index'])->name('masters-SupplyMaster');
 Route::get('/masters/SupplyMaster/add', [SupplyMaster::class, 'add'])->name('masters-SupplyMaster.add');
 Route::post('/masters/SupplyMaster/store', [SupplyMaster::class, 'store'])->name('masters-SupplyMaster.store');
@@ -75,6 +77,16 @@ Route::get('/masters/SupplyMaster/edit/{id}', [SupplyMaster::class, 'edit'])->na
 Route::post('/masters/SupplyMaster/{id}', [SupplyMaster::class, 'update'])->name('masters-SupplyMaster.update');
 Route::get('/masters/SupplyMaster/delete/{id}', [SupplyMaster::class, 'destroy'])->name('masters-SupplyMaster.destroy');
 Route::get('/masters/SupplyMaster/{id}/{status}', [SupplyMaster::class, 'activate'])->name('masters-SupplyMaster.activate');
+//receipt
+Route::get('/processing/receipt', [Receipt::class, 'index'])->name('processing-receipt');
+Route::get('/processing/receipt/add', [Receipt::class, 'add'])->name('processing-receipt.add');
+Route::post('/processing/receipt/getinvoicewithparty', [Receipt::class, 'getinvoicewithparty'])->name('processing-receipt.getinvoicewithparty');
+Route::post('/processing/receipt/getinvoicewithparty_check', [Receipt::class, 'getinvoicewithparty_check'])->name('processing-receipt.getinvoicewithparty_check');
+Route::post('/processing/receipt/store', [Receipt::class, 'store'])->name('processing-receipt.store');
+Route::get('/processing/receipt/view/{id}', [Receipt::class, 'view'])->name('processing-receipt.view');
+Route::get('/processing/receipt/delete/{id}', [Receipt::class, 'destroy'])->name('processing-receipt.delete');
+Route::get('/processing/receipt/print/{id}', [PdfControllerm::class, 'generatePdf'])->name('processing-receipt.print');
+
 Route::get('/masters/ItemMaster', [ItemMaster::class, 'index'])->name('masters-ItemMaster');
 Route::get('/masters/ItemMaster/add', [ItemMaster::class, 'add'])->name('masters.ItemMaster.add');
 //item import
@@ -89,7 +101,7 @@ Route::get('/masters/ItemMaster/delete/{id}', [ItemMaster::class, 'destroy'])->n
 //price master
 Route::get('/masters/PriceMaster/add', [priceMaster::class, 'add'])->name('masters.PriceMaster.add');
 Route::post('/masters/PriceMaster', [PriceMaster::class, 'store'])->name('masters.PriceMaster.store');
-Route::get('/masters/PriceMaster/delete/{incr}/{client}', [PriceMaster::class, 'destroy'])->name('masters-PriceMaster.destroy');
+Route::get('/masters/PriceMaster/delete/{incr}/{code}', [PriceMaster::class, 'destroy'])->name('masters-PriceMaster.destroy');
 Route::get('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'edit'])->name('masters-PriceMaster.edit');
 Route::post('/masters/PriceMaster/{incr}/{code}', [PriceMaster::class, 'update'])->name('masters-PriceMaster.update');
 Route::get('/masters/PriceMaster', [PriceMaster::class, 'index'])->name('masters-PriceMaster');
@@ -123,7 +135,19 @@ Route::get('/transctions/SalesOrder/delete/{id}', [SalesOrder::class, 'destroy']
 
 
 
-Route::get('/transctions/Invoice', [Invoice::class, 'add'])->name('transctions-Invoice');
+Route::get('/transctions/Invoice', [Invoice::class, 'index'])->name('transctions-Invoice');
+
+Route::get('/transctions/Invoice/add', [Invoice::class, 'add'])->name('transctions-Invoice-add');
+
+Route::get('/transctions/Invoice/edit/{id}', [Invoice::class, 'edit'])->name('transctions-Invoice.edit');
+
+Route::get('/transctions/Invoice/print/{id}', [Invoice::class, 'print'])->name('transctions-Invoice.print');
+
+//pdf
+Route::get('/generatepdf/{id}', [PdfController::class, 'generatePdf'])->name('generatePDF.print');
+Route::post('/transctions/Invoice', [Invoice::class, 'store'])->name('transctions-invoice-store');
+
+Route::post('/transctions/Invoice/{id}', [Invoice::class, 'update'])->name('transctions-editinvoice-store');
 
 Route::get('/transactions/getsonumber', [getsonumber::class, 'fetchsoDetails'])->name('transaction.getsonumber');
 

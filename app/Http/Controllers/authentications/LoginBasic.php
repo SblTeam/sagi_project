@@ -26,13 +26,18 @@ class LoginBasic extends Controller
             return redirect()->route('auth-login-basic')->with('error', 'Invalid credentials.');
         }
         $databaseName = $tblUser->dbase;
+        $primarydb = $tblUser->primary_db;
+        $secondarydb = $tblUser->secondary_db;
         Config::set('database.connections.dynamic.database', $databaseName);
+        Config::set('database.connections.mysql2.database', $primarydb);
         Config::set('database.default', 'dynamic');
         $commonUser = CommonUser::where('username', $username)->where('active', 1)->first();
         if (!$commonUser) {
             return redirect()->route('auth-login-basic')->with('error', 'Username not register in '.$databaseName.'.');
         }
         session()->put("db",$databaseName);
+        session()->put("primarydb",$primarydb);
+        session()->put("secondarydb",$secondarydb);
         session()->put("valid_user",$username);
         $request->session()->regenerate();
         return redirect()->route('dashboard-analytics');

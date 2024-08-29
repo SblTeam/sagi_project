@@ -1,0 +1,364 @@
+<style type="text/css">
+p { margin:0 0 0 0; }
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+<script> var sec=0;var msec=0; </script><div id="time" align="center">
+	<img src="../images/mask-loader.gif" align="bottom"/>&nbsp;Please wait,while page is loading . . . . 
+</div>
+
+<table align="center" border="0">
+	<tr>
+		<td style="vertical-align:middle"><img src="../logo/thumbnails/SBL_logo1.png" border="0px" /></td>
+		<td style="vertical-align:middle"><p>
+	<span style="font-size: 16px"><strong>SBL </strong></span></p>
+</td>
+	</tr>
+</table>
+
+
+
+ 
+    <style>
+
+        thead {
+
+            cursor: pointer;  
+        }
+
+    </style>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<link href="phprptcss/project9.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="PHP Report Maker v3.0.0.1" />
+	<link rel="stylesheet" href="../js/base/jquery-ui-1.8.6.custom.css">
+	<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+	<script src="../js/jquery.ui.core.js"></script>
+	<script src="../js/jquery.ui.datepicker.js"></script>
+	<script  type="text/javascript" src="../js/jquery.datepick/jquery.datepick.min.js"></script>
+	
+<script type="text/javascript">
+		$(document).ready(function()
+		{
+	            $(function() {
+		           $( ".datepicker" ).datepicker({
+					changeMonth: true,
+					changeYear: true,
+					 maxDate: '0',
+					numberOfMonths: 1,
+				    dateFormat: 'dd.mm.yy'
+				   });
+	            });
+		});
+</script>
+<script type="text/javascript">
+	entree = new Date;
+	entree = entree.getTime();
+function calculateloadgingtime()
+	{
+	   if(sec==0&&msec==0) {document.getElementById("time").innerHTML=""; return; }
+		fin = new Date;
+		fin = fin.getTime();
+		php_time=(msec*1000)+(sec*1000);
+		var secondes = (fin-entree+php_time)/1000;
+		secondes=Math.round(secondes*1000)/1000;
+				document.getElementById("loadingpage").innerHTML = "(Loaded in " + secondes + " second(s).)"; 
+		document.getElementById("time").innerHTML="";
+				window.status='Page Loaded in ' + secondes + ' second(s).';
+	}
+window.onload = calculateloadgingtime;
+</script>
+
+<style>
+body { font-size:85%; }
+</style>
+</head>
+<body>
+<script type="text/javascript">
+var EW_REPORT_IMAGES_FOLDER = "phprptimages";
+</script>
+<script src="phprptjs/x.js" type="text/javascript"></script>
+<div class="ewLayout">
+
+	<table cellspacing="0" class="ewContentTable">
+		<tr>	
+
+			<td class="ewContentColumn">
+
+<table align="center" border="0">
+    <tr>
+        <td align="center"><strong><font color="#3e3276">Detail Requirement Analysis</font></strong></td>
+    </tr>   
+</table>
+<!-------
+<table align="center" border="0">
+    <tr>
+        <td  align="center"><strong><font color="#3e3276">From Date : </font></strong>&nbsp;&nbsp;</td>
+        <td  align="center"   > <strong><font color="#3e3276">To Date : </font></strong>&nbsp;&nbsp;</td>
+    </tr>
+</table>
+<table align="center" border="0">
+    <tr>
+
+        <td align="center"><strong><font color="#3e3276">Developer : </font></strong>&nbsp;&nbsp;</td>
+
+    </tr> 
+
+</table>
+--->
+
+
+
+                                <br /><br />
+                               <!-- summary report starts -->
+                <div id="report_summary" ng-app="tableSortApp" ng-controller="SortableTableCtrl" >
+
+                    <table class="ewGrid" cellspacing="0" align="center"><tr>
+                            <td class="ewGridContent">
+                                
+                                <!-- Report Grid (Begin) -->
+                                <div class="ewGridMiddlePanel" >
+                                    <table class="ewTable ewTableSeparate" cellspacing="0" align="center" >
+                                        <thead>
+                                            <tr>
+                                                                                                                                                            <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Sno                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Request Id                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Type                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Description                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Estimated Hours                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Actual Hours                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Time Consumed This Month                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Status                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Request Date                                                        </td>
+                                                                                                                                                                                                                    <td valign="bottom" class="ewTableHeader"  align="center" >
+                                                            Production Moved Date                                                        </td>
+                                                                                                                                                    </tr>
+                                        </thead>
+                                                                                  <tbody>
+                                                                                            <tr>
+                                                                                                          <td class="ewRptGrpField3">1</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-ACT-0063</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >In order to upload the purchase document directly from Tualsi we require the classficaiton of Raw Material and Packing Material in the SOBI so that from this we can upload the SOBI Entries from Tualsi</td>                                                        <td class="ewRptGrpField3"  >15</td>                                                        <td class="ewRptGrpField3"  >15</td>                                                        <td class="ewRptGrpField3"  >2</td>                                                        <td class="ewRptGrpField3"  >Testing</td>                                                        <td class="ewRptGrpField3"  >2024-06-25</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">2</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-ACT-0064</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >kotak bank salary payment api configuration</td>                                                        <td class="ewRptGrpField3"  >10</td>                                                        <td class="ewRptGrpField3"  >8</td>                                                        <td class="ewRptGrpField3"  >8</td>                                                        <td class="ewRptGrpField3"  >Finished</td>                                                        <td class="ewRptGrpField3"  >2024-07-23</td>                                                        <td class="ewRptGrpField3"  >2024-07-11</td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">3</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-FPI-0108</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Historical data changes like Import, upload, every month option etc. </td>                                                        <td class="ewRptGrpField3"  >189</td>                                                        <td class="ewRptGrpField3"  >189</td>                                                        <td class="ewRptGrpField3"  >20</td>                                                        <td class="ewRptGrpField3"  >Finished</td>                                                        <td class="ewRptGrpField3"  >2024-05-22</td>                                                        <td class="ewRptGrpField3"  >2024-07-23</td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">4</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-FPI-0110</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Whatsapp api integration to implement in out ERP</td>                                                        <td class="ewRptGrpField3"  >36</td>                                                        <td class="ewRptGrpField3"  >36</td>                                                        <td class="ewRptGrpField3"  >12</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-05-28</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">5</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-HOM-0156</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >progcap integration for data synch with ERP</td>                                                        <td class="ewRptGrpField3"  >134</td>                                                        <td class="ewRptGrpField3"  >134</td>                                                        <td class="ewRptGrpField3"  >22</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2023-11-27</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">6</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-HOM-0162</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Meeting & Discussion (regarding new development, changes and third party Integration)</td>                                                        <td class="ewRptGrpField3"  >61</td>                                                        <td class="ewRptGrpField3"  >61</td>                                                        <td class="ewRptGrpField3"  >24</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-05-28</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">7</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-HOM-0163</td>                                                        <td class="ewRptGrpField3"  >Trouble Shooting</td>                                                        <td class="ewRptGrpField3"  >Trouble shooting & support work, guiding for new tasks </td>                                                        <td class="ewRptGrpField3"  >117</td>                                                        <td class="ewRptGrpField3"  >117</td>                                                        <td class="ewRptGrpField3"  >50</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-05-28</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">8</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-HOM-0164</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >APMC Cess Rs. 0.006% on Dals Category all items on Basic Value for Metro Cash & Carry Parties & Reliance Cash & Carry Parties at Sales Order Level to be updated</td>                                                        <td class="ewRptGrpField3"  >77</td>                                                        <td class="ewRptGrpField3"  >77</td>                                                        <td class="ewRptGrpField3"  >8</td>                                                        <td class="ewRptGrpField3"  >Ready to deploy</td>                                                        <td class="ewRptGrpField3"  >2024-05-30</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">9</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-HOM-0167</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Authorization Merge</td>                                                        <td class="ewRptGrpField3"  >20</td>                                                        <td class="ewRptGrpField3"  >19</td>                                                        <td class="ewRptGrpField3"  >19</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-07-23</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">10</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-INV-0026</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Store Department Transaction Need to Bring in ERP</td>                                                        <td class="ewRptGrpField3"  >50</td>                                                        <td class="ewRptGrpField3"  >50</td>                                                        <td class="ewRptGrpField3"  >19</td>                                                        <td class="ewRptGrpField3"  >Testing</td>                                                        <td class="ewRptGrpField3"  >2024-06-25</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">11</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-LAR-0059</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Onboarding Sagi</td>                                                        <td class="ewRptGrpField3"  >262</td>                                                        <td class="ewRptGrpField3"  >262</td>                                                        <td class="ewRptGrpField3"  >118</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-04-24</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">12</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-OTC-0348</td>                                                        <td class="ewRptGrpField3"  >Modification</td>                                                        <td class="ewRptGrpField3"  >Distributor Item Mapping authorization Reject option</td>                                                        <td class="ewRptGrpField3"  >6</td>                                                        <td class="ewRptGrpField3"  >6</td>                                                        <td class="ewRptGrpField3"  >6</td>                                                        <td class="ewRptGrpField3"  >Finished</td>                                                        <td class="ewRptGrpField3"  >2024-07-23</td>                                                        <td class="ewRptGrpField3"  >2024-07-09</td>                                                                                                          </tr>
+                                                                                                <tr>
+                                                                                                          <td class="ewRptGrpField3">13</td>
+                                                                                                     <td class="ewRptGrpField3"  >SBL-SEC-0140</td>                                                        <td class="ewRptGrpField3"  >New Change Request</td>                                                        <td class="ewRptGrpField3"  >Related to Sagi working in Seconary Software</td>                                                        <td class="ewRptGrpField3"  >42</td>                                                        <td class="ewRptGrpField3"  >42</td>                                                        <td class="ewRptGrpField3"  >42</td>                                                        <td class="ewRptGrpField3"  >Progress</td>                                                        <td class="ewRptGrpField3"  >2024-07-23</td>                                                        <td class="ewRptGrpField3"  ></td>                                                                                                          </tr>
+                                                                                            </tbody>
+                                            <tbody>
+                                                <tr>
+                                                           <td colspan="4" class="ewRptGrpField3" style="text-align:right;">Total</td>
+                                                           <td class="ewRptGrpField3" style="text-align:right;">1019</td>
+                                                           <td class="ewRptGrpField3" style="text-align:right;">1016</td>
+                                                           <td class="ewRptGrpField3" style="text-align:right;">350</td> 
+                                                           <td colspan="4" class="ewRptGrpField3" style="text-align:right;"></td>
+                                                           <td colspan="4" class="ewRptGrpField3" style="text-align:right;"></td>
+                                                </tr>
+                                            </tbody>
+                                                                                <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </td></tr></table>
+                </div>
+<style type="text/css">
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+        color: blue;
+    }
+</style>
+<script type="text/javascript" src="JS_Files/functions_send_request.js"></script>
+<script type="text/javascript">
+
+function filtertableddata(id) {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById(id).value;
+        filter = input.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            tds = tr[i].getElementsByTagName("td");
+            var matches = false;
+
+            for (j = 0; j < tds.length; j++) {
+                if (tds[j]) {
+                    txtValue = tds[j].textContent || tds[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        matches = true;
+                    } 
+                }
+            }
+
+            if(matches == true)
+            {
+                tr[i].style.display = "";
+            }
+             else {
+                    tr[i].style.display = "none";
+                }
+
+            }
+        }
+
+function CompareDates(d1, d2) {
+  var bIsGreater = false;
+  var parts1 = d1.split(".");
+
+  var date1 = new Date(parseInt(parts1[2], 10),
+    parseInt(parts1[1], 10) - 1,
+    parseInt(parts1[0], 10));;
+
+  var parts2 = d2.split("/");
+  var date2 = new Date(parseInt(parts2[2], 10),
+    parseInt(parts2[1], 10) - 1,
+    parseInt(parts2[0], 10));;
+  if (date1 > date2) {
+    bIsGreater = true;
+  }
+  return bIsGreater;
+}
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if(n==0 || n==4 || n==5 || n==6){
+                if (dir == "asc") {
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                }
+                } else if (dir == "desc") {
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }else{
+                if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            
+        }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+function reloadpage()
+    {
+        var type = document.getElementById('type').value;
+        var month = document.getElementById('month').value;
+        var year = document.getElementById('year').value;
+        var team = document.getElementById('team').value;
+        var status = document.getElementById('hstatus').value;
+            send_form_request('/erp/production/DetailedRequirementAnalysisReport.php', { type, month, team, status,year});
+    }
+function checkform()
+  {
+    document.getElementById('save').disabled = true;
+    return true;
+  }
+</script>
+
+			<!-- right column (end) -->
+		</td></tr>
+		<tr><td><div align="center" id="loadingpage"></div></td></tr>
+	</table>
+	<!-- content (end) -->
+	<!-- footer (begin) --><!-- *** Note: Only licensed users are allowed to remove or change the following copyright statement. *** -->
+		<div>
+<br />
+	<br />
+	<div align="center" style=" color:#339933">&copy;Powered By Tulasi Technologies Pvt Ltd.080 41279444</div>
+	</div>
+<script type="text/javascript">
+<!--
+//xGetElementsByClassName(EW_REPORT_TABLE_CLASS, null, "TABLE", ewrpt_SetupTable); // init the table
+
+//-->
+</script>
+<script> var sec=27;var msec=0.077184 </script><!--<div align="center" id="loadingpage"></div>-->
+</body>
+</html>

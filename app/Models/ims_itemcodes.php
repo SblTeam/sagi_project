@@ -31,6 +31,9 @@ class ims_itemcodes extends Model
     'srac',
     'hsn',
     'ean_no',
+    'sales_units',
+    'client',
+    'updated_by',
 
   ];
 }

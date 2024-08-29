@@ -4,7 +4,13 @@
 
 @section('page-script')
 
-<script src="{{asset('assets/js/pages-account-settings-account.js')}}"></script>
+<script src="{{asset('assets/js/pages-account-settings-account.js')}}">
+
+
+</script>
+<script>
+  checkUsage();
+</script>
 @endsection
 
 @section('content')
@@ -40,7 +46,7 @@ $isEdit = isset($ims_itemcodes);
           <div class="row">
             <div class="mb-0 col-md-4">
               <label for="itemcode" class="form-label">Item Code <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" onKeyPress="onlyNumbers12(event);" onpaste="validatePasteitem(this, event);" ondrop="validateDropitem(this, event);"  placeholder="Enter itemCode" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="code" name="code" value="{{ old('code', $isEdit ? $ims_itemcodes->code : '') }}" placeholder="Enter itemCode" style="width: 50%" autofocus    {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'readonly' : '' }}/>
               @error('code')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -48,14 +54,14 @@ $isEdit = isset($ims_itemcodes);
             <div class="mb-0 col-md-5">
 
               <label for="description" class="form-label">Description <sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="description" id="description" onKeyPress="onlyNumbers123(event);"onpaste="validatePaste(this, event)" ondrop="validateDrop(this, event);" placeholder="Enter Description"  style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" />
+              <input class="form-control" type="text" name="description" id="description"  placeholder="Enter Description"  style="width: 75%" value="{{ old('description', $isEdit ? $ims_itemcodes->description : '') }}" {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'readonly' : '' }}/>
               @error('description')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="category_group">Category Group <sup style="color:red;">&#9733;</sup></label>
-              <select id="catgroup" name="catgroup" class="select2 form-select" style="width: 75%" onchange="getcategory();">
+              <select id="catgroup" name="catgroup" class="select2 form-select"  style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}"  onchange="getcategory();">
                 <option value="">Select</option>
                 @foreach ($categoryGroups as $group)
                 <option value="{{ $group->catgroup }}" {{ old('catgroup', $isEdit ? $ims_itemcodes->catgroup : '') == $group->catgroup ? 'selected' : '' }}>{{ $group->catgroup }}</option>
@@ -72,7 +78,7 @@ $isEdit = isset($ims_itemcodes);
 
               <label class="form-label" for="category">Category<sup style="color:red;">&#9733;</sup></label>
 
-              <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
+              <select id="cat" name="cat" class="select2 form-select" style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($types as $group)
                   <option value="{{ $group->type }}" {{ $ims_itemcodes->cat == $group->type ? 'selected' : '' }}>
@@ -86,7 +92,7 @@ $isEdit = isset($ims_itemcodes);
 
               <label class="form-label" for="category">Category <sup style="color:red;">&#9733;</sup></label>
 
-              <select id="cat" name="cat" class="select2 form-select" style="width: 60%">
+              <select id="cat" name="cat" class="select2 form-select" style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                     @foreach ($categorytypes as $group)
                     @if(old('catgroup') == $group->catgroup)
@@ -104,7 +110,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="type">Type <sup style="color:red;">&#9733;</sup></label>
-              <select id="type" name="type" class="select2 form-select " style="width: 75%">
+              <select id="type" name="type" class="select2 form-select " style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
 
                 <option value="Consumed" {{ old('type', $isEdit ? $ims_itemcodes->type : '') == 'Consumed' ? 'selected' : '' }}>Consumed</option>
@@ -122,21 +128,21 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="type">No.Of Pieces<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="piece1" name="pieces" value="{{ old('pieces', $isEdit ? $ims_itemcodes->pieces : '') }}" placeholder="Enter NO.OF Pieces"  onKeyPress="onlyNumbersepices(event);" onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" style="width: 50%" autofocus />
-              @error('type')
+              <input class="form-control" type="text" id="piece1" name="pieces" value="{{ old('pieces', $isEdit ? $ims_itemcodes->pieces : '') }}" placeholder="Enter NO.OF Pieces" style="width: 50%" autofocus {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'readonly' : '' }}/>
+              @error('pieces')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="type">Bag Weight<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="weight1" name="weight" value="{{ old('weight', $isEdit ? $ims_itemcodes->weight : '') }}"onKeyPress="onlyNumbersepices(event);"  onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" placeholder="Enter Bag Weight" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="weight1" name="weight" value="{{ old('weight', $isEdit ? $ims_itemcodes->weight : '') }}" placeholder="Enter Bag Weight" style="width: 50%" autofocus {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'readonly' : '' }}/>
               @error('weight')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="type">Packet Weight<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" id="packetweight" name="packetweight" value="{{ old('packetweight', $isEdit ? $ims_itemcodes->weight : '') }}" onKeyPress="onlyNumbersepices(event);" onpaste="validatePastepices(this, event)" ondrop="validateTextInputpices(this, event);" placeholder="Enter Packet Weight" style="width: 50%" autofocus />
+              <input class="form-control" type="text" id="packetweight" name="packetweight" value="{{ old('packetweight', $isEdit ? $ims_itemcodes->weight : '') }}" placeholder="Enter Packet Weight" style="width: 50%" autofocus {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'readonly' : '' }}/>
               @error('packetweight')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -144,7 +150,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               <label class="form-label" for="sum">Storage Units Of Measure <sup style="color:red;">&#9733;</sup></label>
-              <select id="sunits" name="sunits" class="select2 form-select " style="width: 75%">
+              <select id="sunits" name="sunits" class="select2 form-select " style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($sunits as $group)
                 <option value="{{ $group->sunits }}" {{ old('sunits', $isEdit ? $ims_itemcodes->sunits : '') == $group->sunits ? 'selected' : '' }}>{{ $group->sunits }}</option>
@@ -156,7 +162,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="cum">Consumption Units Of Measure <sup style="color:red;">&#9733;</sup></label>
-              <select id="cunits" name="cunits" class="select2 form-select " style="width: 60%">
+              <select id="cunits" name="cunits" class="select2 form-select " style="width: 60%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($sunits as $group)
                 <option value="{{ $group->sunits }}" {{ old('cunits', $isEdit ? $ims_itemcodes->sunits : '') == $group->sunits ? 'selected' : '' }}>{{ $group->sunits }}</option>
@@ -168,7 +174,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="Sales Units Of Measure">Sales Units Of Measure <sup style="color:red;">&#9733;</sup></label>
-              <select id="saunits" name="saunits" class="select2 form-select" style="width: 75%">
+              <select id="saunits" name="saunits" class="select2 form-select" style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($sunits1 as $group)
                 <option value="{{ $group->sunits }}" {{ old('saunits', $isEdit ? $ims_itemcodes->sales_units : '') == $group->sunits ? 'selected' : '' }}>{{ $group->sunits }}</option>
@@ -180,7 +186,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="country">Source <sup style="color:red;">&#9733;</sup></label>
-              <select id="source" name="source" class="select2 form-select " style="width: 60%">
+              <select id="source" name="source" class="select2 form-select " style="width: 60%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 <option value="Produced" {{ old('source', $isEdit ? $ims_itemcodes->source : '') == 'Produced' ? 'selected' : '' }}>Produced</option>
                 <option value="Purchased" {{ old('source', $isEdit ? $ims_itemcodes->source : '') == 'Purchased' ? 'selected' : '' }}>Purchased</option>
@@ -192,7 +198,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-4">
               <label class="form-label" for="country">Usage <sup style="color:red;">&#9733;</sup></label>
-             <select id="iusage" name="iusage" class="select2 form-select" style="width: 75%" onchange="checkUsage();">
+             <select id="iusage" name="iusage" class="select2 form-select" style="width: 75%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}" onchange="checkUsage();">
   <option value="">Select</option>
   <option value="General Consumption" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'General Consumption' ? 'selected' : '' }}>General Consumption</option>
   <option value="Sale" {{ old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale' ? 'selected' : '' }}>Sale</option>
@@ -209,7 +215,7 @@ $isEdit = isset($ims_itemcodes);
             </div>
             <div class="mb-0 col-md-5">
               <label class="form-label" for="country">Tax Applicable</label>
-              <select id="tax_applicable" name="tax_applicable" class="select2 form-select" style="width: 60%">
+              <select id="tax_applicable" name="tax_applicable" class="select2 form-select" style="width: 60%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($taxcode as $group)
                 <option value="{{ $group->code }}" {{ old('tax_applicable', $isEdit ? $ims_itemcodes->tax_applicable : '') == $group->code ? 'selected' : '' }}>{{ $group->code }}</option>
@@ -224,8 +230,8 @@ $isEdit = isset($ims_itemcodes);
 
 
             <div class="mb-0 col-md-4">
-              <label class="form-label" for="cum">Item A/C</label>
-              <select id="iac" name="iac" class="select2 form-select " style="width: 60%">
+              <label class="form-label" for="cum">Item A/C<sup style="color:red;">&#9733;</sup></label>
+              <select id="iac" name="iac" class="select2 form-select " style="width: 60%; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($codec as $group)
                 <option value="{{ $group->code }}" {{ old('iac', $isEdit ? $ims_itemcodes->iac : '') == $group->code ? 'selected' : '' }}>{{ $group->description}}</option>
@@ -238,15 +244,15 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               @if($isEdit && old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'General Consumption')
-              <label id="expcal" class="form-label" for="cum" style="display: block;">Consumption A/C</label>
-              <select id="expca" name="expca" class="select2 form-select" style="width: 60%; display: block;">
+              <label id="expcal" class="form-label" for="cum" style="display: block;">Consumption A/C<sup style="color:red;">&#9733;</sup></label>
+              <select id="expca" name="expca" class="select2 form-select" style="width: 60%; display: block; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($codee as $group)
                 <option value="{{ $group->code }}" {{ old('expca', $isEdit ? $ims_itemcodes->wpac : '') == $group->code ? 'selected' : '' }}>{{ $group->description }}</option>
                 @endforeach
               </select>
               @else
-              <label id="expcal" class="form-label" for="cum" style="display: none;">Consumption A/C</label>
+              <label id="expcal" class="form-label" for="cum" style="display: none;">Consumption A/C<sup style="color:red;">&#9733;</sup></label>
               <select id="expca" name="expca" class="select2 form-select" style="width: 60%; display: none;">
                 <option value="">Select</option>
                 @foreach ($codee as $group)
@@ -256,7 +262,7 @@ $isEdit = isset($ims_itemcodes);
               @endif
 
               @error('expca')
-              <div class="alert alert-danger p-1">{{ $message }}</div>
+              <div id = "expcaerror" class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
 
@@ -269,7 +275,7 @@ $isEdit = isset($ims_itemcodes);
             <div class="mb-0 col-md-4">
               @if($isEdit && old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale')
               <label id="cogsacl" class="form-label" for="cum" style="display: block;">COGS A/C</label>
-              <select id="cogsac" name="cogsac" class="select2 form-select" style="width: 60%; display: block;">
+              <select id="cogsac" name="cogsac" class="select2 form-select" style="width: 60%; display: block; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($codee as $group)
                 <option value="{{ $group->code }}" {{ old('cogsac', $isEdit ? $ims_itemcodes->cogsac : '') == $group->code ? 'selected' : '' }}>{{ $group->description }}</option>
@@ -286,7 +292,7 @@ $isEdit = isset($ims_itemcodes);
               @endif
 
               @error('cogsac')
-              <div class="alert alert-danger p-1">{{ $message }}</div>
+              <div id = "cogsacerror" class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
 
@@ -299,15 +305,15 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               @if($isEdit && old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale')
-              <label id="sacl" class="form-label" for="cum" style="display: block;">Sales A/C</label>
-              <select id="sac" name="sac" class="select2 form-select" style="width: 60%; display: block;">
+              <label id="sacl" class="form-label" for="cum" style="display: block;">Sales A/C<sup style="color:red;">&#9733;</sup></label>
+              <select id="sac" name="sac" class="select2 form-select" style="width: 60%; display: block; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
                 @foreach ($codes as $group)
                 <option value="{{ $group->code }}" {{ old('sac', $isEdit ? $ims_itemcodes->sac : '') == $group->code ? 'selected' : '' }}>{{ $group->description }}</option>
                 @endforeach
               </select>
               @else
-              <label id="sacl" class="form-label" for="cum" style="display: none;">Sales A/C</label>
+              <label id="sacl" class="form-label" for="cum" style="display: none;">Sales A/C<sup style="color:red;">&#9733;</sup></label>
               <select id="sac" name="sac" class="select2 form-select" style="width: 60%; display: none;">
                 <option value="">Select</option>
                 @foreach ($codes as $group)
@@ -317,7 +323,7 @@ $isEdit = isset($ims_itemcodes);
               @endif
 
               @error('sac')
-              <div class="alert alert-danger p-1">{{ $message }}</div>
+              <div id = "sacerror" class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
 
@@ -330,25 +336,25 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               @if($isEdit && old('iusage', $isEdit ? $ims_itemcodes->iusage : '') == 'Sale')
-              <label id="sractdl" class="form-label" for="cum" style="display: block;">Sales Return A/C</label>
-              <select id="sractd" name="sractd" class="select2 form-select" style="width: 60%; display: block;">
+              <label id="sractdl" class="form-label" for="cum" style="display: block;">Sales Return A/C<sup style="color:red;">&#9733;</sup></label>
+              <select id="sractd" name="sractd" class="select2 form-select" style="width: 60%; display: block; {{ $isEdit && $ims_itemcodes->lel2flag == 1 ? 'pointer-events: none; -webkit-appearance: none;' : '' }}">
                 <option value="">Select</option>
-                @foreach ($codes as $group)
+                @foreach ($codsr as $group)
                 <option value="{{ $group->code }}" {{ old('sac', $isEdit ? $ims_itemcodes->srac : '') == $group->code ? 'selected' : '' }}>{{ $group->description }}</option>
                 @endforeach
               </select>
               @else
-              <label id="sractdl" class="form-label" for="cum" style="display: none;">Sales Return A/C</label>
+              <label id="sractdl" class="form-label" for="cum" style="display: none;">Sales Return A/C<sup style="color:red;">&#9733;</sup></label>
               <select id="sractd" name="sractd" class="select2 form-select" style="width: 60%; display: none;">
                 <option value="">Select</option>
-                @foreach ($codes as $group)
+                @foreach ($codsr as $group)
                 <option value="{{ $group->code }}" {{ old('sac', $isEdit ? $ims_itemcodes->srac : '') == $group->code ? 'selected' : '' }}>{{ $group->description }}</option>
                 @endforeach
               </select>
               @endif
 
               @error('sractd')
-              <div class="alert alert-danger p-1">{{ $message }}</div>
+              <div id = "salesreturnerror" class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
             </div>
 
@@ -359,7 +365,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-5">
               <label class="form-label" for="cum">EAN No<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="ean" id="ean" onKeyPress="onlyNumberse(event);" onpaste="validatePaste111(this, event);" ondrop="validatedrop111(this, event);" placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}" />
+              <input class="form-control" type="text" name="ean" id="ean"  placeholder="Enter ean code" style="width: 75%" value="{{ old('ean', $isEdit ? $ims_itemcodes->ean_no : '') }}"  />
               @error('ean')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -369,7 +375,7 @@ $isEdit = isset($ims_itemcodes);
 
             <div class="mb-0 col-md-4">
               <label class="form-label" for="cum">HSN/SAC<sup style="color:red;">&#9733;</sup></label>
-              <input class="form-control" type="text" name="hsn" id="hsn" onKeyPress="onlyNumbersh(event);" onpaste="validatePaste111(this, event);" ondrop="validateDrop111(this, event);" placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
+              <input class="form-control" type="text" name="hsn" id="hsn"  placeholder="Enter hsn code" style="width: 75%" value="{{ old('hsn', $isEdit ? $ims_itemcodes->hsn : '') }}" />
               @error('hsn')
               <div class="alert alert-danger p-1">{{ $message }}</div>
               @enderror
@@ -377,7 +383,7 @@ $isEdit = isset($ims_itemcodes);
 
 
 
-
+          
 
 
 
@@ -499,6 +505,15 @@ function validateDroppices(el, e) {
     e.preventDefault();
     return false;
   }
+}
+
+
+
+
+function validateTextInputpices(text) {
+  // Regular expression to allow only letters (both cases) and digits 1-9, with no spaces
+  var regex = /^[1-9]+$/;
+  return regex.test(text);
 }
 
 
@@ -721,6 +736,35 @@ function validateDrop111(el, e) {
 
 
 
+function onlyNumbers2(e) {
+  var code = e.charCode || e.keyCode;
+  var input = e.target.value;
+
+  // Allow numbers (0-9)
+  if (code >= 48 && code <= 57) {
+    return;
+  }
+
+  // Allow one decimal point
+  if (code === 46 && !input.includes('.')) {
+    return;
+  }
+
+  // Prevent any other input
+  e.preventDefault();
+}
+
+
+function handlePasteOrDrop(e) {
+  e.preventDefault();
+  var paste = e.clipboardData || window.clipboardData;
+  var text = paste.getData('text');
+  
+  // Allow only numbers and one decimal point
+  if (/^\d*\.?\d*$/.test(text)) {
+    e.target.value += text;
+  }
+}
 
 
 
@@ -767,6 +811,9 @@ function validateDrop111(el, e) {
     } else {
       consumptionAcContainer.style.display = 'none';
       consumptionAcContainerl.style.display = 'none';
+
+
+
     }
 
 
@@ -777,6 +824,10 @@ function validateDrop111(el, e) {
       cogsAcContainerl.style.display = 'block';
       salesreturnAcContainer.style.display = 'block';
       salesreturnAcContainerl.style.display = 'block';
+  
+
+
+
     } else {
       salesAcContainer.style.display = 'none';
       salesAcContainerl.style.display = 'none';
@@ -784,6 +835,10 @@ function validateDrop111(el, e) {
       cogsAcContainerl.style.display = 'none';
       salesreturnAcContainer.style.display = 'none';
       salesreturnAcContainerl.style.display = 'none';
+      document.getElementById('sacerror').style.display = 'none';
+      document.getElementById('cogsacerror').style.display = 'none';
+      document.getElementById('salesreturnerror').style.display = 'none';
+
     }
 
   }

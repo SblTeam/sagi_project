@@ -8,6 +8,8 @@
 
 
   function getpodetails() {
+    document.getElementById("tquantity").value = '';
+    document.getElementById("total").value = '';
     var poNumber = document.getElementById("po").value;
 
     $.ajax({
@@ -15,11 +17,7 @@
         type: 'GET',
         data: { po: poNumber },
         success: function(response) {
-            // Log response for debugging
-            console.log('Response:', response);
 
-            // Check if response is a JSON string
-            var data;
             try {
                 data = Array.isArray(response) ? response : JSON.parse(response);
             } catch (e) {
@@ -44,9 +42,14 @@
                     var price = values[5];
                     var taxTypeText = values[6];
                     var taxValue = values[7];
+                    var taxable_price = values[8];
+                    var basic_total = values[9];
+                    var taxamount = values[11];
+                    var totalwithtax = values[10];
+                    
 
                     // Add new row
-                    addNewRow(index + 1, transfer, descriptionText, code, rate, unit, price, taxTypeText, taxValue);
+                    addNewRow(index + 1, transfer, descriptionText, code, rate, unit, price, taxTypeText, taxValue,taxable_price,basic_total,taxamount,totalwithtax);
                 }
             });gettotal();
         },
@@ -55,53 +58,66 @@
         }
     });
 
-    function addNewRow(rowNumber, transfer, descriptionText, code, rate, unit, price, taxTypeText, taxValue) {
+    function addNewRow(rowNumber, transfer, descriptionText, code, rate, unit, price, taxTypeText, taxValue,taxable_price,basic_total,taxamount,totalwithtax) {
         let newRow = document.createElement('tr');
         newRow.classList.add('dynamic-row', 'mb-1');
         newRow.id = `dynamic-row-${rowNumber}`;
         newRow.innerHTML = `
-            <td>
+ <td>
                 <input type="checkbox" id="check${rowNumber}" name="check[]" onchange="gettotal();" checked>
             </td>
 
             <td>
-                <select id="category${rowNumber}" name="category[]" class="form-control" required>
+                <select id="category${rowNumber}" name="category[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
                     <option value="${transfer}">${transfer}</option>
                 </select>
             </td>
             <td>
-                <select id="description${rowNumber}" name="description[]" class="form-control" required>
+                <select id="description${rowNumber}" name="description[]" style="border: none;pointer-events: none;-webkit-appearance: none;" required>
                     <option value="${descriptionText}">${descriptionText}</option>
                 </select>
             </td>
             <td>
-                <input type="text" id="code${rowNumber}" name="code[]" class="form-control" value="${code}" readonly/>
+                <input type="text" id="code${rowNumber}" name="code[]" style="border: none;width: 100px;" value="${code}" readonly/>
             </td>
             <td>
-                <input type="number" id="quantity${rowNumber}" name="quantity[]" readonly class="form-control" value="${rate}" required/>
+                <input type="text" id="quantity${rowNumber}" name="quantity[]" readonly style="border: none;width: 70px;"value="${rate}" required/>
             </td>
                    <td>
-                <input type="number" id="enterquantity${rowNumber}" name="enteredquantity[]" class="form-control" value="${rate}" required onkeyup = "gettotal();checkdiff();"/>
+                <input type="number" id="enterquantity${rowNumber}" class="form-control"name="enteredquantity[]" style="width: 70px;"value="${rate}" required onkeyup = "gettotal();checkdiff();"/>
             </td>
             <td>
-                <input type="number" id="price${rowNumber}" name="price[]" readonly class="form-control" value="${price}" required/>
+                <input type="text" id="price${rowNumber}" name="price[]" readonly style="border: none;width: 70px;" value="${price}" required/>
+            </td>
+
+                   <td>
+                <input type="text" id="taxableprice${rowNumber}" name="taxableprice[]" readonly style="border: none; width: 70px;" value="${taxable_price}" required/>
+            </td>
+                    <td>
+                <input type="text" id="basic_total${rowNumber}" name="basic_total[]" readonly style="border: none;  width: 70px;"value="${basic_total}" required/>
             </td>
             <td>
-                <select id="taxType${rowNumber}" name="taxType[]" class="form-control" required>
+                <select id="taxType${rowNumber}" name="taxType[]"   style="border: none;pointer-events: none;-webkit-appearance: none;" required>
                     <option value="${taxTypeText}">${taxTypeText}</option>
                 </select>
             </td>
             <td>
-                <input type="number" id="tax${rowNumber}" name="tax[]" class="form-control" value="${taxValue}" readonly/>
+                <input type="text" id="tax${rowNumber}" name="tax[]" style="border: none;width: 50px;"  value="${taxValue}" readonly/>
+            </td>
+                 <td>
+                <input type="text" id="taxamount${rowNumber}" name="taxamount[]" style="border: none;width: 70px;" value="${taxamount}" readonly/>
+            </td>
+            <td>
+                <input type="text" id="total_amount${rowNumber}" name="total_amount[]" style="border: none;width: 100px;"value="${totalwithtax}" readonly/>
             </td>
         `;
+
 
         document.getElementById('dynamic-rows').appendChild(newRow);
     }
   }
 </script>
 
-@endsection
 
 
 
@@ -116,7 +132,7 @@
             <h5 class="card-header text-center"><strong style="font-size:25px">Sales Order</strong></h5>
             <hr class="my-0">
             <div class="card-body">
-                <form action="{{route('transctions-SalesOrder-store')}}" id="formSalesOrder" method="POST" enctype="multipart/form-data">
+                <form action="{{route('transctions-SalesOrder-store')}}" id="formSalesOrder" method="POST" enctype="multipart/form-data"  onsubmit = "return salesordercheck(this);">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-2">
@@ -136,21 +152,25 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-2">
-                            <label for="id" class="form-label"><strong>ID*</strong></label>
+                            <label for="id" class="form-label"><strong>ID<sup style="color: red;">*</sup></strong></label>
                         </div>
                         <div class="col-md-4">
-                        <select id="id" name="id" class="form-control" onchange = "getdist();getpo();getso();">
+                        <select id="id" name="id" class="form-control" onchange = "getdist();getpo();getso();getpodetails();">
                           <option value = ''>-select-</option>
                           @foreach (array_keys($data) as $key)
                          <option value="{{ $key }}">{{ $key }}</option>
                            @endforeach
                             </select>
+                            @error('id')
+              <div class="alert alert-danger p-1">{{ $message }}</div>
+              @enderror
                         </div>
+                  
                         <div class="col-md-2">
                             <label for="distributor" class="form-label"><strong>Distributor*</strong></label>
                         </div>
                         <div class="col-md-4">
-                        <select id="distributor" name="distributor" class="form-control" onchange = "getid();getpo();">
+                        <select id="distributor" name="distributor" class="form-control" onchange = "getid();getpo();getpodetails();">
                           <option value = ''>-select-</option>
                           @foreach ($data as $key)
                           @php
@@ -161,6 +181,9 @@
                            @endforeach
 
                             </select>
+                            @error('distributor')
+              <div class="alert alert-danger p-1">{{ $message }}</div>
+              @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -183,6 +206,9 @@
                         <select id="po" name="po" class="form-control" onchange="getpodetails();">
                           <option value = ''>-select-</option>
                         </select>
+                        @error('po')
+              <div class="alert alert-danger p-1">{{ $message }}</div>
+              @enderror
                         </div>
                     </div>
                     <div class="row mb-4 text-center">
@@ -198,46 +224,62 @@
                                     <th>PO Quantity</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
+                                    <th>Taxable Price</th>
+                                    <th>Basic Total</th>
                                     <th>Tax Type</th>
                                     <th>Tax</th>
+                                    <th>Tax Amount</th>
+                                    <th>Total amount</th>
                                 </tr>
                             </thead>
                             <tbody id="dynamic-rows">
                                 <tr class="dynamic-row mb-1" id="dynamic-row-1">
                                 <td>
-                <input type="checkbox" id="check" name="check[]" onchange="gettotal();">
+                                <input type="checkbox" id="check" name="check[]"onchange="gettotal();">
             </td>
                                     <td>
-                                        <select id="category1" name="category[]" class="form-control" required>
-                                            <option value="">-Select-</option>
+                                        <select id="category1" name="category[]" class="form-control" style="border: none;" >
+                                            <option value=""></option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="description1" name="description[]" class="form-control" required>
-                                            <option value="">-Select-</option>
+                                        <select id="description1" name="description[]"  class="form-control" style="border: none;">
+                                            <option value=""></option>
                                             <!-- Add other options dynamically -->
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" id="code1" name="code[]" class="form-control" readonly/>
+                                        <input type="text" id="code1" name="code[]" class="form-control" style="border: none;" readonly/>
                                     </td>
                                     <td>
-                                        <input type="number" id="quantity1" name="quantity[]" readonly class="form-control" required/>
+                                        <input type="number" id="quantity1" name="quantity[]" class="form-control" readonly style="border: none;"  required/>
                                     </td>
                                     <td>
-                                        <input type="number" id="eneteredquantity1" name="enteredquantity[]" class="form-control" onkeyup = "gettotal();" required/>
+                                        <input type="number" id="eneteredquantity1" class="form-control" name="enteredquantity[]" class="form-control" style="border: none;" onkeyup = "gettotal();" />
                                     </td>
                                     <td>
-                                        <input type="number" id="price1" name="price[]" readonly class="form-control" required/>
+                                        <input type="number" id="price1" name="price[]" style="border: none;" class="form-control" style="border: none;" readonly  />
                                     </td>
                                     <td>
-                                        <select id="taxType1" name="taxType[]" class="form-control">
-                                            <option value="">-Select-</option>
+                                        <input type="number" id="taxableprice1" name="taxableprice[]" class="form-control"  style="border: none;" readonly  />
+                                    </td>
+                                    <td>
+                                        <input type="number" id="basic_total" name="basic_total[]" style="border: none;" class="form-control" style="border: none;" readonly  />
+                                    </td>
+                                    <td>
+                                        <select id="taxType1" style="width: 100px;border: none;" name="taxType[]" class="form-control"  >
+                                            <option value=""></option>
                                             <!-- Add other options as needed -->
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" id="tax1" name="tax[]" class="form-control" readonly/>
+                                        <input type="number" id="tax1" name="tax[]" class="form-control" style="border: none;"   readonly/>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="taxamount" name="taxamount[]" class="form-control" style="border: none;" readonly  />
+                                    </td>
+                                    <td>
+                                        <input type="number" id="total_amount" name="total_amount[]" class="form-control" style="border: none;" readonly  />
                                     </td>
                                 </tr>
                             </tbody>
@@ -245,7 +287,7 @@
                     </div>
                     <div class="row mb-4 text-center">
                         <div class="col-md-3 offset-md-1">
-                            <label class="form-label"><strong>Total Quantity (In Tonnage)</strong></label>
+                            <label class="form-label"><strong>Total Quantity</strong></label>
                             <input type="text" name = "tquantity" id = "tquantity" class="form-control" readonly value="0"/>
                         </div>
 
@@ -269,6 +311,13 @@
 @endsection
 
 <script>
+      function checkpricemaster(){
+ 
+
+
+ alert("hui");
+ 
+ }
   function getdist() {
 
 var id = document.getElementById('id');
@@ -299,6 +348,8 @@ function getpo()
   var id = document.getElementById("id").value;
   if (data.hasOwnProperty(id)) {
      var x =  data[id].split("@")[1];
+     x = x.slice(0, -1);
+
      var y = x.split("&");
      for(var i =0;i<y.length;i++)
      {
@@ -320,9 +371,15 @@ function gettotal() {
             var enteredQuantity = parseFloat(document.getElementById("enterquantity" + i).value);
 
             var price = parseFloat(document.getElementById("price" + i).value);
-            var tax = parseFloat(document.getElementById("tax" + i).value) || 0; // Ensure tax is treated as a float and defaults to 0 if empty
+            
+            var taxable  = parseFloat(document.getElementById("taxableprice" + i).value);
+                
+            var tax1 = parseFloat(document.getElementById("tax" + i).value) // Ensure tax is treated as a float and defaults to 0 if empty
 
-            if (isNaN(enteredQuantity)) {
+          
+
+
+                if (isNaN(enteredQuantity)) {
                 enteredQuantity = 0;
                 document.getElementById("enterquantity" + i).value = 0;
             }
@@ -330,15 +387,26 @@ function gettotal() {
             tquantity += enteredQuantity;
 
             var x = enteredQuantity * price;
+            
+            var z = ((x *tax1) /(100 + tax1));
+     
+
+
+
             sum += x;
 
-            if (tax > 0) {
-                var z = x * (tax / 100);
-                var z1 = z + x;
-                sum1 += z1;
-            } else {
-                sum1 += x;
-            }
+sum1 += x;
+
+var basict = parseFloat(taxable * enteredQuantity).toFixed(2);
+
+document.getElementById("taxamount" + i).value = z.toFixed(2);
+document.getElementById("total_amount" + i).value = x;
+
+document.getElementById("basic_total" + i).value = basict;
+
+            
+ 
+            
         }
     }
 
@@ -393,6 +461,33 @@ function toggleCheckboxes() {
 
     }
   }
+
+  function salesordercheck() {
+    var index = $('[name="category[]"]').length; 
+ 
+  for(var k = 1;k<=index;k++) 
+  { 
+    if(document.getElementById("category"+k).value!='')
+  {
+
+
+
+  
+var tquantity= document.getElementById("tquantity").value;
+
+
+if(tquantity === '0.00')
+{
+alert("please enter atlest one item's quantity");
+return false;
+}
+
+
+  }
+  }
+}
+
+ 
 
 
 </script>

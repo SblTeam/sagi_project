@@ -9,6 +9,6 @@ class contactdetails extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','company','address','place','pan','email','auth_flag2','phone','state','gstin','files_path','active_flag',
+        'name','company','address','place','pan','email','auth_flag2','phone','state','gstin','files_path','active_flag','bank_name', 'branch_name', 'account_no','logo', 'IFSC','holder_name',
     ];
 }

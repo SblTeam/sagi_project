@@ -47,11 +47,11 @@
         @if(session('Fail') || session('success'))
         <div class="bs-toast toast fade show @if(session('Fail'))bg-danger @else bg-info @endif" role="alert" aria-live="assertive" aria-atomic="true" style="position:absolute;top:30%;left:30%">
           <div class="toast-header">
-            <i class='bx bx-bell me-5'></i>
-            <div class="me-auto fw-medium">Alert</div>
+            <i class='bx bx-bell me-5' style="color:black"></i>
+            <div class="me-auto fw-medium" style="color:black">Alert</div>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="toast-body pt-5 pb-5">
+          <div class="toast-body pt-5 pb-5" style="text-align:center">
             {{ session('Fail').session('success') }}
           </div>
         </div>

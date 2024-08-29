@@ -19,34 +19,46 @@
                 <input type="checkbox" id="check${rowNumber}" name="check[]" onchange="gettotal();" checked>
             </td>
             <td>
-                <select id="category${rowNumber}" name="category[]" class="form-control" required>
+                <select id="category${rowNumber}" name="category[]"  style="border: none;pointer-events: none;-webkit-appearance: none;"  required>
                     <option value="${details.category}">${details.category}</option>
                 </select>
             </td>
             <td>
-                <select id="description${rowNumber}" name="description[]" class="form-control" required>
+                <select id="description${rowNumber}" name="description[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
                     <option value="${details.description}">${details.description}</option>
                 </select>
             </td>
             <td>
-                <input type="text" id="code${rowNumber}" name="code[]" class="form-control" value="${details.code}" readonly/>
+                <input type="text" id="code${rowNumber}" name="code[]"  style="border: none;width: 100px;" value="${details.code}" readonly/>
             </td>
             <td>
-                <input type="number" id="quantity${rowNumber}" readonly name="quantity[]" class="form-control" value="${details.quantity}" required/>
+                <input type="number" id="quantity${rowNumber}" readonly  name="quantity[]" style="border: none;width: 70px;"  value="${details.quantity}" required/>
             </td>
             <td>
-                <input type="number" id="enteredquantity${rowNumber}" name="enteredquantity[]" class="form-control" value="${details.squantity}" required onkeyup="gettotal();checkdiff();"/>
+                <input type="number" id="enteredquantity${rowNumber}" class="form-control" name="enteredquantity[]" style="width: 70px;"  value="${details.squantity}" required onkeyup="gettotal();checkdiff();"/>
             </td>
             <td>
-                <input type="number" id="price${rowNumber}" readonly name="price[]" class="form-control" value="${details.price}" required/>
+                <input type="number" id="price${rowNumber}" readonly name="price[]" style="border: none;width: 70px;"   value="${details.price}" required/>
+            </td>
+              <td>
+                <input type="number" id="taxableprice${rowNumber}" readonly name="taxableprice[]"  style="border: none; width: 70px;" value="${details.taxableprice}" required/>
+            </td>
+                 <td>
+                <input type="number" id="basic_total${rowNumber}" readonly name="basic_total[]"  value="${details.basic_total}"  style="border: none;  width: 100px;" required/>
             </td>
             <td>
-                <select id="taxType${rowNumber}" name="taxType[]" class="form-control" required>
+                <select id="taxType${rowNumber}" name="taxType[]"  style="border: none;pointer-events: none;-webkit-appearance: none;" required>
                     <option value="${details.taxcode}">${details.taxcode}</option>
                 </select>
             </td>
             <td>
-                <input type="number" id="tax${rowNumber}" name="tax[]" class="form-control" value="${details.taxvalue}" readonly/>
+                <input type="number" id="tax${rowNumber}" name="tax[]" style="border: none;width: 50px;"  value="${details.taxvalue}" readonly/>
+            </td>
+             <td>
+                <input type="number" id="taxamount${rowNumber}" name="taxamount[]" style="border: none;width: 70px;"  value="${details.taxamount}" readonly/>
+            </td>
+            <td>
+                <input type="number" id="totalamount${rowNumber}" name="totalamount[]" style="border: none;width: 70px;"  value="${details.total_amount}" readonly/>
             </td>
         `;
         document.getElementById('dynamic-rows').appendChild(newRow);
@@ -136,8 +148,12 @@
                                     <th>PO Quantity</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
+                                    <th>Taxable price</th>
+                                    <th>Basic total</th>
                                     <th>Tax Type</th>
                                     <th>Tax</th>
+                                    <th>Tax Amount</th>
+                                    <th>Total Amount</th>
                                 </tr>
                             </thead>
                             <tbody id="dynamic-rows">
@@ -207,9 +223,15 @@ for (var i = 1; i <= index; i++) {
         var enteredQuantity = parseFloat(document.getElementById("enteredquantity" + i).value);
 
         var price = parseFloat(document.getElementById("price" + i).value);
-        var tax = parseFloat(document.getElementById("tax" + i).value) || 0; // Ensure tax is treated as a float and defaults to 0 if empty
+        
+        var taxable  = parseFloat(document.getElementById("taxableprice" + i).value);
+            
+        var tax1 = parseFloat(document.getElementById("tax" + i).value) // Ensure tax is treated as a float and defaults to 0 if empty
 
-        if (isNaN(enteredQuantity)) {
+      
+
+
+            if (isNaN(enteredQuantity)) {
             enteredQuantity = 0;
             document.getElementById("enteredquantity" + i).value = 0;
         }
@@ -217,15 +239,26 @@ for (var i = 1; i <= index; i++) {
         tquantity += enteredQuantity;
 
         var x = enteredQuantity * price;
+        
+        var z = ((x *tax1) /(100 + tax1));
+ 
+
+
+
         sum += x;
 
-        if (tax > 0) {
-            var z = x * (tax / 100);
-            var z1 = z + x;
-            sum1 += z1;
-        } else {
-            sum1 += x;
-        }
+sum1 += x;
+
+var basict = parseFloat(taxable * enteredQuantity).toFixed(2);
+
+document.getElementById("taxamount" + i).value = z.toFixed(2);
+document.getElementById("totalamount" + i).value = x;
+
+document.getElementById("basic_total" + i).value = basict;
+
+        
+
+        
     }
 }
 
